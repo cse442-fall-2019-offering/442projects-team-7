@@ -2,12 +2,11 @@
 This README is meant to provide a high-level outline for our Point-of-Sale (POS) system.
 
 ## Project Description
-The goal of our project is to create an 'open' POS system that can be used by most merchants, with an emphasis on retail.
-i.e.) Any business from small grocery/convienience store to a large wholsesaler.
+The goal of our project is to create a lightweight POS system that can be used by any business (with an emphasis on small) at a low cost without sacrificing functionality. 
 
-We intend to achieve this goal by utilizing the form factor and modular nature of Raspberry PI hardware (and various included peripherals such as a keyboard).
+We intend to achieve this goal by utilizing the versatility of Raspberry Pi hardware.
 
-In addition to the hardware, we intend to create our own modules/libraries to be pre-loaded on all of our deployed systems. These modules will contain: our standard UI, a database for storing and retrieving Universal Product Codes (UPC's), comprehensive system settings (for individual merchants), and Administrative features for book-keeping and workforce management (signing employees into and out of the system).
+In addition to the hardware, we intend to create our own modules/libraries to be pre-loaded on all of our deployed systems. These modules will contain: our standard UI, a database for storing and retrieving item, employee, and customer data, comprehensive system settings (for individual merchants), and Administrative features for book-keeping and workforce management (signing employees into and out of the system).
 
 ## Project Actualization
 To realize our project, we propose separating our project by the various 'user-stories' we will be creating. To that end we will be using ZenHub for managing our various stories and the tasks associated with them. We will also use GitHub for hosting our repository in the use of version control, and for tracking our commits to the various tasks.
@@ -21,4 +20,4 @@ To realize our project, we propose separating our project by the various 'user-s
 Lastly, we hope to incorporate many of the skills and techniques we have accrued through our various coursework at the University at Buffalo and beyond to create a viable product that stands out.
 
 ## Minimal Viable Product (MVP)
-In its most basic form, we hope to have a Raspberry PI system with a keyboard. Our Raspberry PI will host our source code, which will contain all of the necessary methods for performing merchant transactions (upc lookup and info retrieval, updatable running total, keyboard shortcut mappings, updatable item listing). It should also contain some means of database population for the particular merchant to easily access and update as necessary.
+In its most basic form, we will have a functional means of recording and processing transactions with a Raspberry Pi based system. This means being able to add items to a sale, have a running total, accept payment, and store the finalized transaction.
