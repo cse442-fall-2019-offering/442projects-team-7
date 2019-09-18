@@ -54,7 +54,7 @@ input[type=password],input[type=text] {
     color: #CECECE;
     border: none;
     font-size: 120%;
-    
+    text-align: left;
 }
 input[type=text]:focus, input[type=password]:focus {
     background-color: #3B3B3B;
