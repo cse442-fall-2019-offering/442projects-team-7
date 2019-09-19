@@ -26,9 +26,9 @@ Now, just clone the repo and in the /login path, execute the following:
 npm install
 ```
 
-(Note: if `npm start` doesn't work after this, explicitly install Electron:
+(Note: if `npm start` doesn't work after this, explicitly install Electron:)
 ```bash
 npm install electron --save-dev
-```)
+```
 
 You're all set. `npm start` in the /login directory will launch the login UI.
