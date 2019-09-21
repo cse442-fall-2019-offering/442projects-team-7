@@ -11,19 +11,42 @@
       <div id="menubar">
       </div>
       <div id="loginframe" class="hardcentered rounded">
-	<form class="login">
-	  <h1 class="login">Enter your credentials or swipe your ID card to login.</h1>
-	  <br>
-	  <label class="login centered" for="username">Username:</label>
-	  <input class="login centered" type="text" name="username">
-	  <br>
-	  <br>
-	  <label class="login centered" for="password">Password:</label>
-	  <input class="login centered" type="password" name="password" id="password">
-	  <br>
-	  <br>
-	  <input class="login" type="button" value="Login">
-	</form>
+        <form class="login">
+          <h1 class="login">Enter your credentials or swipe your ID card to login.</h1>
+          <br>
+          <label class="login centered" for="username">Username:</label>
+          <input class="login centered" type="text" name="username" id="username">
+          <br>
+          <br>
+          <label class="login centered" for="password">Password:</label>
+          <input class="login centered" type="password" name="password" id="password">
+          <br>
+          <br>
+          <input class="login" type="button" onclick=uLogin() value="Login">
+          <p class="user">New User?
+            <a href="#">Create Account</a>
+          </p>
+        </form>
+        
+        <form class="register">
+            <label class="login centered" for="username">Username:</label>
+            <input class="login centered" type="text" name="username" id="rUsername">
+            <br>
+            <br>
+            <label class="login centered" for="password">Password:</label>
+            <input class="login centered" type="password" name="password" id="rPassword">
+            <br>
+            <br>
+            <label class="login centered" for="password">Re-type Password:</label>
+            <input class="login centered" type="password" name="password" id="checkPW">
+            <br>
+            <br>
+            <input class="login" type="button" onclick=uRegister() value="Register">
+            <p class="user">Already a User?
+              <a href="#">Login</a>
+            </p>
+        </form>
+        <script src = "main.js"></script>
       </div>
     </div>
     
