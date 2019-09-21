@@ -45,6 +45,9 @@ function uLogin(){
 	var exist = accountExists(username)
 	if(exist == true){
 		console.log("Username: " + username + '\n' + "Password: " + password)
+		/*
+			Code to transition to cashier page will go here
+		*/
 	}
 	else{
 		console.log("No such account")
