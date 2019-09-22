@@ -39,6 +39,7 @@ div.row {
 form .login {
     text-align: center;
 }
+
 h1 .login {
 
 }
@@ -61,7 +62,7 @@ input[type=text]:focus, input[type=password]:focus {
 
 }
 input[type=button] {
-    background-color:#808080;
+    background-color:rgb(102, 102, 102);
     color: #000000;
     font-weight: bold;
     border: none;
@@ -70,4 +71,6 @@ input[type=button] {
     margin: 4px 2px;
 }
 
-
+input[type=button]:hover{
+    background-color: #808080;
+}
