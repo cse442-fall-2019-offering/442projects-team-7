@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="pos.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPi Point of Sale - Cashier Default Window</title>
+  </head>
+  <body>
+    <div id="menu-wrapper">
+      <div id="menubar">
+        <nav>
+          <!-- To be made into a Drop-down -->
+          File
+          View
+          Help
+        </nav>
+      </div>
+    </div>
+    <div id="Nav-wrapper">
+      <div id="navbar">
+      </div>
+    </div>
+    <div id="CSI-wrapper">
+      <div id="Create Sale Interface">
+
+        <div id="Sale-Page-Navbar">
+        </div>
+
+        <section>
+          <div id="Transaction-Info-Panel">
+            <input id="Item-Search-Field" type="text" name="search_text" placeholder="Enter a SKU, scan barcode, or search for item...">
+          </div>
+
+          <table id="Item-List-Panel">
+            <thead id="Column-Headers">
+              <tr>
+                <th id="SKU-Column">SKU</th>
+                <th id="Description-Column">Description</th>
+                <th id="Unit-Price-Column">Unit Price</th>
+                <th id="Quantity-Column">Quantity</th>
+                <th id="Total-Column">Total</th>
+              </tr>
+            </thead>
+            <tbody id="Table-Data"></tbody>
+          </table>
+
+          <div id="Sale-Overview">
+            <div id="Customer-Info">
+
+            </div>
+            <div id="Totals">
+
+            </div>
+          </div>
+        </section>
+
+        <aside id="Quick-Buttons">
+          <h1>
+            Quick-Buttons
+          </h1>
+
+        </aside>
+      </div>
+    </div>
+  </body>
