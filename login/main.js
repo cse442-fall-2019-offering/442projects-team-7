@@ -53,8 +53,6 @@ function clearLogin(id){
 		box.style.display = "none"
 		var cashier = document.getElementById("cashierwindow")
 		cashier.style.display = "block"
-		cashier.style.transition = "opacity 1.0s linear 0s"
-		cashier.style.opacity = 1
 	}, 1000)
 }
 
@@ -65,7 +63,6 @@ function uLogin(){
 	if(exist == true){
 		console.log("Username: " + username + '\n' + "Password: " + password)
 		clearLogin("wrapper")
-		
 	}
 	else{
 		console.log("No such account")
