@@ -17,6 +17,32 @@ html, body {
     transform: translate(-50%, -50%);
     text-align: center;
 }
+.rowA{
+  background-color: #292929;
+  text-align: left;
+  height: 32px;
+  position: static;
+}
+.rowB{
+  background-color: #353535;
+  text-align: left;
+  height: 32px;
+  position: static;
+}
+.big-button{
+  background: #171717;
+  border: none;
+  color: white;
+  padding: 28px 54px;
+  margin: 6px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+}
+.fucking-space{
+  margin: 6px;
+}
 div #menubar {
   position: absolute;
   height: 18px;
@@ -56,7 +82,7 @@ div #Item-Search-Field {
   background: #2B2B2B;
 }
 div #Item-List-Panel {
-  position: absolute;
+  position: relative;
   width: 1265px;
   height: 691px;
   left: 0px;
@@ -205,39 +231,4 @@ div #Payment-Buttons {
   height: 100px;
   left: 10px;
   top: 343px;
-}
-label {
-
-}
-input {
-
-}
-div.row {
-
-}
-form .login {
-    text-align: center;
-}
-h1 .login {
-
-}
-label .login {
-    display: inline-block;
-    text-align: right;
-    font-size: 120%;
-    font-weight: bold;
-
-}
-input[type=text]:focus, input[type=password]:focus {
-    background-color: #3B3B3B;
-
-}
-input[type=button] {
-    background-color:#808080;
-    color: #000000;
-    font-weight: bold;
-    border: none;
-    text-decoration: none;
-    padding: 16px 32px;
-    margin: 4px 2px;
 }
