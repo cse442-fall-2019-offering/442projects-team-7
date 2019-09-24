@@ -6,6 +6,10 @@ var loginTest = [
 	{
 		username: "edmund",
 		password: "qwerty"
+	},
+	{
+		username: "",
+		password: ""
 	}
 ]
 
@@ -39,15 +43,26 @@ function accountExists(username){
 		return false
 	}
 }
+
+//Clear login and show cashier window
+function clearLogin(id){
+	var box = document.getElementById(id)
+	box.style.transition = "opacity 1.0s linear 0s"
+	box.style.opacity = 0
+	setTimeout(function(){
+		box.style.display = "none"
+		var cashier = document.getElementById("cashierwindow")
+		cashier.style.display = "block"
+	}, 1000)
+}
+
 function uLogin(){
 	var username = document.getElementById("username").value
 	var password = document.getElementById("password").value
 	var exist = accountExists(username)
 	if(exist == true){
 		console.log("Username: " + username + '\n' + "Password: " + password)
-		/*
-			Code to transition to cashier page will go here
-		*/
+		clearLogin("wrapper")
 	}
 	else{
 		console.log("No such account")
