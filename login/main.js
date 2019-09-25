@@ -22,7 +22,7 @@ function createWindow(){
 	    nodeIntegration: true
 	}
     })
-
+   
     win.loadFile('index.html')
     win.on('closed',() => {
 	win=null
@@ -46,14 +46,18 @@ function accountExists(username){
 
 //Clear login and show cashier window
 function clearLogin(id){
-	var box = document.getElementById(id)
+     
+        var box = document.getElementById(id)
 	box.style.transition = "opacity 1.0s linear 0s"
 	box.style.opacity = 0
-	setTimeout(function(){
-		box.style.display = "none"
-		var cashier = document.getElementById("cashierwindow")
-		cashier.style.display = "block"
+        setTimeout(function(){
+	
+	   
+	    box.style.display = "none"
+	    var cashier = document.getElementById("cashierwindow")
+	    cashier.style.display = "block"
 	}, 1000)
+
 }
 
 function uLogin(){
