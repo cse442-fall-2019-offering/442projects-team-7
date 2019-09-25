@@ -1,0 +1,288 @@
+html, body {
+    background-color: #1B1B1B;
+    color: #CECECE;
+    font-family: Arial, Verdana, sans-serif;
+}
+.rounded {
+    border-radius: 5%;
+}
+.centered {
+    display: inline-block;
+    margin: auto;
+}
+.hardcentered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+aside {
+    width:30%;
+}
+div.qbtns {
+    width:100%;
+    height: 50%;
+
+}
+div.ubtns {
+    width:100%;
+    height:35%;
+}
+div.pbtns {
+    width:100%;
+    height:15%;
+}
+.qbtn-group button {
+    background-color:#171717;
+    color:#BEBEBE;
+    border-style: none;
+    padding: 2%;
+    width: 31%;
+    height: 100px;
+}
+
+.qbtn-group button:hover{
+    background-color:#141414;
+}
+.ubtn-group button {
+    background-color:#171717;
+    color:#BEBEBE;
+    border-style: none;
+    padding: 2%;
+    width: 31%;
+    height: 100px;
+}
+.pbtn-group button {
+    background-color:#171717;
+    color:#BEBEBE;
+    border-style: none;
+    padding: 2%;
+    width: 31%;
+    height: 100px;
+}
+
+div #Quick-Buttons {
+  position: absolute;
+  width: 550px;
+  height: 909px;
+  left: 1271px;
+  top: 59px;
+
+  background: #2F2F2F;
+}
+div #menubar {
+  position: absolute;
+  height: 18px;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+
+  background: #292929;
+  color: #BEBEBE;
+}
+section {
+  position: absolute;
+  width: 1265px;
+  height: 909px;
+  left: 0px;
+  top: 59px;
+
+  background: #2F2F2F;
+}
+div #Transaction-Info-Panel {
+  position: absolute;
+  width: 1265px;
+  height: 46px;
+  left: 0px;
+  top: -1px;
+
+  background: #3F3F3F;
+}
+div #Item-Search-Field {
+  position: absolute;
+  width: 506px;
+  height: 24px;
+  left: 11px;
+  top: 11px;
+
+  color: grey;
+  background: #2B2B2B;
+}
+div #Item-List-Panel {
+  position: absolute;
+  width: 1265px;
+  height: 691px;
+  left: 0px;
+  top: 45px;
+
+  background: #2F2F2F;
+}
+div #Column-Headers {
+  position: absolute;
+  width: 1265px;
+  height: 30px;
+  left: 0px;
+  top: 0px;
+
+  background: #202020;
+  mix-blend-mode: normal;
+}
+div #SKU-Column {
+  position: absolute;
+width: 90px;
+height: 30px;
+left: 0px;
+top: 0px;
+
+background: #202020;
+}
+div #Description-Column {
+  position: absolute;
+  width: 894px;
+  height: 30px;
+  left: 90px;
+  top: 0px;
+
+  background: #202020;
+}
+div #Unit-Price-Column {
+  position: absolute;
+  height: 30px;
+  left: 77.79%;
+  right: 12.09%;
+  top: calc(50% - 30px/2);
+
+  background: #202020;
+}
+div #Quantity-Column {
+  position: absolute;
+  height: 30px;
+  left: 87.91%;
+  right: 7.04%;
+  top: calc(50% - 30px/2);
+
+  background: #202020;
+}
+div #Total-Column {
+  position: absolute;
+  width: 90px;
+  height: 30px;
+  left: 1175px;
+  top: 0px;
+
+  background: #202020;
+}
+div #Sale-Overview {
+  position: absolute;
+  width: 1265px;
+  height: 171px;
+  left: 0px;
+  top: 738px;
+
+  background: #3F3F3F;
+}
+div #Customer-Info {
+  position: absolute;
+  width: 550px;
+  height: 171px;
+  left: 0px;
+  top: 0px;
+
+  background: #3F3F3F;
+}
+div #Totals {
+  position: absolute;
+  width: 271px;
+  height: 171px;
+  left: 994px;
+  top: 0px;
+
+  background: #3F3F3F;
+}
+div #Button-Array {
+  position: absolute;
+  width: 531px;
+  height: 430px;
+  left: 10px;
+  top: 13px;
+}
+div #Row-1 {
+  position: absolute;
+  width: 531px;
+  height: 100px;
+  left: 10px;
+  top: 13px;
+}
+div #Row-2 {
+  position: absolute;
+  width: 531px;
+  height: 100px;
+  left: 10px;
+  top: 123px;
+}
+div #Row-3 {
+  position: absolute;
+  width: 531px;
+  height: 100px;
+  left: 10px;
+  top: 233px;
+}
+div #Row-4 {
+  position: absolute;
+  width: 531px;
+  height: 100px;
+  left: 10px;
+  top: 343px;
+}
+div #Utility-Buttons {
+  position: absolute;
+  width: 550px;
+  right: 0px;
+  top: 454px;
+  bottom: 171px;
+
+  background: #2F2F2F;
+}
+div #Payment-Buttons {
+  position: absolute;
+  width: 531px;
+  height: 100px;
+  left: 10px;
+  top: 343px;
+}
+label {
+
+}
+input {
+
+}
+div.row {
+
+}
+form .login {
+    text-align: center;
+}
+h1 .login {
+
+}
+label .login {
+    display: inline-block;
+    text-align: right;
+    font-size: 120%;
+    font-weight: bold;
+
+}
+input[type=text]:focus, input[type=password]:focus {
+    background-color: #3B3B3B;
+
+}
+input[type=button] {
+    background-color:#808080;
+    color: #000000;
+    font-weight: bold;
+    border: none;
+    text-decoration: none;
+    padding: 16px 32px;
+    margin: 4px 2px;
+}
