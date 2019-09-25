@@ -1,0 +1,17 @@
+{
+  "name": "logintest",
+  "version": "0.0.1",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^6.0.10",
+    "mocha": "^6.2.0",
+    "spectron": "^8.0.0"
+  }
+}
