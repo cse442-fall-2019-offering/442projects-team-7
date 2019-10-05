@@ -71,16 +71,6 @@ div #Quick-Buttons {
 
   background: #2F2F2F;
 }
-div #menubar {
-  position: absolute;
-  height: 18px;
-  left: 0px;
-  right: 0px;
-  top: 0px;
-
-  background: #292929;
-  color: #BEBEBE;
-}
 section {
   position: absolute;
   width: 1265px;
