@@ -5,13 +5,18 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "test": "mocha"
+    "test": "mocha",
+    "postinstall": "electron-builder install-app-deps"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "electron": "^6.0.11",
+    "electron-builder": "^21.2.0",
     "mocha": "^6.2.0",
     "spectron": "^8.0.0"
+  },
+  "dependencies": {
+    "sqlite3": "^4.1.0"
   }
 }

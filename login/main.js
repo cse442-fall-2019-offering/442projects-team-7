@@ -1,6 +1,8 @@
 const { app, BrowserWindow } = require('electron')
 
 const fs = require('fs')
+// .verbose() enables verbose mode which captures stack traces when enqueing queries.
+const sqlite3 = require('sqlite3').verbose();
 
 var loginTest = [
 	{
@@ -74,3 +76,40 @@ function uLogin(){
 }
 
 app.on('ready', createWindow)
+
+/////////// SQLite code ///////////
+
+// creating a Database Object.
+// The sqlite3.Database() returns a Database object and opens the database connection automatically.
+let customerDB = new sqlite3.Database('../database/db/customer.db', function(err){
+    // if err is != null then we print out an error message.
+    if(err){
+        return console.error(err.message);
+    }
+    // print out this if we successfully connected wihtout any errors.
+    console.log('Connected to the customer database.');
+});
+
+let productDB = new sqlite3.Database('../database/db/product.db', function(err){
+    // if err is == null then we print out an error message.
+    if(err){
+        return console.error(err.message);
+    }
+    // print out this if we successfully connected wihtout any errors.
+    console.log('Connected to the product database.');
+});
+
+// close the database connection.
+customerDB.close(function(err){
+    if(err){
+        return console.error(err.message);
+    }
+    console.log('Close the customer database connection.')
+});
+
+productDB.close(function(err){
+    if(err){
+        return console.error(err.message);
+    }
+    console.log('Close the product database connection.')
+});
