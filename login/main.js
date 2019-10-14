@@ -87,17 +87,38 @@ let customerDB = new sqlite3.Database('../database/db/customer.db', function(err
         return console.error(err.message);
     }
     // print out this if we successfully connected wihtout any errors.
-    console.log('Connected to the customer database.');
-});
+	console.log('Connected to the customer database.');
 
+});
+ 
 let productDB = new sqlite3.Database('../database/db/product.db', function(err){
     // if err is == null then we print out an error message.
     if(err){
         return console.error(err.message);
     }
     // print out this if we successfully connected wihtout any errors.
-    console.log('Connected to the product database.');
+	console.log('Connected to the product database.');
+	
+		// createTable() creates table
+		productDB.exec(productDBSchema, function(err){
+			if(err){
+				return console.error(err.message);
+			}
+		});
 });
+
+// productDB Schema
+productDBSchema = `CREATE TABLE IF NOT EXISTS Products(
+	sku integer NOT NULL PRIMARY KEY,
+	description text NOT NULL,
+	unit_price integer NOT NULL,
+	quantity integer NOT NULL,
+	total integer NOT NULL
+);`
+
+
+// const createProductTable = 
+
 
 // close the database connection.
 customerDB.close(function(err){
