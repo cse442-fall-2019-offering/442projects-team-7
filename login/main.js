@@ -76,7 +76,7 @@ function uLogin(){
 }
 
 function addTableItem(sku) {
-	console.log("SKU is : " + sku);
+	console.log("SKU is : " + findItemBySKU(sku));
 }
 
 app.on('ready', createWindow)
@@ -121,7 +121,6 @@ productDBSchema = `CREATE TABLE IF NOT EXISTS Products(
 // getter function to get row by sku
 // returns an array with sku, description, and unit price indexed in that order
 function findItemBySKU (sku){
-	var productInfo = [];
 	var sql = 'SELECT sku, description, unit_price ';
 	sql += 'FROM Products ';
 	sql += 'WHERE sku = ? ';
@@ -130,13 +129,13 @@ function findItemBySKU (sku){
 		if(err){
 			return console.error(err.message);
 		}
-		productInfo.push(row.sku);
-		productInfo.push(row.description);
-		productInfo.push(row.unit_price);
-		console.log(productInfo);
-		return productInfo;
+		console.log(row);
+		return row;
 	})
 }
+
+addTableItem("123415")
+
 
 // close the database connection.
 customerDB.close(function(err){
