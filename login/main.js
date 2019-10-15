@@ -134,8 +134,6 @@ function findItemBySKU (sku){
 	})
 }
 
-findItemBySKU("123415");
-
 // close the database connection.
 customerDB.close(function(err){
     if(err){
