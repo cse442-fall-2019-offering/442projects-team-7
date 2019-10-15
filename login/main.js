@@ -109,16 +109,10 @@ let productDB = new sqlite3.Database('../database/db/product.db', function(err){
 
 // productDB Schema
 productDBSchema = `CREATE TABLE IF NOT EXISTS Products(
-	sku integer NOT NULL PRIMARY KEY,
+	sku text NOT NULL PRIMARY KEY,
 	description text NOT NULL,
-	unit_price integer NOT NULL,
-	quantity integer NOT NULL,
-	total integer NOT NULL
+	unit_price integer NOT NULL
 );`
-
-
-// const createProductTable = 
-
 
 // close the database connection.
 customerDB.close(function(err){
