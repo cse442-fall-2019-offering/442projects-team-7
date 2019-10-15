@@ -3,6 +3,26 @@ html, body {
     color: #CECECE;
     font-family: Arial, Verdana, sans-serif;
 }
+tbody {
+  display:block;
+  height:95%;
+  overflow-y:scroll;
+}
+thead, tbody tr {
+  display:table;
+  width:100%;
+  table-layout:fixed;/* even columns width , fix width of table too*/
+}
+thead {
+  width: calc( 100% - 1em )/* scrollbar is average 1em/16px width, remove it from thead width */
+}
+table {
+  border-collapse: collapse;
+  width:100%;
+}
+td, th {
+  border-left: 1px solid #4F4F4F;
+}
 .rounded {
     border-radius: 5%;
 }
@@ -61,7 +81,59 @@ div.pbtns {
     width: 31%;
     height: 100px;
 }
+.tableEntryA {
+  background: #353535;
+}
+.tableEntryB {
+  background: #292929;
+}
+.tableColumn1 {
+  position: relative;
+  width: 10%;
+  height: 30px;
+  left: 0px;
+  top: 0px;
 
+  text-align: center;
+}
+.tableColumn2 {
+  position: relative;
+  width: 60%;
+  height: 30px;
+  left: 0px;
+  top: 0px;
+
+  text-align: left;
+}
+.tableColumn3 {
+  position: relative;
+  width: 10%;
+  height: 30px;
+  left: 0px;
+  top: 0px;
+
+  padding-right: 5px;
+  text-align: right;
+}
+.tableColumn4 {
+  position: relative;
+  width: 10%;
+  height: 30px;
+  left: 0px;
+  top: 0px;
+
+  text-align: center;
+}
+.tableColumn5 {
+  position: relative;
+  width: 10%;
+  height: 30px;
+  left: 0px;
+  top: 0px;
+
+  padding-right: 5px;
+  text-align: right;
+}
 div #Quick-Buttons {
   position: absolute;
   width: 550px;
@@ -106,11 +178,17 @@ div #Item-List-Panel {
   left: 0px;
   top: 45px;
 
-  background: #2F2F2F;
+  background: #202020;
+}
+div #table-wrapper {
+  position: relative;
+}
+#table-wrapper table {
+  width:100%;
 }
 div #Column-Headers {
-  position: absolute;
-  width: 1265px;
+  position: relative;
+  width: calc(100%-1em);
   height: 30px;
   left: 0px;
   top: 0px;
@@ -119,46 +197,46 @@ div #Column-Headers {
   mix-blend-mode: normal;
 }
 div #SKU-Column {
-  position: absolute;
-width: 90px;
-height: 30px;
-left: 0px;
-top: 0px;
+  position: relative;
+  width: 10%;
+  height: 30px;
+  left: 0px;
+  top: 0px;
 
 background: #202020;
 }
 div #Description-Column {
-  position: absolute;
-  width: 894px;
+  position: relative;
+  width: 60%;
   height: 30px;
-  left: 90px;
+  left: 0px;
   top: 0px;
 
   background: #202020;
 }
 div #Unit-Price-Column {
-  position: absolute;
+  position: relative;
+  width: 10%;
   height: 30px;
-  left: 77.79%;
-  right: 12.09%;
-  top: calc(50% - 30px/2);
+  left: 0px;
+  top: 0px;
 
   background: #202020;
 }
 div #Quantity-Column {
-  position: absolute;
+  position: relative;
+  width: 10%;
   height: 30px;
-  left: 87.91%;
-  right: 7.04%;
-  top: calc(50% - 30px/2);
+  left: 0px;
+  top: 0px;
 
   background: #202020;
 }
 div #Total-Column {
-  position: absolute;
-  width: 90px;
+  position: relative;
+  width: 10%;
   height: 30px;
-  left: 1175px;
+  left: 0px;
   top: 0px;
 
   background: #202020;
