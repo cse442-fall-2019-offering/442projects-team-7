@@ -75,6 +75,10 @@ function uLogin(){
 	}
 }
 
+function addTableItem(sku) {
+	console.log("SKU is : " + sku);
+}
+
 app.on('ready', createWindow)
 
 /////////// SQLite code ///////////

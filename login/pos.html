@@ -19,7 +19,8 @@
 
         <section>
           <div id="Transaction-Info-Panel">
-            <input id="Item-Search-Field" type="text" name="search_text" placeholder="Enter a SKU, scan barcode, or search for item...">
+            <input id="Item-Search-Field" onchange="addTableItem(document.getElementById('Item-Search-Field').value);" type="text" name="search_text" placeholder="Enter a SKU, scan barcode, or search for item...">
+            <script src = "main.js"></script>
           </div>
 
           <table id="Item-List-Panel">
