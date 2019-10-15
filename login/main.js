@@ -111,8 +111,30 @@ let productDB = new sqlite3.Database('../database/db/product.db', function(err){
 productDBSchema = `CREATE TABLE IF NOT EXISTS Products(
 	sku text NOT NULL PRIMARY KEY,
 	description text NOT NULL,
-	unit_price integer NOT NULL
+	unit_price REAL NOT NULL
 );`
+
+// getter function to get row by sku
+// returns an array with sku, description, and unit price indexed in that order
+function findItemBySKU (sku){
+	var productInfo = [];
+	var sql = 'SELECT sku, description, unit_price ';
+	sql += 'FROM Products ';
+	sql += 'WHERE sku = ? ';
+
+	productDB.get(sql, sku, function(err, row){
+		if(err){
+			return console.error(err.message);
+		}
+		productInfo.push(row.sku);
+		productInfo.push(row.description);
+		productInfo.push(row.unit_price);
+		console.log(productInfo);
+		return productInfo;
+	})
+}
+
+findItemBySKU("123415");
 
 // close the database connection.
 customerDB.close(function(err){
