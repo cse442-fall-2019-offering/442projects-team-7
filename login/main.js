@@ -81,3 +81,50 @@ var DAOtest = new DAO(DBPATH);
 var skutest = DAOtest.skuLookup(12345);
 skutest = DAOtest.skuLookup(1);
 
+/////////// Pop up window code ///////////
+
+/**
+ * Creates a pop up window
+ * 
+ * @param id ID of the button we click on to create the window
+ */
+function popUp(id){
+	var popUp = id
+	if(popUp == "itemManip"){
+		window.open("itemManip.html", "_blank", "nodeIntegration = true")
+	}
+}
+
+function editItems(){
+	text = document.getElementById("Edit").value
+	if (text=="Edit") {
+		var input = document.getElementById("SKUInput")
+		input.style.display = "block"
+		document.getElementById("Edit").value = "Submit"
+		editor()
+	}
+    else document.getElementById("Edit").value = "Edit"
+}
+
+/**
+ * Lets us edit each table by row
+ */
+function editor(){
+	var table = document.getElementById("itemTable")
+	var SKU = document.getElementById("itemSKU").value
+	console.log(table.rows[0].cells[0].innerHTML)
+	var des = document.getElementById("itemDescription").value
+	var price = document.getElementById("itemUnitPrice").value
+		for (var i = 1; i < table.rows.length; i++) {
+			table.rows[i].onclick = function(){
+				// Only allow edits while in edit mode(Will need to delete if statement to work with other tables)
+				if(document.getElementById("Edit").value == "Edit"){
+					return;
+				}
+				this.cells[0].innerHTML = document.getElementById("itemSKU").value
+				this.cells[1].innerHTML = document.getElementById("itemDescription").value
+				this.cells[2].innerHTML = document.getElementById("itemUnitPrice").value
+			};
+		}
+	
+}

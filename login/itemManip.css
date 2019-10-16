@@ -1,0 +1,92 @@
+html, body {
+    background-color: #1B1B1B;
+    color: #CECECE;
+    font-family: Arial, Verdana, sans-serif;
+}
+
+.rounded {
+    border-radius: 5%;
+}
+.centered {
+    text-align: center
+}
+.hardcentered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+table, td, th {  
+    border: 1px solid #000000;
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+.tableEntryA {
+    background: #353535;
+}
+.tableEntryB {
+    background: #292929;
+}
+
+.tableColumn1 {
+    position: relative;
+    width: 10%;
+    height: 10px;
+    left: 0px;
+    top: 0px;
+    text-align: center;
+}
+
+.tableColumn2 {
+    position: relative;
+    width: 60%;
+    height: 10px;
+    left: 0px;
+    top: 0px;
+  
+    text-align: left;
+}
+
+.tableColumn3 {
+    position: relative;
+    width: 10%;
+    height: 10px;
+    left: 0px;
+    top: 0px;
+  
+    padding-right: 5px;
+    text-align: right;
+}
+
+div #title{
+    position: absolute;
+    width: 548px;
+    height: 61px;
+    left: 260px;
+    top: 7px;
+}
+
+input[type=button] {
+    background-color:rgb(102, 102, 102);
+    color: #000000;
+    font-weight: bold;
+    border: none;
+    text-decoration: none;
+    padding: 16px 32px;
+    margin: 4px 2px;
+}
+
+input[type=button]:hover{
+    background-color: #808080;
+}
