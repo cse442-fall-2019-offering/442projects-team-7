@@ -75,10 +75,6 @@ function uLogin(){
 	}
 }
 
-function addTableItem(sku) {
-	console.log("SKU is : " + findItemBySKU(sku));
-}
-
 app.on('ready', createWindow)
 
 /////////// SQLite code ///////////
@@ -124,22 +120,30 @@ function findItemBySKU (sku){
 	var sql = 'SELECT sku, description, unit_price ';
 	sql += 'FROM Products ';
 	sql += 'WHERE sku = ? ';
-
-	productDB.get(sql, sku, function(err, row){
-		if(err){
-			return console.error(err.message);
+        
+	return productDB.get(sql, sku, function(err, row){
+	    if(err){
+		console.log('error finding item with sku ' + sku, err);
+		    return console.error(err.message);
 		}
 		console.log(row);
 		return row;
 	})
 }
 
-addTableItem("123415")
 
+function addTableItem(sku) {
+    console.log("SKU is : ",findItemBySKU(sku));
+}
+
+
+//addTableItem("123415");
+console.log(findItemBySKU("123415"))
 
 // close the database connection.
 customerDB.close(function(err){
     if(err){
+	console.log('error closing customerDB: ', err);
         return console.error(err.message);
     }
     console.log('Close the customer database connection.')
@@ -147,6 +151,7 @@ customerDB.close(function(err){
 
 productDB.close(function(err){
     if(err){
+	console.log('error closing productDB: ',err);
         return console.error(err.message);
     }
     console.log('Close the product database connection.')
