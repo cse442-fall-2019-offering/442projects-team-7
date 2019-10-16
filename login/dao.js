@@ -29,16 +29,23 @@ class DAO {
 		console.log('Database connection failed', err)
 	    } else {
 		console.log('Connected to database')
-		createTables()
+		createTables(this)
 	    }
 	})
     }
 
-    const createTables = () => {
-	console.log("Database create for Products, Customers, Sales, and Users");
-	this.db.run(TABLE_PRODUCTS);
+    /** createTables creates the schema for our datastore if they do not already exist
+      * Currently creates Products, Customers, Sales, and Users
+      * @param dao     Passes the parent object for the purposes of establishing proper scope
+      **/
+    createTables(dao) {
+	console.log("Database creation for Products, Customers, Sales, and Users")
+	dao.db.run(TABLE_PRODUCTS)
+	dao.db.run(TABLE_CUSTOMERS)
+	dao.db.run(TABLE_SALES)
+	dao.db.run(TABLE_USERS)
 
-    })
+    }
 
  /** /** run is an abstraction of the existing run function.
       * 
