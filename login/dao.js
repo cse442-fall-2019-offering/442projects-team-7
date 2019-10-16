@@ -5,7 +5,7 @@
  **/
 
 const fs = require('fs');
-const sqlite3 = require('sqlite3');
+const sqlite3 = require('sqlite3').verbose();
 
 /** DAO is the abstraction class for interactions with the database.  
  * 
@@ -54,14 +54,13 @@ module.exports = class DAO {
 
 
 
-
+	
 	this.db = new sqlite3.Database(dbFilePath, (err) => {
 	    if (err) {
 		console.log('Database connection failed', err);
 	    } else {
 		console.log('Connected to database');
 		console.log('Database creation for Products, Customers, Sales, and Users');
-		console.log(TABLE_PRODUCTS);
 		this.db.run(TABLE_PRODUCTS);
 		this.db.run(TABLE_CUSTOMERS);
 		//this.db.run(TABLE_SALES);
@@ -71,28 +70,30 @@ module.exports = class DAO {
 	
     }
 
-    
- /** /** run is an abstraction of the existing run function.
-      * 
-      * @param sql               the SQL query to execute
-      * @param params            additional parameters to pass
-     **
-    run(sql, params = []) {
-	this.db.run(sql, params, function(err) {
-	    if (err) {
-		console.log('SQL query failed: ' + sql)
-		console.log(err)
-	    } else {
-		id: this.lastID
-	    }
-	})
-    }
-    
- **/
 
     
+    skuLookup (sku) {
+	const SQL = `SELECT sku, description, unit_price 
+                     FROM Products 
+                     WHERE sku = ?`;
+	var result;
+	console.log(this.db);
+	this.db.get(SQL, sku, function(err, row) {
+	    if (err) {
+		console.log('error finding item with sku ' + sku, err);
+		return console.error(err);
+	    }
+	    result = row;
+	    return callbackReturner(result);
+	})
+	
+
+    }   
     
 }
 
 
+function  callbackReturner (input) {
+	return console.log(input);
+    }
 //module.exports.DAO = DAO;    

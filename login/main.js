@@ -78,3 +78,6 @@ app.on('ready', createWindow);
 const DBPATH = "./datastore.db";
 var DAOtest = new DAO(DBPATH);
 
+var skutest = DAOtest.skuLookup(12345);
+skutest = DAOtest.skuLookup(1);
+
