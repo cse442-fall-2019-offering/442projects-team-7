@@ -1,21 +1,25 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow,  ipcMain, ipcRenderer} = require('electron'); 
 const { DAO, getData, setData } = require('./dao.js');
 const Promise = require('bluebird');
 const Customers = require('./customers.js');
 const Products = require('./products.js');
 const DBPATH = "./datastore.db";
+const TableHelper = require('./tableManip.js');
 
-
-var loginTest = [
-	{
-		username: "edmund",
-		password: "qwerty"
-	},
-	{
-		username: "",
-		password: ""
-	}
-]
+// Function to get login credentials.
+function getLoginTest() {
+	var loginTest = [
+		{
+			username: "edmund",
+			password: "qwerty"
+		},
+		{
+			username: "",
+			password: ""
+		}
+	];
+	return loginTest;
+}
 
 function createWindow(){
 
@@ -33,7 +37,11 @@ function createWindow(){
 	})
 }
 
+
+
 function accountExists(username){
+	var loginTest = getLoginTest();
+	console.log(loginTest);
 	if((undefined != loginTest) && (loginTest.length)){
 		var password = document.getElementById("password").value
 		for(i=0;i<loginTest.length;i++){
@@ -44,13 +52,13 @@ function accountExists(username){
 		return false
 	}
 	else{
+		console.log(loginTest);
 		return false
 	}
 }
 
 //Clear login and show cashier window
 function clearLogin(id){
-     
     var box = document.getElementById(id);
     box.style.transition = "opacity 1.0s linear 0s";
     box.style.opacity = 0;
@@ -65,6 +73,7 @@ function clearLogin(id){
 function uLogin(){
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
+    console.log("Username: " + username + '\n' + "Password: " + password);
     var exist = accountExists(username);
 	if(exist == true){
 	    console.log("Username: " + username + '\n' + "Password: " + password);
@@ -82,10 +91,42 @@ const DAOtest = new DAO(DBPATH);
 const customerStore = new Customers.Customers(DAOtest);
 const productStore = new Products.Products(DAOtest);
 
+// ipcMain.on('updateTable', function(event, sku) {
+//   	console.log('sku : ' + sku);
+//   	// Call function to generate productDB and return
+// 	productStore.createTable()
+// 		.then(() => productStore.getBySku(sku))
+// 		.then((product) => {
+// 		console.log('Retrieved product from DB', product);
+// 		return new Promise((resolve, reject) => {
+// 			//var sku = product.sku;
+// 			//var description = product.description;
+// 			//var price = product.unit_price;
+// 			console.log(`SKU = ${product.sku}`);
+// 			console.log(`Description = ${product.description}`);
+// 			console.log(`Price = ${product.unit_price}`);
+// 			//var productArray = {sku, description, price};
+// 		});
+// 		resolve("success");
+// 		})
+// 	    .catch((err) => {
+// 		console.log('Error: ');
+// 		console.log(err);
+// 		});
+// });
+
+// document.getElementById('login').addEventListener('click', () => {
+//  	ipcRenderer.send('updateTable', 1);
+// });
 
 
-//EXAMPLE: Inits tables (always need this) and then gets all entries in Products table. Can act on them within the promise, or use the promise to add the entries to an external array. Refer to products.js and customers.js to see other functions. 
-customerStore.createTable()
+// Function to populate main POS display table on SKU search entry.
+function addTableItem() {
+	//var sku = document.getElementById("Item-Search-Field").value;
+	var sku = 1;
+	console.log('sku : ' + sku);
+
+	customerStore.createTable()
     .then(() => productStore.createTable())
     .then(() => productStore.getAll())
     .then((products) => {
@@ -103,6 +144,29 @@ customerStore.createTable()
 	console.log('Error: ');
 	console.log(err);
     });
+}
+
+//EXAMPLE: Inits tables (always need this) and then gets all entries in Products table. 
+// Can act on them within the promise, or use the promise to add the entries to an external array. 
+// Refer to products.js and customers.js to see other functions. 
+// customerStore.createTable()
+//     .then(() => productStore.createTable())
+//     .then(() => productStore.getAll())
+//     .then((products) => {
+// 	console.log('Retrieved products from DB', products);
+// 	return new Promise((resolve, reject) => {
+// 	    products.forEach((product) => {
+// 		console.log(`SKU = ${product.sku}`);
+// 		console.log(`Description = ${product.description}`);
+// 		console.log(`Price = ${product.unit_price}`);
+// 	    });
+// 	});
+// 	resolve('success');
+//     })
+//     .catch((err) => {
+// 	console.log('Error: ');
+// 	console.log(err);
+//     });
 
 
 
@@ -151,5 +215,7 @@ function editor(){
 				this.cells[2].innerHTML = document.getElementById("itemUnitPrice").value
 			};
 		}
-	
+
 }
+
+addTableItem();

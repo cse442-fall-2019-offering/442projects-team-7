@@ -22,8 +22,47 @@
 
         <section>
           <div id="Transaction-Info-Panel">
-            <input id="Item-Search-Field" onchange="addTableItem(document.getElementById('Item-Search-Field').value);" type="text" name="search_text" placeholder="Enter a SKU, scan barcode, or search for item...">
-            <script src = "main.js"></script>
+            <input id="Item-Search-Field" type="text" name="search_text" placeholder="Enter a SKU, scan barcode, or search for item...">
+            <button id="test-button" onclick="addToTable();"></button>
+            <script type="text/javascript">
+                const { DAO, getData, setData } = require('./dao.js');
+                const { ipcRenderer} = require('electron');
+                const Promise = require('bluebird');
+                const Products = require('./products.js');
+                const DBPATH = "./datastore.db";
+                const TableHelper = require('./tableManip.js');
+                
+                const DAOtest = new DAO(DBPATH);
+                const customerStore = new Customers.Customers(DAOtest);
+                const productStore = new Products.Products(DAOtest);
+
+                function addToTable() {
+                    var sku = document.getElementById('Item-Search-Field');
+                    console.log('sku : ' + sku);
+                    // Call function to generate productDB and return
+                    productStore.createTable()
+                        .then(() => productStore.getBySku(sku))
+                        .then((product) => {
+                        console.log('Retrieved product from DB', product);
+                        return new Promise((resolve, reject) => {
+                            //var sku = product.sku;
+                            //var description = product.description;
+                            //var price = product.unit_price;
+                            console.log(`SKU = ${product.sku}`);
+                            console.log(`Description = ${product.description}`);
+                            console.log(`Price = ${product.unit_price}`);
+                            //var productArray = {sku, description, price};
+                        });
+                        resolve("success");
+                        })
+                        .catch((err) => {
+                        console.log('Error: ');
+                        console.log(err);
+                        });
+                }
+
+                
+            </script>
           </div>
 
           <table id="Item-List-Panel">
