@@ -1,7 +1,5 @@
 const { app, BrowserWindow } = require('electron')
-
-
-var DAO = require('./dao.js')
+const { DAO, getData, setData } = require('./dao.js')
  
 var loginTest = [
 	{
@@ -78,6 +76,9 @@ app.on('ready', createWindow);
 const DBPATH = "./datastore.db";
 var DAOtest = new DAO(DBPATH);
 
-var skutest = DAOtest.skuLookup(12345);
+DAOtest.skuLookup(12345);
+var returned = getData();
+console.log(returned);
 skutest = DAOtest.skuLookup(1);
-
+returned = getData();
+console.log(returned);

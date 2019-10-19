@@ -6,16 +6,18 @@
 
 const fs = require('fs');
 const sqlite3 = require('sqlite3').verbose();
+const Promise = require('bluebird');
 
+global.data = {get:'', all:['']};
 /** DAO is the abstraction class for interactions with the database.  
  * 
  *
  *
 **/
-module.exports = class DAO {
+class DAO {
 
     
-
+    
     /** constructor creates the database connection by opening a database at the given path.
       * Upon successful connection, it creates the necessary tables if they do not exist. 
       * @param dbFilePath        the desired path for the database
@@ -71,29 +73,53 @@ module.exports = class DAO {
     }
 
 
+
+    run(sql, params = []) {
+	return new Promise((resolve, reject) => {
+	    this.db.run(sql, params, function (err) {
+		if (err) {
+		    console.log('Error with sql ' + sql);
+		    console.log(err);
+		    reject(err);
+		} else {
+		    resolve({ id: this.lastID });
+		}
+
+	    });
+
+	});
+    }
+
     
     skuLookup (sku) {
 	const SQL = `SELECT sku, description, unit_price 
                      FROM Products 
                      WHERE sku = ?`;
-	var result;
+	
 	console.log(this.db);
 	this.db.get(SQL, sku, function(err, row) {
 	    if (err) {
 		console.log('error finding item with sku ' + sku, err);
 		return console.error(err);
 	    }
-	    result = row;
-	    return callbackReturner(result);
-	})
-	
+	    return setData(row);
+	});
 
-    }   
+	
+    }
+    
     
 }
 
+function getData() {
+    console.log("getdata in dao.js:",global.data);
+    return global.data;
 
-function  callbackReturner (input) {
-	return console.log(input);
-    }
-//module.exports.DAO = DAO;    
+}
+function setData(input) {
+    console.log("setdata in dao.js:",global.data);
+    global.data.get = input;
+
+}
+
+module.exports = { DAO, getData, setData };
