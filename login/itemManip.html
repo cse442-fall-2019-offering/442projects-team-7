@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="itemManip.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Item Manipulator</title>
+    </head>
+    <script src = "main.js"></script>
+    <div class = "centered">
+        Item Manipulation
+    </div>
+    <div id="SKUInput">
+        SKU:<input type="text" name="itemSKU" id="itemSKU">
+        Description:<input type="text" name="itemDescription" id="itemDescription">
+        Unit Price:<input type="text" name="itemUnitPrice" id="itemUnitPrice">
+    </div>
+    <table id="itemTable">
+        <thead>
+            <tr class = "tableEntryB">
+                <th>SKU</th>
+                <th>Description</th>
+                <th>Unit Price</th>
+            </tr>
+            <tr class = "tableEntryA">
+                <td class = "tableColumn1">Filler SKU</td>
+                <td class = "tableColumn2">Filler description</td>
+                <td class = "tableColumn3">Filler unit price</td>
+            </tr>
+            <tr class = "tableEntryB">
+                <td class = "tableColumn1">Filler SKU</td>
+                <td class = "tableColumn2">Filler description</td>
+                <td class = "tableColumn3">Filler unit price</td>
+            </tr>
+            <tr class = "tableEntryA">
+                <td class = "tableColumn1">Filler SKU</td>
+                <td class = "tableColumn2">Filler description</td>
+                <td class = "tableColumn3">Filler unit price</td>
+            </tr>
+            <tr class = "tableEntryB">
+                <td class = "tableColumn1">Filler SKU</td>
+                <td class = "tableColumn2">Filler description</td>
+                <td class = "tableColumn3">Filler unit price</td>
+            </tr>
+            <tr class = "tableEntryA">
+                <td class = "tableColumn1">Filler SKU</td>
+                <td class = "tableColumn2">Filler description</td>
+                <td class = "tableColumn3">Filler unit price</td>
+            </tr>
+            <tr class = "tableEntryB">
+                <td class = "tableColumn1">Filler SKU</td>
+                <td class = "tableColumn2">Filler description</td>
+                <td class = "tableColumn3">Filler unit price</td>
+            </tr>
+        </thead>
+    </table>
+    <div>
+        <input type = "button" value = "Delete">
+        <input type = "button" onclick = "editItems()" value = "Edit" id = "Edit">
+    </div>
+</html>
