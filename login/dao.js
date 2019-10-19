@@ -4,7 +4,6 @@
  *
  **/
 
-const fs = require('fs');
 const sqlite3 = require('sqlite3').verbose();
 const Promise = require('bluebird');
 
@@ -24,38 +23,6 @@ class DAO {
      **/
     constructor(dbFilePath) {
 
-	const TABLE_PRODUCTS = `CREATE TABLE IF NOT EXISTS Products( 
-        sku integer NOT NULL PRIMARY KEY, 
-        description text NOT NULL UNIQUE, 
-        unit_price real NOT NULL)`;
-	const TABLE_CUSTOMERS = `CREATE TABLE IF NOT EXISTS Customers( 
-        custId integer NOT NULL PRIMARY KEY, 
-        firstname text NOT NULL, 
-        lastname text NOT NULL, 
-        email text UNIQUE, 
-        phone text, 
-        address text,  
-        city text, zip text, 
-        points integer NOT NULL, 
-        joined text NOT NULL, 
-        lastSeen text NOT NULL)`;
-	const TABLE_SALES = `CREATE TABLE IF NOT EXISTS Sales( 
-        saleId integer NOT NULL PRIMARY KEY, 
-        FOREIGN KEY(customer) REFERENCES Customers(custId), 
-        soldItems blob NOT NULL, 
-        pointsUsed integer NOT NULL, 
-        pointsEarned integer NOT NULL, 
-        total real NOT NULL)`;
-	const TABLE_USERS = `CREATE TABLE IF NOT EXISTS Users( 
-        userId integer NOT NULL PRIMARY KEY, 
-        username text NOT NULL, 
-        pass blob NOT NULL, 
-        salt blob NOT NULL, 
-        group text NOT NULL)`;
-
-
-
-
 	
 	this.db = new sqlite3.Database(dbFilePath, (err) => {
 	    if (err) {
@@ -63,10 +30,6 @@ class DAO {
 	    } else {
 		console.log('Connected to database');
 		console.log('Database creation for Products, Customers, Sales, and Users');
-		this.db.run(TABLE_PRODUCTS);
-		this.db.run(TABLE_CUSTOMERS);
-		//this.db.run(TABLE_SALES);
-		//this.db.run(TABLE_USERS);
 	    }
 	})
 	
@@ -88,6 +51,40 @@ class DAO {
 	    });
 
 	});
+    }
+
+
+    get(sql, params = []) {
+	return new Promise((resolve, reject) => {
+	    this.db.get(sql, params, (err, result) => {
+		if (err) {
+		    console.log('Error with sql ' + sql);
+		    console.log(err);
+		    reject(err);
+		} else {
+		    resolve(result);
+		}
+
+	    });
+	});
+
+    }
+
+
+    all(sql, params = []) {
+	return new Promise((resolve, reject) => {
+	    this.db.all(sql, params, (err, rows) => {
+		if (err) {
+		    console.log('Error with sql ' + sql);
+		    console.log(err);
+		    reject(err);
+		} else {
+		    resolve(rows);
+		}
+	    });
+
+	});
+
     }
 
     
@@ -123,3 +120,4 @@ function setData(input) {
 }
 
 module.exports = { DAO, getData, setData };
+

@@ -17,6 +17,7 @@
     "spectron": "^8.0.0"
   },
   "dependencies": {
+    "bluebird": "^3.7.1",
     "sqlite3": "^4.1.0"
   }
 }

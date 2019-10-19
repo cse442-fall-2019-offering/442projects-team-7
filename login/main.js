@@ -1,6 +1,11 @@
-const { app, BrowserWindow } = require('electron')
-const { DAO, getData, setData } = require('./dao.js')
- 
+const { app, BrowserWindow } = require('electron');
+const { DAO, getData, setData } = require('./dao.js');
+const Promise = require('bluebird');
+const Customers = require('./customers.js');
+const Products = require('./products.js');
+const DBPATH = "./datastore.db";
+
+
 var loginTest = [
 	{
 		username: "edmund",
@@ -73,17 +78,33 @@ function uLogin(){
 app.on('ready', createWindow);
 
 
-const DBPATH = "./datastore.db";
-var DAOtest = new DAO(DBPATH);
+const DAOtest = new DAO(DBPATH);
+const customerStore = new Customers.Customers(DAOtest);
+const productStore = new Products.Products(DAOtest);
 
-DAOtest.skuLookup(12345);
-var returned = getData();
-console.log(returned);
-skutest = DAOtest.skuLookup(1);
-<<<<<<< HEAD
-returned = getData();
-console.log(returned);
-=======
+
+
+//EXAMPLE: Inits tables (always need this) and then gets all entries in Products table. Can act on them within the promise, or use the promise to add the entries to an external array. Refer to products.js and customers.js to see other functions. 
+customerStore.createTable()
+    .then(() => productStore.createTable())
+    .then(() => productStore.getAll())
+    .then((products) => {
+	console.log('Retrieved products from DB', products);
+	return new Promise((resolve, reject) => {
+	    products.forEach((product) => {
+		console.log(`SKU = ${product.sku}`);
+		console.log(`Description = ${product.description}`);
+		console.log(`Price = ${product.unit_price}`);
+	    });
+	});
+	resolve('success');
+    })
+    .catch((err) => {
+	console.log('Error: ');
+	console.log(err);
+    });
+
+
 
 /////////// Pop up window code ///////////
 
@@ -132,4 +153,3 @@ function editor(){
 		}
 	
 }
->>>>>>> 29838bf59fdf161e4b67650dd5ecaf7210cb853e
