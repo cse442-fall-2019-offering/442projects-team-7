@@ -24,7 +24,7 @@ td, th {
   border-left: 1px solid #4F4F4F;
 }
 tr:hover {
-  background-color: grey;
+  outline: #333 solid 4px;;
 }
 .rounded {
     border-radius: 5%;
@@ -138,7 +138,7 @@ div.pbtns {
   text-align: right;
 }
 .selectedRow {
-  outline: #333 solid 4px;
+  background-color: grey;
 }
 .tableButton {
   position: relative;

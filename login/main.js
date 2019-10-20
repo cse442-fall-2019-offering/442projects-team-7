@@ -190,7 +190,7 @@ function insertTableRowDataNew(rowEntry, tableData) {
 	addRowCellNew(getColumnClass(4), row.insertCell(), rowEntry[2]);
 }
 
-// Function to populate main POS display table on SKU search entry.
+// Populates main POS display table on SKU search entry.
 function addMainTableItem() {
 	//var sku = document.getElementById("Item-Search-Field").value;
 	var sku = 556278;
@@ -212,6 +212,59 @@ function addMainTableItem() {
 			console.log("Non-Empty Case");
 			insertTableRowDataNew(rowEntry, tableData);
 		}
+	}
+}
+
+// Determines new row styling
+function switchStyling() {
+
+}
+
+// Deletes all rows with selected class applied
+function deleteMainSelectedItems() {
+	var table = document.getElementById("Table-Data");
+	var numRows = table.rows.length;
+	var count = 1;
+	for (var rowIndex = 0; rowIndex < numRows; rowIndex++) {
+		var row = table.rows[rowIndex];
+		if (row.classList.contains('selectedRow')) {
+			if (rowIndex <= 21) {
+				row.classList.remove('selectedRow');
+				table.deleteRow(rowIndex);
+				newRow = table.insertRow();
+				addRowCellNew(getColumnClass(0), newRow.insertCell(), "");
+				addRowCellNew(getColumnClass(1), newRow.insertCell(), "");
+				addRowCellNew(getColumnClass(2), newRow.insertCell(), "");
+				addRowCellNew(getColumnClass(3), newRow.insertCell(), "");
+				addRowCellNew(getColumnClass(4), newRow.insertCell(), "");
+				// for (var colIndex = 0; colIndex < 5; colIndex++) {
+				// 	console.log(row.columns[rowIndex].innerHTML);
+				// 	row.columns[rowIndex].innerHTML = "";
+				// }
+			} else {
+				row.classList.remove('selectedRow');
+				table.deleteRow(rowIndex);
+				row = table.rows[rowIndex];
+			}
+		}
+		row = table.rows[rowIndex];
+		row.id = "row_" + count;
+
+		if (row.classList.contains('tableEntryB')) {
+			row.classList.remove('tableEntryB');
+		} else if (row.classList.contains('tableEntryA')) {
+			row.classList.remove('tableEntryA');
+		}
+
+		if((count % 2) == 0) {
+			row.classList.add("tableEntryB");
+		} else {
+			row.classList.add("tableEntryA");
+		}
+
+		count += 1;
+
+		console.log(rowIndex); 
 	}
 }
 

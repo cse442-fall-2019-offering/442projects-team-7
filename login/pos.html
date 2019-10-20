@@ -25,7 +25,7 @@
             <div id="Inner-Transaction-Panel">
             <input id="Item-Search-Field" type="text" name="search_text" placeholder="Enter a SKU, scan barcode, or search for item...">
             <button class="tableButton" type="button" onclick="addMainTableItem();">Search Item</button>
-            <button class="tableButton" type="button" onclick="deleteMainTableItem();">Delete Item</button>
+            <button class="tableButton" type="button" onclick="deleteMainSelectedItems();">Delete Item</button>
             </div>
             <script src="main.js"></script>
             <!--button id="test-button" onclick="addToTable();"></button>
@@ -242,7 +242,7 @@
                     console.log('already');
                 } else {
                     row.classList.add('selectedRow');
-                    console.log('newlyy');
+                    console.log('newly');
                 }
             }); 
         </script>
