@@ -120,7 +120,7 @@ const productStore = new Products.Products(DAOtest);
 
 /////////// Table Population code ///////////
 
-// Function to 
+// Returns a product entry as a list via its sku
 function getProductBySku(sku) {
 	var product = [556278, "An example item description", 44.99];
 	if (product[0] == sku) {
@@ -129,6 +129,7 @@ function getProductBySku(sku) {
 	return undefined;
 }
 
+// Inserts a given rowEntry into an existing empty row
 function insertTableRowData(rowEntry, tableData) {
 	console.log(tableData.rows.length);
 	for (var rowIndex = 0; rowIndex < tableData.rows.length; rowIndex++) {
@@ -145,6 +146,7 @@ function insertTableRowData(rowEntry, tableData) {
 	}	
 }
 
+// Returns the string name for a styling class, based on column index
 function getColumnClass(colIndex) {
 	switch(colIndex) {
 		case(0):
@@ -161,12 +163,14 @@ function getColumnClass(colIndex) {
 
 }
 
+// Populates a newly created row cell
 function addRowCellNew(colClass, cell, entry) {
 	let textNode = document.createTextNode(entry);
 	cell.appendChild(textNode);
 	cell.classList.add(colClass);
 }
 
+// Creates a new row and populates its data
 function insertTableRowDataNew(rowEntry, tableData) {
 	let table = document.getElementById("Table-Data");
 	let row = table.insertRow();
