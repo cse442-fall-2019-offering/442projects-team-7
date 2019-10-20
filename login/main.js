@@ -176,6 +176,7 @@ function insertTableRowDataNew(rowEntry, tableData) {
 	let row = table.insertRow();
 
 	var rowLen = table.rows.length;
+	row.id = "row_" + rowLen;
 	if(rowLen % 2 == 0) {
 		row.classList.add("tableEntryB");
 	} else {
