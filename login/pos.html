@@ -22,8 +22,9 @@
 
         <section>
           <div id="Transaction-Info-Panel">
-            <input id="Item-Search-Field" type="text" name="search_text" placeholder="Enter a SKU, scan barcode, or search for item...">
-            <button id="test-button" onclick="addToTable();"></button>
+            <input id="Item-Search-Field" type="text" onchange="addMainTableItem();" name="search_text" placeholder="Enter a SKU, scan barcode, or search for item...">
+            <script src="main.js"></script>
+            <!--button id="test-button" onclick="addToTable();"></button>
             <script type="text/javascript">
                 const { DAO, getData, setData } = require('./dao.js');
                 const { ipcRenderer} = require('electron');
@@ -31,13 +32,13 @@
                 const Products = require('./products.js');
                 const DBPATH = "./datastore.db";
                 const TableHelper = require('./tableManip.js');
-                
+
                 const DAOtest = new DAO(DBPATH);
                 const customerStore = new Customers.Customers(DAOtest);
                 const productStore = new Products.Products(DAOtest);
 
                 function addToTable() {
-                    var sku = document.getElementById('Item-Search-Field');
+                    var sku = document.getElementById('Item-Search-Field').value;
                     console.log('sku : ' + sku);
                     // Call function to generate productDB and return
                     productStore.createTable()
@@ -62,7 +63,7 @@
                 }
 
                 
-            </script>
+            </script-->
           </div>
 
           <table id="Item-List-Panel">

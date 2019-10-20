@@ -4,7 +4,6 @@ const Promise = require('bluebird');
 const Customers = require('./customers.js');
 const Products = require('./products.js');
 const DBPATH = "./datastore.db";
-const TableHelper = require('./tableManip.js');
 
 // Function to get login credentials.
 function getLoginTest() {
@@ -119,31 +118,96 @@ const productStore = new Products.Products(DAOtest);
 //  	ipcRenderer.send('updateTable', 1);
 // });
 
+/////////// Table Population code ///////////
+
+// Function to 
+function getProductBySku(sku) {
+	var product = [556278, "An example item description", 44.99];
+	if (product[0] == sku) {
+		return product;
+	}
+	return undefined;
+}
+
+function insertTableRowData(rowEntry, tableData) {
+	console.log(tableData.rows.length);
+	for (var rowIndex = 0; rowIndex < tableData.rows.length; rowIndex++) {
+		// if current row is empty, populate
+		if (tableData.rows[rowIndex].cells[0].innerHTML == '') {
+			console.log('Found');
+			tableData.rows[rowIndex].cells[0].innerHTML = rowEntry[0];
+			tableData.rows[rowIndex].cells[1].innerHTML = rowEntry[1];
+			tableData.rows[rowIndex].cells[2].innerHTML = rowEntry[2];
+			tableData.rows[rowIndex].cells[3].innerHTML = 1;
+			tableData.rows[rowIndex].cells[4].innerHTML = rowEntry[2];
+			break;
+		}
+	}	
+}
+
+function getColumnClass(colIndex) {
+	switch(colIndex) {
+		case(0):
+			return "tableColumn1";
+		case(1):
+			return "tableColumn2";
+		case(2):
+			return "tableColumn3";
+		case(3):
+			return "tableColumn4";
+		default:
+			return "tableColumn5";
+	}
+
+}
+
+function addRowCellNew(colClass, cell, entry) {
+	let textNode = document.createTextNode(entry);
+	cell.appendChild(textNode);
+	cell.classList.add(colClass);
+}
+
+function insertTableRowDataNew(rowEntry, tableData) {
+	let table = document.getElementById("Table-Data");
+	let row = table.insertRow();
+
+	var rowLen = table.rows.length;
+	if(rowLen % 2 == 0) {
+		row.classList.add("tableEntryB");
+	} else {
+		row.classList.add("tableEntryA");
+	}
+
+	addRowCellNew(getColumnClass(0), row.insertCell(), rowEntry[0]);
+	addRowCellNew(getColumnClass(1), row.insertCell(), rowEntry[1]);
+	addRowCellNew(getColumnClass(2), row.insertCell(), rowEntry[2]);
+	addRowCellNew(getColumnClass(3), row.insertCell(), 1);
+	addRowCellNew(getColumnClass(4), row.insertCell(), rowEntry[2]);
+}
 
 // Function to populate main POS display table on SKU search entry.
-function addTableItem() {
+function addMainTableItem() {
 	//var sku = document.getElementById("Item-Search-Field").value;
-	var sku = 1;
+	var sku = 556278;
+
 	console.log('sku : ' + sku);
 
-	customerStore.createTable()
-    .then(() => productStore.createTable())
-    .then(() => productStore.getAll())
-    .then((products) => {
-	console.log('Retrieved products from DB', products);
-	return new Promise((resolve, reject) => {
-	    products.forEach((product) => {
-		console.log(`SKU = ${product.sku}`);
-		console.log(`Description = ${product.description}`);
-		console.log(`Price = ${product.unit_price}`);
-	    });
-	});
-	resolve('success');
-    })
-    .catch((err) => {
-	console.log('Error: ');
-	console.log(err);
-    });
+	// Requires DB access
+	var rowEntry = getProductBySku(sku);
+
+	// Check if last row is empty
+	if (rowEntry != undefined) {
+		// Check if last open table is empty
+		var tableData = document.getElementById("Table-Data");
+		if (tableData.rows[20].cells[0].innerHTML == '') {
+			console.log("Empty Case");
+			insertTableRowData(rowEntry, tableData);
+		} else {
+			// Populate rest of table
+			console.log("Non-Empty Case");
+			insertTableRowDataNew(rowEntry, tableData);
+		}
+	}
 }
 
 //EXAMPLE: Inits tables (always need this) and then gets all entries in Products table. 
@@ -217,5 +281,3 @@ function editor(){
 		}
 
 }
-
-addTableItem();
