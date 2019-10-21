@@ -15,19 +15,19 @@
       <div id="Create Sale Interface">
 
         <div id="Sale-Page-Navbar">
-			<button class="navButton">Customer Lookup</button>
-			<button class="navButton" onclick="popUp('itemManip');" value="Edit Items" id="itemManip">Edit Items</button>
-	
+		  <button class="navButton">Customer Lookup</button>
+		  <button class="navButton" onclick="popUp('itemManip');" value="Edit Items" id="itemManip">Edit Items</button>
+	      <script src="main.js"></script>
         </div>
 
         <section>
           <div id="Transaction-Info-Panel">
             <div id="Inner-Transaction-Panel">
-            <input id="Item-Search-Field" type="text" name="search_text" placeholder="Enter a SKU, scan barcode, or search for item...">
-            <button class="tableButton" type="button" onclick="addMainTableItem();">Search Item</button>
-            <button class="tableButton" type="button" onclick="deleteMainSelectedItems();">Delete Item</button>
+                <input id="Item-Search-Field" type="text" name="search_text" placeholder="Enter a SKU, scan barcode, or search for item...">
+                <button class="tableButton" type="button" onclick="addMainTableItem();">Search Item</button>
+                <button class="tableButton" type="button" onclick="deleteMainSelectedItems();">Delete Item</button>
+                <script src="tableManip.js"></script>
             </div>
-            <script src="main.js"></script>
             <!--button id="test-button" onclick="addToTable();"></button>
             <script type="text/javascript">
                 const { DAO, getData, setData } = require('./dao.js');

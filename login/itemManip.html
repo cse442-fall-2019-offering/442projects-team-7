@@ -3,59 +3,126 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="itemManip.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Item Manipulator</title>
     </head>
-    <script src = "main.js"></script>
-    <div class = "centered">
-        Item Manipulation
-    </div>
-    <div id="SKUInput">
-        SKU:<input type="text" name="itemSKU" id="itemSKU">
-        Description:<input type="text" name="itemDescription" id="itemDescription">
-        Unit Price:<input type="text" name="itemUnitPrice" id="itemUnitPrice">
-    </div>
-    <table id="itemTable">
-        <thead>
-            <tr class = "tableEntryB">
-                <th>SKU</th>
-                <th>Description</th>
-                <th>Unit Price</th>
-            </tr>
-            <tr class = "tableEntryA">
-                <td class = "tableColumn1">Filler SKU</td>
-                <td class = "tableColumn2">Filler description</td>
-                <td class = "tableColumn3">Filler unit price</td>
-            </tr>
-            <tr class = "tableEntryB">
-                <td class = "tableColumn1">Filler SKU</td>
-                <td class = "tableColumn2">Filler description</td>
-                <td class = "tableColumn3">Filler unit price</td>
-            </tr>
-            <tr class = "tableEntryA">
-                <td class = "tableColumn1">Filler SKU</td>
-                <td class = "tableColumn2">Filler description</td>
-                <td class = "tableColumn3">Filler unit price</td>
-            </tr>
-            <tr class = "tableEntryB">
-                <td class = "tableColumn1">Filler SKU</td>
-                <td class = "tableColumn2">Filler description</td>
-                <td class = "tableColumn3">Filler unit price</td>
-            </tr>
-            <tr class = "tableEntryA">
-                <td class = "tableColumn1">Filler SKU</td>
-                <td class = "tableColumn2">Filler description</td>
-                <td class = "tableColumn3">Filler unit price</td>
-            </tr>
-            <tr class = "tableEntryB">
-                <td class = "tableColumn1">Filler SKU</td>
-                <td class = "tableColumn2">Filler description</td>
-                <td class = "tableColumn3">Filler unit price</td>
-            </tr>
-        </thead>
-    </table>
-    <div>
-        <input type = "button" value = "Delete">
-        <input type = "button" onclick = "editItems()" value = "Edit" id = "Edit">
-    </div>
+    <body>
+        <script src = "main.js"></script>
+        <div id="title" class="centered">
+            Item Manipulation
+        </div>
+        <div id="SKUInput">
+            SKU:<input type="text" name="itemSKU" id="itemSKU">
+            Description:<input type="text" name="itemDescription" id="itemDescription">
+            Unit Price:<input type="text" name="itemUnitPrice" id="itemUnitPrice">
+        </div>
+        <div id="Table-Wrapper">
+            <table id="Item-List-Panel">
+                <thead id="Column-Headers">
+                    <tr">
+                        <th id="SKU-Column">SKU</th>
+                        <th id="Description-Column">Description</th>
+                        <th id="Unit-Price-Column">Unit Price</th>
+                    </tr>
+                </thead>
+                <tbody id="Table-Data">
+                    <tr id="row_1" class = "tableEntryA">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_2" class = "tableEntryB">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_3" class = "tableEntryA">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_4" class = "tableEntryB">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_5" class = "tableEntryA">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_6" class = "tableEntryB">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_7" class = "tableEntryA">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_8" class = "tableEntryB">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_9" class = "tableEntryA">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_10" class = "tableEntryB">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_11" class = "tableEntryA">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_12" class = "tableEntryB">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_13" class = "tableEntryA">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_14" class = "tableEntryB">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_15" class = "tableEntryA">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <script type="text/javascript">
+                document.getElementById("Table-Data").addEventListener('click', (e) => {
+                    var rowID = e.target.closest('tr').id;
+                    var row = document.getElementById(rowID);
+                    console.log(e.target.closest('tr').id);
+                    console.log(row);
+
+                    if (row.classList.contains('selectedRow')) {
+                        row.classList.remove('selectedRow');
+                        console.log('already');
+                    } else {
+                        row.classList.add('selectedRow');
+                        console.log('newly');
+                    }
+                }); 
+            </script>
+        </div>
+        <div id="Button-Array">
+            <input class="tableButton" type = "button" value = "Refresh Table">
+            <input class="tableButton" type = "button" value = "Delete">
+            <input class="tableButton" type = "button" onclick = "editItems()" value = "Edit" id = "Edit">
+        </div>
+    </body>
 </html>

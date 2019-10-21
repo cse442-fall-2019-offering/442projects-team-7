@@ -3,7 +3,6 @@ html, body {
     color: #CECECE;
     font-family: Arial, Verdana, sans-serif;
 }
-
 .rounded {
     border-radius: 5%;
 }
@@ -17,21 +16,31 @@ html, body {
     transform: translate(-50%, -50%);
     text-align: center;
 }
-
-table, td, th {  
-    border: 1px solid #000000;
-    text-align: left;
+tbody {
+  display:block;
+  height:95%;
+  overflow-y:scroll;
 }
-
+thead, tbody tr {
+  display:table;
+  width:100%;
+  table-layout:fixed;/* even columns width , fix width of table too*/
+}
+thead {
+  width: calc( 100% - 1em )/* scrollbar is average 1em/16px width, remove it from thead width */
+}
 table {
-    border-collapse: collapse;
-    width: 100%;
+  border-collapse: collapse;
+  width:100%;
 }
-  
-th, td {
-    text-align: left;
-    padding: 8px;
+td, th {
+  border-left: 1px solid #4F4F4F;
+  padding: 8px;
 }
+tr:hover {
+  outline: #333 solid 4px;;
+}
+
 .tableEntryA {
     background: #353535;
 }
@@ -41,16 +50,17 @@ th, td {
 
 .tableColumn1 {
     position: relative;
-    width: 10%;
+    width: 15%;
     height: 10px;
     left: 0px;
     top: 0px;
+
     text-align: center;
 }
 
 .tableColumn2 {
     position: relative;
-    width: 60%;
+    width: 65%;
     height: 10px;
     left: 0px;
     top: 0px;
@@ -60,13 +70,16 @@ th, td {
 
 .tableColumn3 {
     position: relative;
-    width: 10%;
+    width: 15%;
     height: 10px;
     left: 0px;
     top: 0px;
   
-    padding-right: 5px;
     text-align: right;
+}
+
+.selectedRow {
+  background-color: grey;
 }
 
 div #title{
@@ -75,6 +88,81 @@ div #title{
     height: 61px;
     left: 260px;
     top: 7px;
+}
+
+div #SKUInput{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    left: 10px;
+    top: 5px;
+    bottom: 5px;
+}
+
+div #Table-Wrapper {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  left: 10px;
+  top: 5px;
+  bottom: 5px;
+
+  background-color: #202020;
+}
+
+div #Item-List-Panel {
+  background: #202020;
+}
+
+div #Column-Headers {
+  position: relative;
+  width: calc(100%-1em);
+  left: 0px;
+  top: 0px;
+
+  background: #202020;
+  mix-blend-mode: normal;
+}
+
+div #SKU-Column {
+  position: relative;
+  width: 15%;
+  left: 0px;
+  top: 0px;
+}
+
+div #Description-Column {
+  position: relative;
+  width: 65%;
+  left: 0px;
+  top: 0px;
+}
+
+div #Unit-Price-Column {
+  position: relative;
+  width: 15%;
+  left: 0px;
+  top: 0px;
+}
+
+div #Button-Array {
+  position: absolute;
+  width: 946px;
+  height: 65px;
+  left: 37px;
+  top: 629px;
+}
+
+.tableButton {
+  position: relative;
+  height: 65%;
+  width: 20%;
+
+  background-color:rgb(102, 102, 102);
+  color: #000000;
+  font-weight: bold;
+  border: none;
+  text-decoration: none;
 }
 
 input[type=button] {
