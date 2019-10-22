@@ -1,5 +1,6 @@
 const Application = require('spectron').Application;
 const assert = require('assert');
+//const Promise = require('bluebird');
 /*const electronPath = require('electron');// Require Electron from the binaries included in node_modules.
 */
 const path = require('path');

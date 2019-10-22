@@ -152,7 +152,7 @@ const productStore = new Products.Products(DAOtest);
 function popUp(id){
 	var popUp = id
 	if(popUp == "itemManip"){
-		window.open("itemManip.html", "_blank", "nodeIntegration = true")
+		window.open("itemManip.html", "_blank", "width=100, height=100, scrollbars=1, nodeIntegration = true, left=0,top=0")
 	}
 }
 

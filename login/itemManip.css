@@ -19,16 +19,14 @@ html, body {
 tbody {
   display:block;
   height:95%;
-  overflow-y:scroll;
+
 }
 thead, tbody tr {
   display:table;
   width:100%;
   table-layout:fixed;/* even columns width , fix width of table too*/
 }
-thead {
-  width: calc( 100% - 1em )/* scrollbar is average 1em/16px width, remove it from thead width */
-}
+
 table {
   border-collapse: collapse;
   width:100%;
@@ -116,7 +114,6 @@ div #Item-List-Panel {
 
 div #Column-Headers {
   position: relative;
-  width: calc(100%-1em);
   left: 0px;
   top: 0px;
 
