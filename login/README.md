@@ -26,6 +26,29 @@ Now, just clone the repo and in the /login path, execute the following:
 npm install
 ```
 
+
+Add SQLite + Bluebird
+
+```bash
+npm install --save sqlite3
+```
+
+```bash
+npm install --save bluebird
+```
+
+```bash
+npm install --save-dev electron-builder
+```
+
+in package.json: `"postinstall": "electron-builder install-app-deps"`
+
+in shell:
+
+```bash
+npm run postinstall
+```
+
 (Note: if `npm start` doesn't work after this, explicitly install Electron:)
 ```bash
 npm install electron --save-dev
