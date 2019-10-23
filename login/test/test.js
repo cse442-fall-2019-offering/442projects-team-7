@@ -55,6 +55,13 @@ describe('Application launch', function () {
 
 })
 
+it('Populate main table', async () => {
+	for(i=0; i<10; i++){
+		await app.client.click('#searchItem');
+	}
+})
+////////// Pop up page tests ///////////
+
 it('Pops up edit page', async () => {
 	await sleep(1000);
 
@@ -64,6 +71,16 @@ it('Pops up edit page', async () => {
 	await app.client.windowByIndex(1);
 	await app.client.waitUntilWindowLoaded();
 	assert.ok('#itemTable');
+})
+
+it('Populate item table', async () => {
+	await sleep(1000);
+	await app.client.click("#Refresh");
+	for(i=0;i<16;i++){
+		await app.client.click("#row_1");
+		await app.client.click("#Delete");
+		await sleep(200);
+	}
 })
 
 it('Edit pop up table(1)', async () => {
