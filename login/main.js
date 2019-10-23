@@ -1,6 +1,6 @@
 const { app, BrowserWindow,  ipcMain, ipcRenderer} = require('electron'); 
 const { DAO, getData, setData } = require('./dao.js');
-const Promise = require('bluebird');
+//const Promise = require('bluebird');
 const Customers = require('./customers.js');
 const Products = require('./products.js');
 const DBPATH = "./datastore.db";

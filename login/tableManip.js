@@ -109,7 +109,7 @@ function deleteSelectedItems(src) {
 		console.log(rowIndex); 
 		var row = table.rows[rowIndex];
 		if (row.classList.contains('selectedRow')) {
-			if (rowIndex < startingRows) {
+			if (rowIndex < startingRows && numRows == startingRows) {
 				row.classList.remove('selectedRow');
 				table.deleteRow(rowIndex);
 				let newRow = table.insertRow();
@@ -244,13 +244,31 @@ function getProductListing() {
 
 }
 
-//function editItems(){
-	// text = document.getElementById("Edit").value
+// Edits a selected row by replacing: sku, description, and unit price with input data  
+function editItems(){
+	var newSkuText = document.getElementById("itemSKU").value;
+	var newDescText = document.getElementById("itemDescription").value;
+	var newPriceText = document.getElementById("itemUnitPrice").value;
+
+	var tableData = document.getElementById("Table-Data");
+	var numRows = tableData.rows.length;
+	for (rowIndex = 0; rowIndex < numRows; rowIndex++) {
+		let row = tableData.rows[rowIndex];
+		if (row.classList.contains("selectedRow")) {
+			// Requires further input sanitation
+			if (newSkuText !== '' && newDescText !== '' && newPriceText !== '') {
+				var skuText = row.cells[0].innerHTML = newSkuText;
+				var descText = row.cells[1].innerHTML = newDescText;
+				var priceText = row.cells[2].innerHTML = newPriceText;
+			}
+		}
+	}
+
 	// if (text=="Edit") {
 	// 	var input = document.getElementById("SKUInput")
-	// 	input.style.display = "block"
+	// 	//input.style.display = "block"
 	// 	document.getElementById("Edit").value = "Submit"
 	// 	editor()
 	// }
  //    else document.getElementById("Edit").value = "Edit"
-//}
+}
