@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="itemManip.css">
+        <title>Item Manipulator</title>
+    </head>
+    <body>
+        <script src = "main.js"></script>
+        <div id="title" class="centered">
+            Item Manipulation
+        </div>
+        <div id="SKUInput">
+            SKU:<input type="text" name="itemSKU" id="itemSKU">
+            Description:<input type="text" name="itemDescription" id="itemDescription">
+            Unit Price:<input type="text" name="itemUnitPrice" id="itemUnitPrice">
+        </div>
+        <div id="Table-Wrapper">
+            <table id="Item-List-Panel">
+                <thead id="Column-Headers">
+                    <tr">
+                        <th id="SKU-Column">SKU</th>
+                        <th id="Description-Column">Description</th>
+                        <th id="Unit-Price-Column">Unit Price</th>
+                    </tr>
+                </thead>
+                <tbody id="Table-Data">
+                    <tr id="row_1" class = "tableEntryA">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_2" class = "tableEntryB">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_3" class = "tableEntryA">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_4" class = "tableEntryB">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_5" class = "tableEntryA">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_6" class = "tableEntryB">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_7" class = "tableEntryA">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_8" class = "tableEntryB">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_9" class = "tableEntryA">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_10" class = "tableEntryB">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_11" class = "tableEntryA">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_12" class = "tableEntryB">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_13" class = "tableEntryA">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_14" class = "tableEntryB">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                    <tr id="row_15" class = "tableEntryA">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <script type="text/javascript">
+                document.getElementById("Table-Data").addEventListener('click', (e) => {
+                    var rowID = e.target.closest('tr').id;
+                    var row = document.getElementById(rowID);
+                    console.log(e.target.closest('tr').id);
+                    console.log(row);
+
+                    if (row.classList.contains('selectedRow')) {
+                        row.classList.remove('selectedRow');
+                    } else {
+                        // Check all row classes for selected
+                        var prevSelected = false;
+                        var tableData = document.getElementById("Table-Data");
+                        for (var rowIndex = 0; rowIndex < tableData.rows.length; rowIndex++) {
+                            if (tableData.rows[rowIndex].classList.contains('selectedRow')) {
+                                prevSelected = true;
+                            }
+                        }
+
+                        if (!prevSelected) {
+                            row.classList.add('selectedRow');
+                        }
+                    }
+                }); 
+            </script>
+        </div>
+        <div id="Button-Array">
+            <input class="tableButton" type = "button" onclick="getProductListing();" value = "Refresh Table" id = "Refresh">
+            <input class="tableButton" type = "button" onclick = "deleteSelectedItems('popup');" value = "Delete" id = "Delete">
+            <input class="tableButton" type = "button" onclick = "editItems();" value = "Edit" id = "Edit">
+            <script src="tableManip.js"></script>
+        </div>
+    </body>
+</html>

@@ -3,6 +3,29 @@ html, body {
     color: #CECECE;
     font-family: Arial, Verdana, sans-serif;
 }
+tbody {
+  display:block;
+  height:95%;
+  overflow-y:scroll;
+}
+thead, tbody tr {
+  display:table;
+  width:100%;
+  table-layout:fixed;/* even columns width , fix width of table too*/
+}
+thead {
+  width: calc( 100% - 1em )/* scrollbar is average 1em/16px width, remove it from thead width */
+}
+table {
+  border-collapse: collapse;
+  width:100%;
+}
+td, th {
+  border-left: 1px solid #4F4F4F;
+}
+tr:hover {
+  outline: #333 solid 4px;;
+}
 .rounded {
     border-radius: 5%;
 }
@@ -61,7 +84,72 @@ div.pbtns {
     width: 31%;
     height: 100px;
 }
+.tableEntryA {
+  background: #353535;
+}
+.tableEntryB {
+  background: #292929;
+}
+.tableColumn1 {
+  position: relative;
+  width: 10%;
+  height: 30px;
+  left: 0px;
+  top: 0px;
 
+  text-align: center;
+}
+.tableColumn2 {
+  position: relative;
+  width: 60%;
+  height: 30px;
+  left: 0px;
+  top: 0px;
+
+  text-align: left;
+}
+.tableColumn3 {
+  position: relative;
+  width: 10%;
+  height: 30px;
+  left: 0px;
+  top: 0px;
+
+  padding-right: 5px;
+  text-align: right;
+}
+.tableColumn4 {
+  position: relative;
+  width: 10%;
+  height: 30px;
+  left: 0px;
+  top: 0px;
+
+  text-align: center;
+}
+.tableColumn5 {
+  position: relative;
+  width: 10%;
+  height: 30px;
+  left: 0px;
+  top: 0px;
+
+  padding-right: 5px;
+  text-align: right;
+}
+.selectedRow {
+  background-color: grey;
+}
+.tableButton {
+  position: relative;
+  height: 65%;
+
+  background-color:rgb(102, 102, 102);
+  color: #000000;
+  font-weight: bold;
+  border: none;
+  text-decoration: none;
+}
 div #Quick-Buttons {
   position: absolute;
   width: 550px;
@@ -70,16 +158,6 @@ div #Quick-Buttons {
   top: 59px;
 
   background: #2F2F2F;
-}
-div #menubar {
-  position: absolute;
-  height: 18px;
-  left: 0px;
-  right: 0px;
-  top: 0px;
-
-  background: #292929;
-  color: #BEBEBE;
 }
 section {
   position: absolute;
@@ -91,20 +169,25 @@ section {
   background: #2F2F2F;
 }
 div #Transaction-Info-Panel {
-  position: absolute;
-  width: 1265px;
+  position: relative;
+  width: 100%;
   height: 46px;
   left: 0px;
-  top: -1px;
+  top: 0px;
 
   background: #3F3F3F;
 }
+div #Inner-Transaction-Panel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin-top: 5px;
+  margin-left: 5px;
+}
 div #Item-Search-Field {
-  position: absolute;
-  width: 506px;
-  height: 24px;
-  left: 11px;
-  top: 11px;
+  position: relative;
+  width: 30%;
+  height: 50%;
 
   color: grey;
   background: #2B2B2B;
@@ -116,11 +199,17 @@ div #Item-List-Panel {
   left: 0px;
   top: 45px;
 
-  background: #2F2F2F;
+  background: #202020;
+}
+div #table-wrapper {
+  position: relative;
+}
+#table-wrapper table {
+  width:100%;
 }
 div #Column-Headers {
-  position: absolute;
-  width: 1265px;
+  position: relative;
+  width: calc(100%-1em);
   height: 30px;
   left: 0px;
   top: 0px;
@@ -129,46 +218,46 @@ div #Column-Headers {
   mix-blend-mode: normal;
 }
 div #SKU-Column {
-  position: absolute;
-width: 90px;
-height: 30px;
-left: 0px;
-top: 0px;
+  position: relative;
+  width: 10%;
+  height: 30px;
+  left: 0px;
+  top: 0px;
 
 background: #202020;
 }
 div #Description-Column {
-  position: absolute;
-  width: 894px;
+  position: relative;
+  width: 60%;
   height: 30px;
-  left: 90px;
+  left: 0px;
   top: 0px;
 
   background: #202020;
 }
 div #Unit-Price-Column {
-  position: absolute;
+  position: relative;
+  width: 10%;
   height: 30px;
-  left: 77.79%;
-  right: 12.09%;
-  top: calc(50% - 30px/2);
+  left: 0px;
+  top: 0px;
 
   background: #202020;
 }
 div #Quantity-Column {
-  position: absolute;
+  position: relative;
+  width: 10%;
   height: 30px;
-  left: 87.91%;
-  right: 7.04%;
-  top: calc(50% - 30px/2);
+  left: 0px;
+  top: 0px;
 
   background: #202020;
 }
 div #Total-Column {
-  position: absolute;
-  width: 90px;
+  position: relative;
+  width: 10%;
   height: 30px;
-  left: 1175px;
+  left: 0px;
   top: 0px;
 
   background: #202020;
@@ -273,6 +362,18 @@ label .login {
     font-weight: bold;
 
 }
+
+.navButton{
+  background-color:#808080;
+  color: #000000;
+  font-weight: bold;
+  border: none;
+  text-decoration: none;
+  width: 150px;
+  height: 30px;
+  margin: 4px 2px;
+}
+
 input[type=text]:focus, input[type=password]:focus {
     background-color: #3B3B3B;
 
