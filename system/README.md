@@ -22,6 +22,8 @@ curl -L https://npmjs.org/install.sh | sudo sh
 
 Now, just clone the repo and in the /login path, execute the following:
 
+(If you're feeling lucky, type "sh setup.sh" to do it all for you)
+
 ```bash
 npm install
 ```

@@ -6,7 +6,7 @@
         <title>Item Manipulator</title>
     </head>
     <body>
-        <script src = "main.js"></script>
+        <script src = "../main.js"></script>
         <div id="title" class="centered">
             Item Manipulation
         </div>
@@ -18,7 +18,7 @@
         <div id="Table-Wrapper">
             <table id="Item-List-Panel">
                 <thead id="Column-Headers">
-                    <tr">
+                    <tr>
                         <th id="SKU-Column">SKU</th>
                         <th id="Description-Column">Description</th>
                         <th id="Unit-Price-Column">Unit Price</th>
@@ -125,14 +125,14 @@
                             row.classList.add('selectedRow');
                         }
                     }
-                }); 
+                });
             </script>
         </div>
         <div id="Button-Array">
             <input class="tableButton" type = "button" onclick="getProductListing();" value = "Refresh Table" id = "Refresh">
             <input class="tableButton" type = "button" onclick = "deleteSelectedItems('popup');" value = "Delete" id = "Delete">
             <input class="tableButton" type = "button" onclick = "editItems();" value = "Edit" id = "Edit">
-            <script src="tableManip.js"></script>
+            <script src="../datastore/tableManip.js"></script>
         </div>
     </body>
 </html>

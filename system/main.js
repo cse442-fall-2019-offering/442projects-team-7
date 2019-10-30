@@ -1,9 +1,9 @@
 const { app, BrowserWindow,  ipcMain, ipcRenderer} = require('electron'); 
-const { DAO, getData, setData } = require('./dao.js');
+const { DAO, getData, setData } = require('./datastore/dao.js');
 const Promise = require('bluebird');
-const Customers = require('./customers.js');
-const Products = require('./products.js');
-const DBPATH = "./datastore.db";
+const Customers = require('./datastore/customers.js');
+const Products = require('./datastore/products.js');
+const DBPATH = "./datastore/datastore.db";
 
 // Function to get login credentials.
 function getLoginTest() {
@@ -30,7 +30,7 @@ function createWindow(){
 	}
     })
    
-    win.loadFile('index.html')
+    win.loadFile('./display/index.html')
     win.on('closed',() => {
 	win=null
 	})
@@ -152,7 +152,7 @@ const productStore = new Products.Products(DAOtest);
 function popUp(id){
 	var popUp = id
 	if(popUp == "itemManip"){
-		window.open("itemManip.html", "_blank", "width=100, height=100, scrollbars=1, nodeIntegration = true, left=0,top=0")
+		window.open("../display/itemManip.html", "_blank", "width=100, height=100, scrollbars=1, nodeIntegration = true, left=0,top=0")
 	}
 }
 

@@ -17,7 +17,7 @@
         <div id="Sale-Page-Navbar">
 		  <button class="navButton">Customer Lookup</button>
 		  <button class="navButton" onclick="popUp('itemManip');" value="Edit Items" id="itemManip">Edit Items</button>
-	      <script src="main.js"></script>
+	      <script src="../main.js"></script>
         </div>
 
         <section>
@@ -26,16 +26,16 @@
                 <input id="Item-Search-Field" type="text" name="search_text" placeholder="Enter a SKU, scan barcode, or search for item...">
                 <button class="tableButton" type="button" onclick="addMainTableItem();" id ="searchItem">Search Item</button>
                 <button class="tableButton" type="button" onclick="deleteSelectedItems('main');">Delete Item</button>
-                <script src="tableManip.js"></script>
+                <script src="../datastore/tableManip.js"></script>
             </div>
             <!--button id="test-button" onclick="addToTable();"></button>
             <script type="text/javascript">
-                const { DAO, getData, setData } = require('./dao.js');
+                const { DAO, getData, setData } = require('../datastore/dao.js');
                 const { ipcRenderer} = require('electron');
                 const Promise = require('bluebird');
-                const Products = require('./products.js');
-                const DBPATH = "./datastore.db";
-                const TableHelper = require('./tableManip.js');
+                const Products = require('../datastore/products.js');
+                const DBPATH = "../datastore/datastore.db";
+                const TableHelper = require('../datastore/tableManip.js');
 
                 const DAOtest = new DAO(DBPATH);
                 const customerStore = new Customers.Customers(DAOtest);
@@ -66,7 +66,7 @@
                         });
                 }
 
-                
+
             </script-->
           </div>
 
@@ -244,7 +244,7 @@
                     row.classList.add('selectedRow');
                     console.log('newly');
                 }
-            }); 
+            });
         </script>
 
           <div id="Sale-Overview">

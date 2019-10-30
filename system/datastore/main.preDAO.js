@@ -25,7 +25,7 @@ function createWindow(){
 	}
     })
    
-    win.loadFile('index.html')
+    win.loadFile('../display/index.html')
     win.on('closed',() => {
 	win=null
 	})
