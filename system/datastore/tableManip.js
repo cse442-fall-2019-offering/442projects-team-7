@@ -1,34 +1,3 @@
-// Returns a product entry as a list via its sku
-function getProductBySku(sku) {
-	var product = [556278, "An example item description", 44.99];
-	if (product[0] == sku) {
-		return product;
-	}
-	return undefined;
-}
-
-// Returns list of all products (eventually from ProductsDB)
-function getAllProducts() {
-	var productList = [];
-		productList.push([556278, "Example_1", 44.99]);
-		productList.push([556279, "Example_2", 55.99]);
-		productList.push([556280, "Example_3", 3.99]);
-		productList.push([556281, "Example_4", 4.99]);
-		productList.push([556282, "Example_5", 10.99]);
-		productList.push([556283, "Example_6", 109.05]);
-		productList.push([556284, "Example_7", 1000.05]);
-		productList.push([556285, "Example_8", 306.25]);
-		productList.push([556286, "Example_9", 404.01]);
-		productList.push([556287, "Example_10", 442.24]);
-		productList.push([556288, "Example_11", 24.25]);
-		productList.push([556289, "Example_12", 609.99]);
-		productList.push([556290, "Example_13", 36.82]);
-		productList.push([556291, "Example_14", 29.99]);
-		productList.push([556292, "Example_15", 302.50]);
-		productList.push([556293, "Example_16", 231.50]);
-	return productList;
-}
-
 // Returns the string name for a styling class, based on column index
 function getColumnClass(colIndex) {
 	switch(colIndex) {
@@ -44,6 +13,35 @@ function getColumnClass(colIndex) {
 			return "tableColumn5";
 	}
 
+}
+
+// Returns the SKU for a selected row in the Item Manipulation table
+function getSkuFromSelected() {
+	var tableData = document.getElementById("Table-Data");
+    for (var rowIndex = 0; rowIndex < tableData.rows.length; rowIndex++) {
+        if (tableData.rows[rowIndex].classList.contains('selectedRow')) {
+            var sku = tableData.rows[rowIndex].cells[0].innerHTML;
+            return sku;
+        }
+    }
+}
+
+// Returns the itemSKU input
+function getInputSku() {
+	var newSkuText = document.getElementById("itemSKU").value;
+	return newSkuText;
+}
+
+// Returns the itemDescription input
+function getInputDescription() {
+	var newDescText = document.getElementById("itemDescription").value;
+	return newDescText;
+}
+
+// Returns the itemUnitPrice input
+function getInputPrice() {
+	var newPriceText = document.getElementById("itemUnitPrice").value;
+	return newPriceText;
 }
 
 // Populates a newly created row cell
@@ -149,18 +147,11 @@ function deleteSelectedItems(src) {
 }
 
 // Populates main POS display table on SKU search entry.
-function addMainTableItem() {
-	//var sku = document.getElementById("Item-Search-Field").value;
-	var sku = 556278;
-
-	console.log('sku : ' + sku);
-
-	// Requires DB access
-	// Gets a rowEntry list by sku
-	var rowEntry = getProductBySku(sku);
+function addMainTableItem(rowEntry) {
+	console.log('rowEntry : ' + rowEntry);
 
 	// Check if last row is empty
-	if (rowEntry != undefined) {
+	if (rowEntry.length != 0) {
 		// Check if last open table is empty
 		var tableData = document.getElementById("Table-Data");
 		if (tableData.rows[20].cells[0].innerHTML == '') {
@@ -192,7 +183,7 @@ function generateTable(products, tableData) {
 	}
 }
 
-// Reset's table to intial empty state
+// Resets table to intial empty state
 function cleanupTable(tableData) {
 	var numRows = tableData.rows.length;
 	for (var rowIndex = numRows-1; rowIndex >= 0; rowIndex--) {
@@ -220,15 +211,10 @@ function cleanupTable(tableData) {
 }
 
 // On a Refresh Table click, populate the item manipulation table
-function getProductListing() {
-	// Requires DB access
-	// Get list of lists, all Products in the DB
-	var products = getAllProducts();
-	console.log(products);
-
+function getProductListing(products) {
 	var tableData = document.getElementById("Table-Data");
 
-	if (products != undefined) {
+	if (products.length != 0) {
 		// for row in products, add row to table
 		// if row# exists -> add to empty row, else populate new row
 		if (tableData.rows[0].cells[0].innerHTML == '') {
@@ -245,10 +231,10 @@ function getProductListing() {
 }
 
 // Edits a selected row by replacing: sku, description, and unit price with input data  
-function editItems(){
-	var newSkuText = document.getElementById("itemSKU").value;
-	var newDescText = document.getElementById("itemDescription").value;
-	var newPriceText = document.getElementById("itemUnitPrice").value;
+function editSelectedItem(){
+	var newSkuText = getSkuFromSelected();
+	var newDescText = getInputDescription();
+	var newPriceText = getInputPrice();
 
 	var tableData = document.getElementById("Table-Data");
 	var numRows = tableData.rows.length;
@@ -263,12 +249,6 @@ function editItems(){
 			}
 		}
 	}
-
-	// if (text=="Edit") {
-	// 	var input = document.getElementById("SKUInput")
-	// 	//input.style.display = "block"
-	// 	document.getElementById("Edit").value = "Submit"
-	// 	editor()
-	// }
- //    else document.getElementById("Edit").value = "Edit"
 }
+
+module.exports = { addMainTableItem, deleteSelectedItems, getProductListing, editSelectedItem, getSkuFromSelected, getInputSku, getInputDescription, getInputPrice };
