@@ -137,6 +137,16 @@ div.pbtns {
   padding-right: 5px;
   text-align: right;
 }
+.qty_input {
+  font-size:18px;
+  border: none;
+  border-color: transparent;
+  color: white;
+  text-align: center;
+  background: transparent;
+  width: 100%;
+  box-sizing: border-box; width: 100%;
+}
 .selectedRow {
   background-color: grey;
 }
