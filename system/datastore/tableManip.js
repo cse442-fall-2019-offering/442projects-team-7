@@ -52,7 +52,6 @@ function addRowCellNew(colClass, cell, entry) {
 		var qtyInput = document.createElement("input");
 		qtyInput.type = "number";
 		qtyInput.classList.add("qty_input");
-		qtyInput.value = 1;
 		cell.appendChild(qtyInput);
 		cell.classList.add(colClass);
 		// return to set id
@@ -105,6 +104,7 @@ function insertTableRowDataNew(rowEntry, tableData, isMain) {
 	if (isMain) {
 		let input = addRowCellNew(getColumnClass(3), row.insertCell(), 1);
 		input.id = "row_" + (rowLen) + "_qty_input";
+		input.value = 1;
 		addRowCellNew(getColumnClass(4), row.insertCell(), rowEntry[2]);
 	}
 }
@@ -146,6 +146,9 @@ function deleteSelectedItems(src) {
 	for (rowIndex = 0; rowIndex < numRows; rowIndex++) {
 		row = table.rows[rowIndex];
 		row.id = "row_" + count;
+		if (src === "main") {
+			row.cells[3].children[0].id = "row_" + (rowIndex+1) + "_qty_input";
+		}
 
 		// styling fix
 		if (row.classList.contains('tableEntryB')) {
