@@ -24,7 +24,7 @@
           <div id="Transaction-Info-Panel">
             <div id="Inner-Transaction-Panel">
                 <input id="Item-Search-Field" type="text" name="search_text" placeholder="Enter a SKU, scan barcode, or search for item...">
-                <button class="tableButton" type="button" onclick="requestProductRow(document.getElementById('Item-Search-Field').value);" id ="searchItem">Search Item</button>
+                <button class="tableButton" type="button" onclick="requestProductRow(document.getElementById('Item-Search-Field').value); updateTotals();" id ="searchItem">Search Item</button>
                 <button class="tableButton" type="button" onclick="deleteProductRow();">Delete Item</button>
             </div>
           </div>
@@ -220,7 +220,25 @@
 
             </div>
             <div id="Totals">
-            </div>
+       
+				<p>Subtotal: <span id="subtotal">$0.00</span></p>
+				<p>Discounts: <span id="discounts">$0.00</span></p>
+				<p>Tax: <span id="tax">$0.00</span></p>
+				<br>
+				<p>Total: <span id="total">$0.00</span></p>
+			</div>
+			<script>
+				function updateTotals(){
+					//whenever somthing gets added to the table, add it to the total sum.
+					var table = document.getElementById("Table-Data"), sumVal = 0;
+
+					for(var i = 1; i < table.rows.length; i++){
+						sumVal += parseInt(table.rows[i].cells[4]);
+					}
+
+					document.getElementById("total").innerHTML = sumVal;
+				}
+			</script>
           </div>
         </section>
 
@@ -246,10 +264,17 @@
 	    </div>
 	    <br>
 	    <div class="qbtn-group">
+<<<<<<< HEAD
 	      <button onClick="requestProductRow(10);">Common Item 10</button>
 	      <button onClick="requestProductRow(11);">Common Item 11</button>
 	      <button onClick="requestProductRow(12);">Common Item 12</button>
 	    </div>
+=======
+	      <button>Common Item</button>
+	      <button>Common Item</button>
+	      <button>Common Item</button>
+		</div>
+>>>>>>> calculateTotal
 	  </div>
 	  <br>
 	  <div class="ubtns">
