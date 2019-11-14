@@ -387,3 +387,16 @@ input[type=button] {
     padding: 16px 32px;
     margin: 4px 2px;
 }
+
+#subtotal{
+  float: right;
+}
+#discounts{
+  float: right;
+}
+#tax{
+  float: right;
+}
+#total{
+  float: right;
+}

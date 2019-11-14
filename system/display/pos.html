@@ -211,8 +211,22 @@
 
             </div>
             <div id="Totals">
+				<p>Subtotal: <span id="subtotal">$0.00</span></p>
+				<p>Discounts: <span id="discounts">$0.00</span></p>
+				<p>Tax: <span id="tax">$0.00</span></p>
+				<br>
+				<p>Total: <span id="total">$0.00</span></p>
+			</div>
+			<script>
+				//whenever somthing gets added to the table, add it to the total sum.
+				var table = document.getElementById("Table-Data"), sumVal = 0;
 
-            </div>
+				for(var i = 1; i < table.rows.length; i++){
+					sumVal += parseFloat(table.rows[i].cells[4].innerHTML);
+				}
+
+				document.getElementById("total").innerHTML = sumVal;
+			</script>
           </div>
         </section>
 
@@ -241,7 +255,7 @@
 	      <button>Common Item</button>
 	      <button>Common Item</button>
 	      <button>Common Item</button>
-	    </div>
+		</div>
 	  </div>
 	  <br>
 	  <div class="ubtns">
