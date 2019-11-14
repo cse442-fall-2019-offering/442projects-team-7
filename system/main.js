@@ -260,6 +260,16 @@ function deleteProductRow() {
 	deleteSelectedItems('main');
 }
 
+// Updates a product's total when its sale quantity changes in the main POS table
+function updateProductTotal(quantity, inputID) {
+	console.log("updateProductTotal()");
+	var parsedID = inputID.split("_");
+	var total = document.getElementById(parsedID[0] + '_' + parsedID[1]);
+	if (quantity >= 0) {
+		total.cells[4].innerHTML = (total.cells[2].innerHTML  * quantity).toFixed(2);
+	}
+}
+
 /////////// Pop up window code ///////////
 
 /**

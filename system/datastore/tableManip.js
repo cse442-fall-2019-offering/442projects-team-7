@@ -57,6 +57,9 @@ function addRowCellNew(colClass, cell, entry) {
 		// return to set id
 		return qtyInput
 	} else {
+		if (colClass == "tableColumn2" || colClass == "tableColumn4") {
+			let entry = entry.toFixed(2);
+		}
 		let textNode = document.createTextNode(entry);
 		cell.appendChild(textNode);
 		cell.classList.add(colClass);
@@ -72,13 +75,13 @@ function insertTableRowData(rowEntry, tableData, isMain) {
 			console.log('Found');
 			tableData.rows[rowIndex].cells[0].innerHTML = rowEntry[0];
 			tableData.rows[rowIndex].cells[1].innerHTML = rowEntry[1];
-			tableData.rows[rowIndex].cells[2].innerHTML = rowEntry[2];
+			tableData.rows[rowIndex].cells[2].innerHTML = rowEntry[2].toFixed(2);
 			if (isMain) {
 				var inputId = "row_" + (rowIndex+1) + "_qty_input";
 				var input = document.getElementById(inputId);
 				input.value = 1;
-				input.disabled = false;
-				tableData.rows[rowIndex].cells[4].innerHTML = rowEntry[2];
+				//input.disabled = false;
+				tableData.rows[rowIndex].cells[4].innerHTML = rowEntry[2].toFixed(2);
 			}
 			break;
 		}
@@ -105,6 +108,8 @@ function insertTableRowDataNew(rowEntry, tableData, isMain) {
 		let input = addRowCellNew(getColumnClass(3), row.insertCell(), 1);
 		input.id = "row_" + (rowLen) + "_qty_input";
 		input.value = 1;
+		input.disabled = true;
+		input.min = "0";
 		addRowCellNew(getColumnClass(4), row.insertCell(), rowEntry[2]);
 	}
 }
@@ -148,6 +153,9 @@ function deleteSelectedItems(src) {
 		row.id = "row_" + count;
 		if (src === "main") {
 			row.cells[3].children[0].id = "row_" + (rowIndex+1) + "_qty_input";
+			if (!row.classList.contains('selectedRow')) {
+				row.cells[3].children[0].disabled = "true";
+			}
 		}
 
 		// styling fix
