@@ -57,9 +57,6 @@ function addRowCellNew(colClass, cell, entry) {
 		// return to set id
 		return qtyInput
 	} else {
-		if (colClass == "tableColumn2" || colClass == "tableColumn4") {
-			let entry = entry.toFixed(2);
-		}
 		let textNode = document.createTextNode(entry);
 		cell.appendChild(textNode);
 		cell.classList.add(colClass);
@@ -110,6 +107,9 @@ function insertTableRowDataNew(rowEntry, tableData, isMain) {
 		input.value = 1;
 		input.disabled = true;
 		input.min = "0";
+		input.onchange = function () {  
+    						updateProductTotal(input.value, input.id);
+						};
 		addRowCellNew(getColumnClass(4), row.insertCell(), rowEntry[2]);
 	}
 }
