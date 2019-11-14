@@ -46,9 +46,21 @@ function getInputPrice() {
 
 // Populates a newly created row cell
 function addRowCellNew(colClass, cell, entry) {
-	let textNode = document.createTextNode(entry);
-	cell.appendChild(textNode);
-	cell.classList.add(colClass);
+
+	// DYNAMICALLY ADD INPUT
+	if (colClass == "tableColumn4") {
+		var qtyInput = document.createElement("input");
+		qtyInput.type = "number";
+		qtyInput.classList.add("qty_input");
+		cell.appendChild(qtyInput);
+		cell.classList.add(colClass);
+		// return to set id
+		return qtyInput
+	} else {
+		let textNode = document.createTextNode(entry);
+		cell.appendChild(textNode);
+		cell.classList.add(colClass);
+	}
 }
 
 // Inserts a given rowEntry into an existing empty row
@@ -60,10 +72,13 @@ function insertTableRowData(rowEntry, tableData, isMain) {
 			console.log('Found');
 			tableData.rows[rowIndex].cells[0].innerHTML = rowEntry[0];
 			tableData.rows[rowIndex].cells[1].innerHTML = rowEntry[1];
-			tableData.rows[rowIndex].cells[2].innerHTML = rowEntry[2];
+			tableData.rows[rowIndex].cells[2].innerHTML = rowEntry[2].toFixed(2);
 			if (isMain) {
-				tableData.rows[rowIndex].cells[3].innerHTML = 1;
-				tableData.rows[rowIndex].cells[4].innerHTML = rowEntry[2];
+				var inputId = "row_" + (rowIndex+1) + "_qty_input";
+				var input = document.getElementById(inputId);
+				input.value = 1;
+				//input.disabled = false;
+				tableData.rows[rowIndex].cells[4].innerHTML = rowEntry[2].toFixed(2);
 			}
 			break;
 		}
@@ -87,7 +102,14 @@ function insertTableRowDataNew(rowEntry, tableData, isMain) {
 	addRowCellNew(getColumnClass(1), row.insertCell(), rowEntry[1]);
 	addRowCellNew(getColumnClass(2), row.insertCell(), rowEntry[2]);
 	if (isMain) {
-		addRowCellNew(getColumnClass(3), row.insertCell(), 1);
+		let input = addRowCellNew(getColumnClass(3), row.insertCell(), 1);
+		input.id = "row_" + (rowLen) + "_qty_input";
+		input.value = 1;
+		input.disabled = true;
+		input.min = "0";
+		input.onchange = function () {  
+    						updateProductTotal(input.value, input.id);
+						};
 		addRowCellNew(getColumnClass(4), row.insertCell(), rowEntry[2]);
 	}
 }
@@ -129,6 +151,12 @@ function deleteSelectedItems(src) {
 	for (rowIndex = 0; rowIndex < numRows; rowIndex++) {
 		row = table.rows[rowIndex];
 		row.id = "row_" + count;
+		if (src === "main") {
+			row.cells[3].children[0].id = "row_" + (rowIndex+1) + "_qty_input";
+			if (!row.classList.contains('selectedRow')) {
+				row.cells[3].children[0].disabled = "true";
+			}
+		}
 
 		// styling fix
 		if (row.classList.contains('tableEntryB')) {

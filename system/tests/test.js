@@ -1,6 +1,6 @@
 const Application = require('spectron').Application;
 const assert = require('assert');
-//const Promise = require('bluebird');
+const Promise = require('bluebird');
 /*const electronPath = require('electron');// Require Electron from the binaries included in node_modules.
 */
 const path = require('path');
@@ -23,7 +23,7 @@ describe('Application launch', function () {
   // init method, (beforeEach() for each test)
   before(() => app.start());
 
-  after(() => app.stop());
+  //after(() => app.stop());
 
   it('Shows initial window', async () => {
   	const count = await app.client.getWindowCount();
@@ -45,8 +45,8 @@ describe('Application launch', function () {
   it('Transitions to the cashier POS page', async () => {
   	await sleep(1000);
 
-  	// switch frame to the iframe (based on id)
-    app.client.frame("cashierFrame");
+  	// switch to main POS BrowserWindow
+    app.client.windowByIndex(1);
 
   	const page_name = await app.client.getHTML("title");
   	assert.equal(page_name, '<title id="title">RPi Point of Sale - Cashier Default Window</title>');
@@ -57,6 +57,7 @@ describe('Application launch', function () {
 
 it('Populate main table', async () => {
 	for(i=0; i<10; i++){
+		await app.client.setValue("#Item-Search-Field", i);
 		await app.client.click('#searchItem');
 	}
 })
