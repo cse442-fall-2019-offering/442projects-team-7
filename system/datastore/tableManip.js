@@ -108,8 +108,8 @@ function insertTableRowDataNew(rowEntry, tableData, isMain) {
 		input.disabled = true;
 		input.min = "0";
 		input.onchange = function () {  
-    						updateProductTotal(input.value, input.id);
-						};
+		    updateProductTotal(input.value, input.id);
+		};
 		addRowCellNew(getColumnClass(4), row.insertCell(), rowEntry[2]);
 	}
 }
@@ -176,21 +176,46 @@ function deleteSelectedItems(src) {
 
 // Populates main POS display table on SKU search entry.
 function addMainTableItem(rowEntry) {
-	console.log('rowEntry : ' + rowEntry);
+    console.log('rowEntry : ' + rowEntry);
 
+
+   
+    
 	// Check if last row is empty
 	if (rowEntry.length != 0) {
 		// Check if last open table is empty
-		var tableData = document.getElementById("Table-Data");
+	    var tableData = document.getElementById("Table-Data");
+	    let checkExists = alreadyExists(rowEntry);
 		if (tableData.rows[20].cells[0].innerHTML == '') {
 			console.log("Empty Case");
+		    if (checkExists[0]) {
+			tableData.rows[checkExists[1]].cells[3].getElementsByTagName('input')[0].stepUp();
+			let qty = tableData.rows[checkExists[1]].cells[3].getElementsByTagName('input')[0].value;
+			tableData.rows[checkExists[1]].cells[4].innerHTML = (tableData.rows[checkExists[1]].cells[2].innerHTML * qty).toFixed(2);
+			console.log(tableData.rows[checkExists[1]].cells[2].innerHTML, qty);
+			console.log("Already present in table. Incremented quantity.");
+		    }
+		    else {
 			insertTableRowData(rowEntry, tableData, true);
+		    }
 		} else {
 			// Populate rest of table
 			console.log("Non-Empty Case");
 			insertTableRowDataNew(rowEntry, tableData, true);
 		}
 	}
+
+}
+
+//checks for existing row items
+function alreadyExists(rowEntry) {
+    let table = document.getElementById("Table-Data");
+    for (let i=0; i<table.rows.length; ++i) {
+	if (table.rows[i].cells[0].innerHTML == rowEntry[0].toString()) {
+	    return [true, i];
+	}
+    }
+    return [false, -1]
 }
 
 // Generates a brand-new table for refresh functionality
