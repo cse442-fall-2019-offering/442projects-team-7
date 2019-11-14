@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="custLookup.css">
+        <title>Customer Lookup</title>
+    </head>
+    <body>
+        <script src = "main.js"></script>
+        <div id="title" class="centered">
+            Customer Lookup
+        </div>
+        <div id="CIDInput">
+            <input type="text" name="custInput" id="custInput" placeholder="Enter a CID, name, phone #, address...">
+        </div>
+        <div id="Table-Wrapper">
+            <table id="Item-List-Panel">
+                <thead id="Column-Headers">
+                    <tr">
+                        <th id="CID-Column">CID #</th>
+                        <th id="Customer-Column">Customer Name</th>
+                        <th id="Phone-Column">Phone #</th>
+                        <th id="Address-Column">Address</th>
+                    </tr>
+                </thead>
+                <tbody id="Table-Data">
+                    <tr id="row_1" class = "tableEntryA">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                        <td class = "tableColumn4"></td>
+                    </tr>
+                    <tr id="row_2" class = "tableEntryB">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                        <td class = "tableColumn4"></td>
+                    </tr>
+                    <tr id="row_3" class = "tableEntryA">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                        <td class = "tableColumn4"></td>
+                    </tr>
+                    <tr id="row_4" class = "tableEntryB">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                        <td class = "tableColumn4"></td>
+                    </tr>
+                    <tr id="row_5" class = "tableEntryA">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                        <td class = "tableColumn4"></td>
+                    </tr>
+                    <tr id="row_6" class = "tableEntryB">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                        <td class = "tableColumn4"></td>
+                    </tr>
+                    <tr id="row_7" class = "tableEntryA">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                        <td class = "tableColumn4"></td>
+                    </tr>
+                    <tr id="row_8" class = "tableEntryB">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                        <td class = "tableColumn4"></td>
+                    </tr>
+                    <tr id="row_9" class = "tableEntryA">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                        <td class = "tableColumn4"></td>
+                    </tr>
+                    <tr id="row_10" class = "tableEntryB">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                        <td class = "tableColumn4"></td>
+                    </tr>
+                    <tr id="row_11" class = "tableEntryA">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                        <td class = "tableColumn4"></td>
+                    </tr>
+                    <tr id="row_12" class = "tableEntryB">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                        <td class = "tableColumn4"></td>
+                    </tr>
+                    <tr id="row_13" class = "tableEntryA">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                        <td class = "tableColumn4"></td>
+                    </tr>
+                    <tr id="row_14" class = "tableEntryB">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                        <td class = "tableColumn4"></td>
+                    </tr>
+                    <tr id="row_15" class = "tableEntryA">
+                        <td class = "tableColumn1"></td>
+                        <td class = "tableColumn2"></td>
+                        <td class = "tableColumn3"></td>
+                        <td class = "tableColumn4"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <script type="text/javascript">
+                document.getElementById("Table-Data").addEventListener('click', (e) => {
+                    var rowID = e.target.closest('tr').id;
+                    var row = document.getElementById(rowID);
+                    console.log(e.target.closest('tr').id);
+                    console.log(row);
+
+                    if (row.classList.contains('selectedRow')) {
+                        row.classList.remove('selectedRow');
+                    } else {
+                        // Check all row classes for selected
+                        var prevSelected = false;
+                        var tableData = document.getElementById("Table-Data");
+                        for (var rowIndex = 0; rowIndex < tableData.rows.length; rowIndex++) {
+                            if (tableData.rows[rowIndex].classList.contains('selectedRow')) {
+                                prevSelected = true;
+                            }
+                        }
+
+                        if (!prevSelected) {
+                            row.classList.add('selectedRow');
+                        }
+                    }
+                }); 
+            </script>
+        </div>
+        <div id="Button-Array">
+            <input class="tableButton" type = "button" value = "Select">
+            <input class="tableButton" type = "button" value = "Add">
+            <input class="tableButton" type = "button" value = "Edit">
+            <input class="tableButton" type = "button" value = "Delete">
+            <script src="tableManip.js"></script>
+        </div>
+    </body>
+</html>

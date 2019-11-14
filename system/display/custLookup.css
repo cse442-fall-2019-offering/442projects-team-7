@@ -1,0 +1,199 @@
+html, body {
+    background-color: #1B1B1B;
+    color: #CECECE;
+    font-family: Arial, Verdana, sans-serif;
+}
+.rounded {
+    border-radius: 5%;
+}
+.centered {
+    text-align: center
+}
+.hardcentered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+tbody {
+  display:block;
+  height:95%;
+
+}
+thead, tbody tr {
+  display:table;
+  width:100%;
+  table-layout:fixed;/* even columns width , fix width of table too*/
+}
+
+table {
+  border-collapse: collapse;
+  width:100%;
+}
+td, th {
+  border-left: 1px solid #4F4F4F;
+  padding: 8px;
+}
+tr:hover {
+  outline: #333 solid 4px;;
+}
+
+.tableEntryA {
+  background: #353535;
+}
+.tableEntryB {
+  background: #292929;
+}
+
+.tableColumn1 {
+  position: relative;
+  width: 10%;
+  height: 10px;
+  left: 0px;
+  top: 0px;
+  
+  text-align: center;
+}
+.tableColumn2 {
+  position: relative;
+  width: 30%;
+  height: 10px;
+  left: 0px;
+  top: 0px;
+  
+  text-align: left;
+}
+.tableColumn3 {
+  position: relative;
+  width: 15%;
+  height: 10px;
+  left: 0px;
+  top: 0px;
+  
+  padding-right: 5px;
+  text-align: right;
+  }
+.tableColumn4 {
+  position: relative;
+  width: 45%;
+  height: 10px;
+  left: 0px;
+  top: 0px;
+  
+  text-align: center;
+}
+
+.selectedRow {
+  background-color: grey;
+}
+
+div #title{
+    position: absolute;
+    width: 548px;
+    height: 61px;
+    left: 260px;
+    top: 7px;
+}
+
+div #CIDInput{
+  position: absolute;
+  width: 100%;
+  left: 10px;
+  top: 5px;
+  bottom: 5px;
+}
+
+div #custInput{
+  position: center;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 30px;
+  top: 5px;
+  font-size: 20px
+}
+div #Table-Wrapper {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  left: 10px;
+  top: 5px;
+  bottom: 5px;
+
+  background-color: #202020;
+}
+
+div #Item-List-Panel {
+  background: #202020;
+}
+
+div #Column-Headers {
+  position: relative;
+  left: 0px;
+  top: 0px;
+
+  background: #202020;
+  mix-blend-mode: normal;
+}
+
+div #CID-Column {
+  position: relative;
+  width: 10%;
+  left: 0px;
+  top: 0px;
+}
+
+div #Customer-Column {
+  position: relative;
+  width: 30%;
+  left: 0px;
+  top: 0px;
+}
+
+div #Phone-Column {
+  position: relative;
+  width: 15%;
+  left: 0px;
+  top: 0px;
+}
+
+div #Address-Column {
+  position: relative;
+  width: 45%;
+  left: 0px;
+  top: 0px;
+}
+
+div #Button-Array {
+  position: absolute;
+  width: 946px;
+  height: 65px;
+  left: 37px;
+  top: 629px;
+}
+
+.tableButton {
+  position: relative;
+  height: 65%;
+  width: 24%;
+  background-color:rgb(102, 102, 102);
+  color: #000000;
+  font-weight: bold;
+  border: none;
+  text-decoration: none;
+}
+
+input[type=button] {
+    background-color:rgb(102, 102, 102);
+    color: #000000;
+    font-weight: bold;
+    border: none;
+    text-decoration: none;
+    padding: 16px 32px;
+    margin: 4px 2px;
+}
+
+input[type=button]:hover{
+    background-color: #808080;
+}

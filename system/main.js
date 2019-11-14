@@ -245,6 +245,29 @@ ipcMain.on('loadItemManip', function(event) {
 	});
 });
 
+// On loadCustLookup message, create a new BrowserWindow for the Customer Lookup Window
+ipcMain.on('loadCustLookup', function(event) {
+	console.log("Loading Customer Lookup Window");
+
+	let win = new BrowserWindow({
+	show: false,
+	width: 1025,
+	height: 560,
+	resizable: false,
+	alwaysOnTop: true,
+	webPreferences: {
+	    nodeIntegration: true
+	}
+    })
+	win.loadFile('./display/custLookup.html');
+	win.once('ready-to-show', () => {
+  		win.show();
+	})
+	win.on('closed',() => {
+		win=null;
+	});
+});
+
 // Requests a product row in the products DB by sku
 function requestProductRow(sku) {
 	const { addMainTableItem } = require("../datastore/tableManip.js");
@@ -272,6 +295,9 @@ function popUp(id){
 	if(popUp == "itemManip"){
 		ipcRenderer.send('loadItemManip');
 		//window.open("../display/itemManip.html", "_blank", "width=100, height=100, scrollbars=1, nodeIntegration = true, left=0,top=0")
+	}
+	else if(popUp = "custLookup"){
+		ipcRenderer.send('loadCustLookup');
 	}
 }
 
