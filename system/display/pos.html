@@ -24,7 +24,7 @@
           <div id="Transaction-Info-Panel">
             <div id="Inner-Transaction-Panel">
                 <input id="Item-Search-Field" type="text" name="search_text" placeholder="Enter a SKU, scan barcode, or search for item...">
-                <button class="tableButton" type="button" onclick="requestProductRow(document.getElementById('Item-Search-Field').value);" id ="searchItem">Search Item</button>
+                <button class="tableButton" type="button" onclick="requestProductRow(document.getElementById('Item-Search-Field').value); updateTotals();" id ="searchItem">Search Item</button>
                 <button class="tableButton" type="button" onclick="deleteProductRow();">Delete Item</button>
             </div>
           </div>
@@ -223,7 +223,7 @@
 					var table = document.getElementById("Table-Data"), sumVal = 0;
 
 					for(var i = 1; i < table.rows.length; i++){
-						sumVal += parseFloat(table.rows[i].cells[4].innerHTML);
+						sumVal += parseInt(table.rows[i].cells[4]);
 					}
 
 					document.getElementById("total").innerHTML = sumVal;
