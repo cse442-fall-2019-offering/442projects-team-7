@@ -218,14 +218,16 @@
 				<p>Total: <span id="total">$0.00</span></p>
 			</div>
 			<script>
-				//whenever somthing gets added to the table, add it to the total sum.
-				var table = document.getElementById("Table-Data"), sumVal = 0;
+				function updateTotals(){
+					//whenever somthing gets added to the table, add it to the total sum.
+					var table = document.getElementById("Table-Data"), sumVal = 0;
 
-				for(var i = 1; i < table.rows.length; i++){
-					sumVal += parseFloat(table.rows[i].cells[4].innerHTML);
+					for(var i = 1; i < table.rows.length; i++){
+						sumVal += parseFloat(table.rows[i].cells[4].innerHTML);
+					}
+
+					document.getElementById("total").innerHTML = sumVal;
 				}
-
-				document.getElementById("total").innerHTML = sumVal;
 			</script>
           </div>
         </section>
