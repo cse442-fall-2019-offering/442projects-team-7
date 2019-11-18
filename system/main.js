@@ -201,6 +201,30 @@ ipcMain.on('getAllProductRows', function(event) {
 	    });
 });
 
+// On getAllCustomerRows message, open Customers DB and return a listing of all customer lists
+ipcMain.on('getAllCustomerRows', function(event) {
+	const Promise = require('bluebird');
+	customerStore.createTable()
+	    .then(() => customerStore.getAll())
+	    .then((customers) => {
+		return new Promise((resolve, reject) => {
+			var rowsList = [];
+		    customers.forEach((customer) => {
+			    if (customer != undefined) {
+			    	let rowList = [customer.custId, customer.firstname, customer.lastname, customer.phone, customer.address, customer.city, customer.zip]
+			    	rowsList.push(rowList);
+				}
+		    });
+		    event.returnValue = rowsList;
+		});
+		resolve('success');
+	    })
+	    .catch((err) => {
+		console.log('Error: ');
+		console.log(err);
+	    });
+});
+
 // On loadPosDisplay message, create a new BrowserWindow for the main pos display
 ipcMain.on('loadPosDisplay', function(event) {
 	console.log("Loading POS Display Page");
@@ -315,10 +339,20 @@ function popUp(id){
  * Refresh items table on click to Refresh table button in itemManip
  */
 function refreshItemsTable() {
-	const { getProductListing } = require("../datastore/tableManip.js");
+	const { refreshListing } = require("../datastore/tableManip.js");
 	let response = ipcRenderer.sendSync('getAllProductRows');
 	console.log(response);
-	getProductListing(response);
+	refreshListing(response, "itemManip");
+}
+
+/**
+* Refresh Customer Lookup Table on click to Refresh table button in custLookup
+*/
+function refreshCustomerTable() {
+	const { refreshListing } = require("../datastore/tableManip.js");
+	let response = ipcRenderer.sendSync('getAllCustomerRows');
+	console.log(response);
+	refreshListing(response, "custManip");
 }
 
 /**
