@@ -92,7 +92,9 @@ function insertTableRowData(rowEntry, tableData, tableName) {
 				tableData.rows[rowIndex].cells[0].innerHTML = rowEntry[0];
 				tableData.rows[rowIndex].cells[1].innerHTML = rowEntry[1] + " " + rowEntry[2];
 				tableData.rows[rowIndex].cells[2].innerHTML = rowEntry[3];
-				tableData.rows[rowIndex].cells[3].innerHTML = rowEntry[4] + ", " + rowEntry[5] + ", " + rowEntry[6];
+				let row = tableData.rows[rowIndex].cells[3];
+				row.innerHTML = rowEntry[4] + ", " + rowEntry[5];
+				row.innerHTML += ", " + rowEntry[6] + ", " + rowEntry[7];
 			}
 			break;
 		}

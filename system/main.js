@@ -211,7 +211,7 @@ ipcMain.on('getAllCustomerRows', function(event) {
 			var rowsList = [];
 		    customers.forEach((customer) => {
 			    if (customer != undefined) {
-			    	let rowList = [customer.custId, customer.firstname, customer.lastname, customer.phone, customer.address, customer.city, customer.zip]
+			    	let rowList = [customer.custId, customer.firstname, customer.lastname, customer.phone, customer.address, customer.city, customer.state, customer.zip]
 			    	rowsList.push(rowList);
 				}
 		    });
