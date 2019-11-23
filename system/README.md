@@ -125,5 +125,5 @@ You're all set. `npm start` in the /system directory will launch the login UI.
 
 # Deployment for Raspberry Pi
 
-Download our RPiPOS SD card image from (insert link here, gotta figure out how to shrink the image down from 60GB) and clone it to an SD card with Rufus.
+Download our RPiPOS 64GB SD card image from https://buffalo.box.com/s/48lgw6pghu009hxyvn3icgu8yqp5gvoi and clone it to an SD card with Rufus.
 When the Pi boots, it will automatically start the RPiPOS system.

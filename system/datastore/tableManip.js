@@ -44,8 +44,8 @@ function getInputPrice() {
 	return newPriceText;
 }
 
-// Populates a newly created row cell
-function addRowCellNew(colClass, cell, entry) {
+// Populates a newly created row cell for items
+function addRowCellNewItem(colClass, cell, entry) {
 
 	// DYNAMICALLY ADD INPUT
 	if (colClass == "tableColumn4") {
@@ -63,22 +63,38 @@ function addRowCellNew(colClass, cell, entry) {
 	}
 }
 
+// Populates a newly created row cell for customers
+function addRowCellNewCustomer(colClass, cell, entry) {
+	let textNode = document.createTextNode(entry);
+	cell.appendChild(textNode);
+	cell.classList.add(colClass);
+}
+
 // Inserts a given rowEntry into an existing empty row
-function insertTableRowData(rowEntry, tableData, isMain) {
+function insertTableRowData(rowEntry, tableData, tableName) {
 	console.log(tableData.rows.length);
 	for (var rowIndex = 0; rowIndex < tableData.rows.length; rowIndex++) {
 		// if current row is empty, populate
 		if (tableData.rows[rowIndex].cells[0].innerHTML == '') {
 			console.log('Found');
-			tableData.rows[rowIndex].cells[0].innerHTML = rowEntry[0];
-			tableData.rows[rowIndex].cells[1].innerHTML = rowEntry[1];
-			tableData.rows[rowIndex].cells[2].innerHTML = rowEntry[2].toFixed(2);
-			if (isMain) {
-				var inputId = "row_" + (rowIndex+1) + "_qty_input";
-				var input = document.getElementById(inputId);
-				input.value = 1;
-				//input.disabled = false;
-				tableData.rows[rowIndex].cells[4].innerHTML = rowEntry[2].toFixed(2);
+			if (tableName !== "custManip") {
+				tableData.rows[rowIndex].cells[0].innerHTML = rowEntry[0];
+				tableData.rows[rowIndex].cells[1].innerHTML = rowEntry[1];
+				tableData.rows[rowIndex].cells[2].innerHTML = rowEntry[2].toFixed(2);
+				if (tableName === "main") {
+					var inputId = "row_" + (rowIndex+1) + "_qty_input";
+					var input = document.getElementById(inputId);
+					input.value = 1;
+					//input.disabled = false;
+					tableData.rows[rowIndex].cells[4].innerHTML = rowEntry[2].toFixed(2);
+				} 
+			} else {
+				tableData.rows[rowIndex].cells[0].innerHTML = rowEntry[0];
+				tableData.rows[rowIndex].cells[1].innerHTML = rowEntry[1] + " " + rowEntry[2];
+				tableData.rows[rowIndex].cells[2].innerHTML = rowEntry[3];
+				let row = tableData.rows[rowIndex].cells[3];
+				row.innerHTML = rowEntry[4] + ", " + rowEntry[5];
+				row.innerHTML += ", " + rowEntry[6] + ", " + rowEntry[7];
 			}
 			break;
 		}
@@ -86,7 +102,7 @@ function insertTableRowData(rowEntry, tableData, isMain) {
 }
 
 // Creates a new row and populates its data
-function insertTableRowDataNew(rowEntry, tableData, isMain) {
+function insertTableRowDataNew(rowEntry, tableData, tableName) {
 	let table = document.getElementById("Table-Data");
 	let row = table.insertRow();
 
@@ -98,19 +114,26 @@ function insertTableRowDataNew(rowEntry, tableData, isMain) {
 		row.classList.add("tableEntryA");
 	}
 
-	addRowCellNew(getColumnClass(0), row.insertCell(), rowEntry[0]);
-	addRowCellNew(getColumnClass(1), row.insertCell(), rowEntry[1]);
-	addRowCellNew(getColumnClass(2), row.insertCell(), rowEntry[2]);
-	if (isMain) {
-		let input = addRowCellNew(getColumnClass(3), row.insertCell(), 1);
-		input.id = "row_" + (rowLen) + "_qty_input";
-		input.value = 1;
-		input.disabled = true;
-		input.min = "0";
-		input.onchange = function () {  
-		    updateProductTotal(input.value, input.id);
-		};
-		addRowCellNew(getColumnClass(4), row.insertCell(), rowEntry[2]);
+	if (tableName !== "custManip") {
+		addRowCellNewItem(getColumnClass(0), row.insertCell(), rowEntry[0]);
+		addRowCellNewItem(getColumnClass(1), row.insertCell(), rowEntry[1]);
+		addRowCellNewItem(getColumnClass(2), row.insertCell(), rowEntry[2]);
+		if (tableName === "main") {
+			let input = addRowCellNewItem(getColumnClass(3), row.insertCell(), 1);
+			input.id = "row_" + (rowLen) + "_qty_input";
+			input.value = 1;
+			input.disabled = true;
+			input.min = "0";
+			input.onchange = function () {  
+			    updateProductTotal(input.value, input.id);
+			};
+			addRowCellNew(getColumnClass(4), row.insertCell(), rowEntry[2]);
+		}
+	} else {
+		addRowCellNewCustomer(getColumnClass(0), row.insertCell(), rowEntry[0]);
+		addRowCellNewCustomer(getColumnClass(1), row.insertCell(), rowEntry[1] + " " + rowEntry[2]);
+		addRowCellNewCustomer(getColumnClass(2), row.insertCell(), rowEntry[3]);
+		addRowCellNewCustomer(getColumnClass(3), row.insertCell(), rowEntry[4] + ", " + rowEntry[5] + ", " + rowEntry[6]);
 	}
 }
 
@@ -133,12 +156,12 @@ function deleteSelectedItems(src) {
 				row.classList.remove('selectedRow');
 				table.deleteRow(rowIndex);
 				let newRow = table.insertRow();
-				addRowCellNew(getColumnClass(0), newRow.insertCell(), "");
-				addRowCellNew(getColumnClass(1), newRow.insertCell(), "");
-				addRowCellNew(getColumnClass(2), newRow.insertCell(), "");
+				addRowCellNewItem(getColumnClass(0), newRow.insertCell(), "");
+				addRowCellNewItem(getColumnClass(1), newRow.insertCell(), "");
+				addRowCellNewItem(getColumnClass(2), newRow.insertCell(), "");
 				if (src === "main") {
-					addRowCellNew(getColumnClass(3), newRow.insertCell(), "");
-					addRowCellNew(getColumnClass(4), newRow.insertCell(), "");
+					addRowCellNewItem(getColumnClass(3), newRow.insertCell(), "");
+					addRowCellNewItem(getColumnClass(4), newRow.insertCell(), "");
 				}
 			} else {
 				row.classList.remove('selectedRow');
@@ -177,9 +200,6 @@ function deleteSelectedItems(src) {
 // Populates main POS display table on SKU search entry.
 function addMainTableItem(rowEntry) {
     console.log('rowEntry : ' + rowEntry);
-
-
-   
     
 	// Check if last row is empty
 	if (rowEntry.length != 0) {
@@ -196,12 +216,12 @@ function addMainTableItem(rowEntry) {
 			console.log("Already present in table. Incremented quantity.");
 		    }
 		    else {
-			insertTableRowData(rowEntry, tableData, true);
+			insertTableRowData(rowEntry, tableData, "main");
 		    }
 		} else {
 			// Populate rest of table
 			console.log("Non-Empty Case");
-			insertTableRowDataNew(rowEntry, tableData, true);
+			insertTableRowDataNew(rowEntry, tableData, "main");
 		}
 	}
 
@@ -219,7 +239,7 @@ function alreadyExists(rowEntry) {
 }
 
 // Generates a brand-new table for refresh functionality
-function generateTable(products, tableData) {
+function generateTable(products, tableData, tableName) {
 	for (var productIndex = 0; productIndex < products.length; productIndex++) {
 		console.log(products.length);
 		// Check if last open table is empty
@@ -227,17 +247,17 @@ function generateTable(products, tableData) {
 
 		if (tableData.rows[14].cells[0].innerHTML == '') {
 			console.log("Empty Case");
-			insertTableRowData(rowEntry, tableData, false);
+			insertTableRowData(rowEntry, tableData, tableName);
 		} else {
 			// Populate rest of table
 			console.log("Non-Empty Case");
-			insertTableRowDataNew(rowEntry, tableData, false);
+			insertTableRowDataNew(rowEntry, tableData, tableName);
 		}
 	}
 }
 
 // Resets table to intial empty state
-function cleanupTable(tableData) {
+function cleanupTable(tableData, tableName) {
 	var numRows = tableData.rows.length;
 	for (var rowIndex = numRows-1; rowIndex >= 0; rowIndex--) {
 		tableData.deleteRow(rowIndex);
@@ -245,10 +265,19 @@ function cleanupTable(tableData) {
 	// Reset layout
 	var count = 1;
 	for (rowIndex = 0; rowIndex < 15; rowIndex++) {
-		let newRow = tableData.insertRow();
-		addRowCellNew(getColumnClass(0), newRow.insertCell(), "");
-		addRowCellNew(getColumnClass(1), newRow.insertCell(), "");
-		addRowCellNew(getColumnClass(2), newRow.insertCell(), "");
+		var newRow;
+		if (tableName !== "custManip") {
+			newRow = tableData.insertRow();
+			addRowCellNewItem(getColumnClass(0), newRow.insertCell(), "");
+			addRowCellNewItem(getColumnClass(1), newRow.insertCell(), "");
+			addRowCellNewItem(getColumnClass(2), newRow.insertCell(), "");
+		} else {
+			newRow = tableData.insertRow();
+			addRowCellNewCustomer(getColumnClass(0), newRow.insertCell(), "");
+			addRowCellNewCustomer(getColumnClass(1), newRow.insertCell(), "");
+			addRowCellNewCustomer(getColumnClass(2), newRow.insertCell(), "");
+			addRowCellNewCustomer(getColumnClass(3), newRow.insertCell(), "");
+		}
 
 		row = tableData.rows[rowIndex];
 		row.id = "row_" + count;
@@ -264,7 +293,7 @@ function cleanupTable(tableData) {
 }
 
 // On a Refresh Table click, populate the item manipulation table
-function getProductListing(products) {
+function refreshListing(products, tableName) {
 	var tableData = document.getElementById("Table-Data");
 
 	if (products.length != 0) {
@@ -272,12 +301,12 @@ function getProductListing(products) {
 		// if row# exists -> add to empty row, else populate new row
 		if (tableData.rows[0].cells[0].innerHTML == '') {
 			// generate new table
-			generateTable(products, tableData);
+			generateTable(products, tableData, tableName);
 		} else { 
 			//remove all entries
-			cleanupTable(tableData);
+			cleanupTable(tableData, tableName);
 			// Generate new table
-			generateTable(products, tableData);
+			generateTable(products, tableData, tableName);
 		}
 	}
 
@@ -304,4 +333,4 @@ function editSelectedItem(){
 	}
 }
 
-module.exports = { addMainTableItem, deleteSelectedItems, getProductListing, editSelectedItem, getSkuFromSelected, getInputSku, getInputDescription, getInputPrice };
+module.exports = { addMainTableItem, deleteSelectedItems, refreshListing, editSelectedItem, getSkuFromSelected, getInputSku, getInputDescription, getInputPrice };

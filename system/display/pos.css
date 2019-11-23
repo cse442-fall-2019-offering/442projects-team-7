@@ -46,20 +46,20 @@ aside {
 }
 div.qbtns {
     width:100%;
-    height: 50%;
+    height: 65%;
 
 }
 div.ubtns {
     width:100%;
-    height:35%;
+    height:17%;
 }
 div.pbtns {
     width:100%;
     height:15%;
 }
 .qbtn-group button {
-    background-color:#171717;
-    color:#BEBEBE;
+    background-color:#76bd1d;
+    color:#fff;
     border-style: none;
     padding: 2%;
     width: 31%;
@@ -70,20 +70,28 @@ div.pbtns {
     background-color:#141414;
 }
 .ubtn-group button {
-    background-color:#171717;
-    color:#BEBEBE;
+    background-color:#76bd1d;
+    color:#fff;
     border-style: none;
     padding: 2%;
     width: 31%;
     height: 100px;
 }
+
+.ubtn-group button:hover{
+    background-color:#141414;
+}
 .pbtn-group button {
-    background-color:#171717;
-    color:#BEBEBE;
+    background-color:#76bd1d;
+    color:#fff;
     border-style: none;
     padding: 2%;
     width: 31%;
     height: 100px;
+}
+
+.pbtn-group button:hover{
+    background-color:#141414;
 }
 
 /*Sale Overview */

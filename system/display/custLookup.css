@@ -52,7 +52,7 @@ tr:hover {
   height: 10px;
   left: 0px;
   top: 0px;
-  
+
   text-align: center;
 }
 .tableColumn2 {
@@ -61,8 +61,8 @@ tr:hover {
   height: 10px;
   left: 0px;
   top: 0px;
-  
-  text-align: left;
+
+  text-align: center;
 }
 .tableColumn3 {
   position: relative;
@@ -72,7 +72,7 @@ tr:hover {
   top: 0px;
   
   padding-right: 5px;
-  text-align: right;
+  text-align: center;
   }
 .tableColumn4 {
   position: relative;
@@ -176,7 +176,7 @@ div #Button-Array {
 .tableButton {
   position: relative;
   height: 65%;
-  width: 24%;
+  width: 19%;
   background-color:rgb(102, 102, 102);
   color: #000000;
   font-weight: bold;
