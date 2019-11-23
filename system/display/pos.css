@@ -40,6 +40,7 @@ tr:hover {
     transform: translate(-50%, -50%);
     text-align: center;
 }
+/*Quick Button Panel*/
 aside {
     width:30%;
 }
@@ -92,6 +93,91 @@ div.pbtns {
 .pbtn-group button:hover{
     background-color:#141414;
 }
+
+/*Sale Overview */
+div.flex-row {
+    display: flex;
+}
+div.customer-column {
+    flex: 50%;
+}
+#Customer-Info {
+    padding-left: 1%;
+    flex-shrink: 1;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+
+/*Payment Button Overlay*/
+.fulloverlay {
+  height: 0;
+  width: 100%;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  background-color: rgb(0,0,0); /* Black fallback color */
+  background-color: rgba(0,0,0, 0.9); /* Black w/opacity */
+  overflow-y: hidden; /* Disable horizontal scroll */
+  transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+/* Position the content inside the overlay */
+
+.fulloverlay-content {
+  position: relative;
+  top: 25%; 
+  width: 100%; 
+  text-align: center;
+  margin-top: 30px; 
+  margin-right: -50%;
+  left: 50%;
+}
+
+/* The navigation links inside the overlay */
+
+.fulloverlay input {
+
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #818181;
+  background-color: #1b1b1b;
+  transition: 0.3s;
+
+}
+.fulloverlay label {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+}
+
+.fulloverlay input[type=number] {
+    width: 5em;
+}
+
+/* Position the close button (top right corner) */
+.fulloverlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+  color: #818181;
+}
+
+.fulloverlay a:hover, .overlay a:focus {
+  color: #f1f1f1;
+}
+
+
+
+
+
 .tableEntryA {
   background: #353535;
 }
