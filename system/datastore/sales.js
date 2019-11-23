@@ -22,6 +22,24 @@ class Sales {
 	return this.dao.run(sql);
     }
 
+    createEntry(matchCust, soldItems, pointsUsed, pointsEarned, total) {
+
+	const sql = `INSERT INTO Customers (matchCust, soldItems, pointsUsed, pointsEarned, total) VALUES (?, ?, ?, ?, ?)`;
+
+	return this.dao.run(sql,[matchCust, soldItems, pointsUsed, pointsEarned, total]);
+
+    }
+
+    getById(id) {
+	const sql = `SELECT * FROM Sales WHERE saleId = ?`
+	return this.dao.get(sql, [id]);
+    }
+
+    getAll() {
+	const sql = `SELECT * FROM Sales`;
+	return this.dao.all(sql);
+    }
+
 }
 
 

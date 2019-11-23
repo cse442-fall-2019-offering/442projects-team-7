@@ -356,7 +356,7 @@
 	  </div>
 	  <div class="pbtns">
 	    <div class="pbtn-group">
-	      <button>Payment Button</button>
+	      <button onclick="openNav()">Accept Cash Payment</button>
 	      <button>Payment Button</button>
 	      <button>Payment Button</button>
 	    </div>
@@ -364,4 +364,34 @@
         </aside>
       </div>
     </div>
+
+    <div id="cashpaymentolay" class="fulloverlay">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+      <div class="overlay-content">
+	<form class="cashpaymentform">
+	  <label for="processsaledue">Amount due: </label>
+	  <input class="paymentfield" id="processsaledue" type="number"  value="0.00" readonly><br>
+	  <label for="processsalepaid">Amount paid: </label>
+          <input class="paymentfield" id="processsalepaid" type="number" value="0.00"><br>
+	  <label for="processsalechange">Change due: </label>
+          <input class="paymentfield" id="processsalechange" type="number" value="0.00"><br>
+          <input class="paymentfield" type="button" onClick="processPayment();" value="Complete transaction">
+
+	</form>
+      </div>
+    </div>
+    <script>
+      function openNav() {
+	  document.getElementById("cashpaymentolay").style.height = "100%";
+      }
+      function closeNav() {
+	  document.getElementById("cashpaymentolay").style.height = "0%";
+      }
+      function processPayment() {
+
+
+	  closeNav();
+      }
+    </script>
   </body>
