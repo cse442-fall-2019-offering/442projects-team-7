@@ -94,15 +94,15 @@ const productStore = new Products.Products(DAOtest);
 const salesStore = new Sales.Sales(DAOtest);
 
 ipcMain.on('storeSale', (event, payload) => {
-    console.log('received sale storage in main');
-    console.log(payload);
+    //console.log('received sale storage in main');
+    //console.log(payload);
     const Promise = require('bluebird');
     salesStore.createTable()
 	.then(() => {
 
 	    return new Promise((resolve, reject) => {
 		salesStore.createEntry(payload.custId, payload.soldItems, payload.pointsUsed, payload.pointsEarned, payload.total);
-		console.log('sent sale to dao');
+		//console.log('sent sale to dao');
 	    });
 	    resolve("success");
 	})

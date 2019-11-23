@@ -386,7 +386,7 @@
     </div>
     <script>
       function updateAmountDue() {
-	  document.getElementById("processsalechange").value = parseFloat(document.getElementById("processsalepaid").value) - parseFloat(document.getElementById("total").innerHTML.split("$")[1]);
+	  document.getElementById("processsalechange").value = (parseFloat(document.getElementById("processsalepaid").value) - parseFloat(document.getElementById("total").innerHTML.split("$")[1])).toFixed(2);
       }
       function openNav() {
 	  document.getElementById("cashpaymentolay").style.height = "100%";
