@@ -2,6 +2,7 @@ const { app, BrowserWindow,  ipcMain, ipcRenderer} = require('electron');
 const { DAO, getData, setData } = require('./datastore/dao.js');
 const Customers = require('./datastore/customers.js');
 const Products = require('./datastore/products.js');
+const Sales = require('./datastore/sales.js');
 const DBPATH = "./datastore/datastore.db";
 
 // Function to get login credentials.
@@ -90,6 +91,29 @@ app.on('ready', createWindow);
 const DAOtest = new DAO(DBPATH);
 const customerStore = new Customers.Customers(DAOtest);
 const productStore = new Products.Products(DAOtest);
+const salesStore = new Sales.Sales(DAOtest);
+
+ipcMain.on('storeSale', (event, payload) => {
+    console.log('received sale storage in main');
+    console.log(payload);
+    const Promise = require('bluebird');
+    salesStore.createTable()
+	.then(() => {
+
+	    return new Promise((resolve, reject) => {
+		salesStore.createEntry(payload.custId, payload.soldItems, payload.pointsUsed, payload.pointsEarned, payload.total);
+		console.log('sent sale to dao');
+	    });
+	    resolve("success");
+	})
+	.catch((err) => {
+	    console.log('Error: ');
+	    console.log(err);
+	});
+
+    
+
+});
 
 // On createProduct message, create a new product in products DB
 ipcMain.on('createProduct', function(event, description, price) {

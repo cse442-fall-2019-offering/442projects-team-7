@@ -13,20 +13,20 @@ class Sales {
     createTable() {
 	const sql = `CREATE TABLE IF NOT EXISTS Sales( 
             saleId integer NOT NULL PRIMARY KEY AUTOINCREMENT, 
-            CONSTRAINT matchCust FOREIGN KEY(customer) REFERENCES Customers(custId), 
+            matchCust integer REFERENCES Customers(custId) ON DELETE NO ACTION ON UPDATE CASCADE, 
             soldItems blob NOT NULL, 
             pointsUsed integer NOT NULL, 
             pointsEarned integer NOT NULL, 
             total real NOT NULL)`;
-
+	
 	return this.dao.run(sql);
     }
 
-    createEntry(matchCust, soldItems, pointsUsed, pointsEarned, total) {
+    createEntry(custId, soldItems, pointsUsed, pointsEarned, total) {
 
-	const sql = `INSERT INTO Customers (matchCust, soldItems, pointsUsed, pointsEarned, total) VALUES (?, ?, ?, ?, ?)`;
+	const sql = `INSERT INTO Sales (matchCust, soldItems, pointsUsed, pointsEarned, total) VALUES (?, ?, ?, ?, ?)`;
 
-	return this.dao.run(sql,[matchCust, soldItems, pointsUsed, pointsEarned, total]);
+	return this.dao.run(sql,[custId, soldItems, pointsUsed, pointsEarned, total]);
 
     }
 

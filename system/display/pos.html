@@ -356,7 +356,7 @@
 	  </div>
 	  <div class="pbtns">
 	    <div class="pbtn-group">
-	      <button onclick="openNav()">Accept Cash Payment</button>
+	      <button onclick="openNav();">Accept Cash Payment</button>
 	      <button>Payment Button</button>
 	      <button>Payment Button</button>
 	    </div>
@@ -371,9 +371,9 @@
       <div class="overlay-content">
 	<form class="cashpaymentform">
 	  <label for="processsaledue">Amount due: </label>
-	  <input class="paymentfield" id="processsaledue" type="number"  value="0.00" readonly><br>
+	  <input class="paymentfield" id="processsaledue" type="number"  value="0.00"><br>
 	  <label for="processsalepaid">Amount paid: </label>
-          <input class="paymentfield" id="processsalepaid" type="number" value="0.00"><br>
+          <input class="paymentfield" id="processsalepaid" type="number" value="0.00" onchange="updateAmountDue();"><br>
 	  <label for="processsalechange">Change due: </label>
           <input class="paymentfield" id="processsalechange" type="number" value="0.00"><br>
           <input class="paymentfield" type="button" onClick="processPayment();" value="Complete transaction">
@@ -382,15 +382,38 @@
       </div>
     </div>
     <script>
+      function updateAmountDue() {
+	  document.getElementById("processsalechange").value = parseFloat(document.getElementById("processsalepaid").value) - parseFloat(document.getElementById("total").innerHTML.split("$")[1]);
+      }
       function openNav() {
 	  document.getElementById("cashpaymentolay").style.height = "100%";
+	  document.getElementById("processsaledue").value = document.getElementById("total").innerHTML.split("$")[1];
+	  document.getElementById("processsaledue").setAttributeNode(document.CreateAttribute("readonly"));
       }
       function closeNav() {
 	  document.getElementById("cashpaymentolay").style.height = "0%";
       }
+      
       function processPayment() {
+	  let saleObject = { custId: '', soldItems: {}, pointsUsed: 0, pointsEarned: 0, total: 0 };
+	  saleObject.custId = document.getElementById("custidval").innerHTML;
+	  saleObject.pointsUsed = document.getElementById("custpointsapplyval").innerHTML;
+	  saleObject.pointsEarned = Math.floor(parseFloat(document.getElementById("total").innerHTML.split("$")[1]));
+	  saleObject.total = document.getElementById("total").innerHTML.split("$")[1];
 
+	  let table = document.getElementById("Table-Data");
 
+	  for (var i=0, row; row = table.rows[i]; i++) {
+	      if (row.cells[0].innerHTML == '') { break; }
+	      let item = { sku: -1, qty: 0 };
+	      item.sku = row.cells[0].innerHTML;
+	      item.qty = row.cells[3].getElementsByTagName('input')[0].value;
+	      saleObject.soldItems = {...saleObject.soldItems, ...item};
+	  }
+	  saleObject.soldItems = JSON.stringify(saleObject.soldItems);
+	  const {ipcRenderer} = require('electron');
+	  ipcRenderer.send('storeSale', saleObject);
+	  console.log('sent storeSale request');
 	  closeNav();
       }
     </script>
