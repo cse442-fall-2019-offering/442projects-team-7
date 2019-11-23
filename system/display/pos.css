@@ -84,6 +84,21 @@ div.pbtns {
     width: 31%;
     height: 100px;
 }
+
+div.flex-row {
+    display: flex;
+}
+div.customer-column {
+    flex: 50%;
+}
+#Customer-Info {
+    padding-left: 1%;
+    flex-shrink: 1;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+
+
 .tableEntryA {
   background: #353535;
 }
