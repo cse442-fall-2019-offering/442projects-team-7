@@ -195,6 +195,14 @@
             </tbody>
           </table>
         <script type="text/javascript">
+            ipcRenderer.on('forWin2', function (event, custData){
+              console.log(custData);
+              document.getElementById('custidval').innerHTML = custData[0];
+              document.getElementById('custnameval').innerHTML = custData[1];
+              document.getElementById('custphoneval').innerHTML = custData[2];
+            });
+        </script>
+        <script type="text/javascript">
             document.getElementById("Table-Data").addEventListener('click', (e) => {
                 var rowID = e.target.closest('tr').id;
                 var row = document.getElementById(rowID);

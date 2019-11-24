@@ -91,7 +91,7 @@ function insertTableRowData(rowEntry, tableData, tableName) {
 			} else {
 				tableData.rows[rowIndex].cells[0].innerHTML = rowEntry[0];
 				tableData.rows[rowIndex].cells[1].innerHTML = rowEntry[1] + " " + rowEntry[2];
-				tableData.rows[rowIndex].cells[2].innerHTML = rowEntry[3];
+				tableData.rows[rowIndex].cells[2].innerHTML = '(' + rowEntry[3].slice(0, 3) + ') ' + rowEntry[3].slice(3, 6) + '-' + rowEntry[3].slice(6, 9);
 				let row = tableData.rows[rowIndex].cells[3];
 				row.innerHTML = rowEntry[4] + ", " + rowEntry[5];
 				row.innerHTML += ", " + rowEntry[6] + ", " + rowEntry[7];
@@ -333,4 +333,21 @@ function editSelectedItem(){
 	}
 }
 
-module.exports = { addMainTableItem, deleteSelectedItems, refreshListing, editSelectedItem, getSkuFromSelected, getInputSku, getInputDescription, getInputPrice };
+// Returns data for the currently selected customer in the form of a list
+function getCustomerData() {
+	var tableData = document.getElementById("Table-Data");
+	var numRows = tableData.rows.length;
+	for (rowIndex = 0; rowIndex < numRows; rowIndex++) {
+		let row = tableData.rows[rowIndex];
+		if (row.classList.contains("selectedRow")) {
+			// check to see if the customer has a valid CID
+			if (row.cells[0].innerHTML !== '') {
+				var customerData = [row.cells[0].innerHTML, row.cells[1].innerHTML, row.cells[2].innerHTML];
+				return customerData;
+			}
+		}
+	}
+	return [];
+}
+
+module.exports = { addMainTableItem, deleteSelectedItems, refreshListing, editSelectedItem, getSkuFromSelected, getInputSku, getInputDescription, getInputPrice, getCustomerData };

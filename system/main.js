@@ -1,4 +1,4 @@
-const { app, BrowserWindow,  ipcMain, ipcRenderer} = require('electron'); 
+const { app, BrowserWindow,  ipcMain, ipcRenderer } = require('electron'); 
 const { DAO, getData, setData } = require('./datastore/dao.js');
 const Customers = require('./datastore/customers.js');
 const Products = require('./datastore/products.js');
@@ -249,11 +249,13 @@ ipcMain.on('getAllCustomerRows', function(event) {
 	    });
 });
 
+var mainWindow
+
 // On loadPosDisplay message, create a new BrowserWindow for the main pos display
 ipcMain.on('loadPosDisplay', function(event) {
 	console.log("Loading POS Display Page");
 
-	let win = new BrowserWindow({
+	mainWindow = new BrowserWindow({
 	show: false,
 	width: 1920,
 	height: 1080,
@@ -261,12 +263,12 @@ ipcMain.on('loadPosDisplay', function(event) {
 	    nodeIntegration: true
 	}
     })
-	win.loadFile('./display/pos.html');
-	win.once('ready-to-show', () => {
-  		win.show();
-	})
-	win.on('closed',() => {
-		win=null;
+	 mainWindow.loadFile('./display/pos.html');
+	 mainWindow.once('ready-to-show', () => {
+  		 mainWindow.show();
+	});
+	 mainWindow.on('closed',() => {
+		 mainWindow=null;
 	});
 });
 
@@ -314,6 +316,13 @@ ipcMain.on('loadCustLookup', function(event) {
 	win.on('closed',() => {
 		win=null;
 	});
+});
+
+// Updates the current customer's info in the pos.html
+ipcMain.on('updateCurrCustInfo', function(event, data) {
+	console.log("Update Customer Info Called!");
+	//console.log(data);
+	mainWindow.webContents.send("forWin2", data)
 });
 
 // Requests a product row in the products DB by sku
@@ -377,6 +386,17 @@ function refreshCustomerTable() {
 	let response = ipcRenderer.sendSync('getAllCustomerRows');
 	console.log(response);
 	refreshListing(response, "custManip");
+}
+
+/**
+* Select Customer from Lookup Table
+*/
+function selectCustomer() {
+	const { getCustomerData } = require("../datastore/tableManip.js");
+	var data = getCustomerData();
+	console.log(data);
+	let response = ipcRenderer.send('updateCurrCustInfo', data);
+	console.log(response);
 }
 
 /**
