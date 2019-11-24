@@ -92,9 +92,10 @@ function insertTableRowData(rowEntry, tableData, tableName) {
 				tableData.rows[rowIndex].cells[0].innerHTML = rowEntry[0];
 				tableData.rows[rowIndex].cells[1].innerHTML = rowEntry[1] + " " + rowEntry[2];
 				tableData.rows[rowIndex].cells[2].innerHTML = '(' + rowEntry[3].slice(0, 3) + ') ' + rowEntry[3].slice(3, 6) + '-' + rowEntry[3].slice(6, 9);
-				let row = tableData.rows[rowIndex].cells[3];
-				row.innerHTML = rowEntry[4] + ", " + rowEntry[5];
-				row.innerHTML += ", " + rowEntry[6] + ", " + rowEntry[7];
+				tableData.rows[rowIndex].cells[3].innerHTML = rowEntry[4];
+				let row = tableData.rows[rowIndex].cells[4];
+				row.innerHTML = rowEntry[5] + ", " + rowEntry[6];
+				row.innerHTML += ", " + rowEntry[7] + ", " + rowEntry[8];
 			}
 			break;
 		}
@@ -342,7 +343,7 @@ function getCustomerData() {
 		if (row.classList.contains("selectedRow")) {
 			// check to see if the customer has a valid CID
 			if (row.cells[0].innerHTML !== '') {
-				var customerData = [row.cells[0].innerHTML, row.cells[1].innerHTML, row.cells[2].innerHTML];
+				var customerData = [row.cells[0].innerHTML, row.cells[1].innerHTML, row.cells[2].innerHTML, row.cells[3].innerHTML];
 				return customerData;
 			}
 		}
