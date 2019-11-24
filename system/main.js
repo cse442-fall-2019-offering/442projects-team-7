@@ -322,7 +322,7 @@ ipcMain.on('loadCustLookup', function(event) {
 ipcMain.on('updateCurrCustInfo', function(event, data) {
 	console.log("Update Customer Info Called!");
 	//console.log(data);
-	mainWindow.webContents.send("forWin2", data)
+	mainWindow.webContents.send("changeCustomerData", data)
 });
 
 // Requests a product row in the products DB by sku

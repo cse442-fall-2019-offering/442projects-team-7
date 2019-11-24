@@ -57,7 +57,7 @@ tr:hover {
 }
 .tableColumn2 {
   position: relative;
-  width: 30%;
+  width: 20%;
   height: 10px;
   left: 0px;
   top: 0px;
@@ -66,7 +66,7 @@ tr:hover {
 }
 .tableColumn3 {
   position: relative;
-  width: 15%;
+  width: 20%;
   height: 10px;
   left: 0px;
   top: 0px;
@@ -76,14 +76,22 @@ tr:hover {
   }
 .tableColumn4 {
   position: relative;
-  width: 45%;
+  width: 20%;
   height: 10px;
   left: 0px;
   top: 0px;
   
   text-align: center;
 }
-
+.tableColumn5 {
+  position: relative;
+  width: 30%;
+  height: 10px;
+  left: 0px;
+  top: 0px;
+  
+  text-align: center;
+}
 .selectedRow {
   background-color: grey;
 }
@@ -146,21 +154,28 @@ div #CID-Column {
 
 div #Customer-Column {
   position: relative;
-  width: 30%;
+  width: 20%;
   left: 0px;
   top: 0px;
 }
 
 div #Phone-Column {
   position: relative;
-  width: 15%;
+  width: 20%;
+  left: 0px;
+  top: 0px;
+}
+
+div #Email-Column {
+  position: relative;
+  width: 20%;
   left: 0px;
   top: 0px;
 }
 
 div #Address-Column {
   position: relative;
-  width: 45%;
+  width: 30%;
   left: 0px;
   top: 0px;
 }

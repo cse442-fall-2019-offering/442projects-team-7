@@ -132,7 +132,7 @@ function insertTableRowDataNew(rowEntry, tableData, tableName) {
 	} else {
 		addRowCellNewCustomer(getColumnClass(0), row.insertCell(), rowEntry[0]);
 		addRowCellNewCustomer(getColumnClass(1), row.insertCell(), rowEntry[1] + " " + rowEntry[2]);
-		addRowCellNewCustomer(getColumnClass(2), row.insertCell(), rowEntry[3]);
+		addRowCellNewCustomer(getColumnClass(2), row.insertCell(), ('(' + rowEntry[3].slice(0, 3) + ') ' + rowEntry[3].slice(3, 6) + '-' + rowEntry[3].slice(6, 9)));
 		addRowCellNewCustomer(getColumnClass(3), row.insertCell(), rowEntry[4] + ", " + rowEntry[5] + ", " + rowEntry[6]);
 	}
 }

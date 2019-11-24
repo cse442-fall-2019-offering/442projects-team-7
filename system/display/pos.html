@@ -195,7 +195,7 @@
             </tbody>
           </table>
         <script type="text/javascript">
-            ipcRenderer.on('forWin2', function (event, custData){
+            ipcRenderer.on('changeCustomerData', function (event, custData){
               console.log(custData);
               document.getElementById('custidval').innerHTML = custData[0];
               document.getElementById('custnameval').innerHTML = custData[1];
