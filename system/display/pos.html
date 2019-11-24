@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="title">RPi Point of Sale - Cashier Default Window</title>
     <script>
-     
+
     </script>
-    
+
   </head>
   <body>
     <div id="Nav-wrapper">
@@ -231,7 +231,7 @@
 
           <div id="Sale-Overview">
             <div id="Customer-Info">
-	      
+
 	      <div class="flex-row">
 		<div class="customer-column">
 		  <strong><em>Customer Info</em></strong>
@@ -244,7 +244,7 @@
 		    <div class="customer-column">
 		      <p id="custnameval">John Doe</p> <!--Concatenate first+last name in script that sets this via customer selection-->
 		    </div>
-		  </div>		  
+		  </div>
 		  <div class="flex-row">
 		    <div class="customer-column">
 		      <p id="custphoneval">(555) 555-5555</p>
@@ -273,7 +273,7 @@
 		    <div class="customer-column">
 		      <p id="custpointsapplyval">0</p>
 		    </div>
-		  </div>		  
+		  </div>
 		  <div class="flex-row">
 		    <div class="customer-column">
 		      <p id="custpointsremaininglabel">Remaining:</p>
@@ -286,7 +286,7 @@
 	      </div>
             </div>
             <div id="Totals">
-       
+
 				<p>Subtotal: <span id="subtotal">$0.00</span></p>
 				<p>Discounts: <span id="discounts">$0.00</span></p>
 				<p>Tax: <span id="tax">$0.00</span></p>
@@ -305,7 +305,7 @@
 					    console.log("attempted to parse " + table.rows[i].cells[4].innerHTML);
 					}
 				    }
-				    
+
 				    let subtotal = sumVal.toFixed(2);
 				    subtotal = "$".concat(subtotal.toString());
 				    let tax = (sumVal * 0.08).toFixed(2);
@@ -349,8 +349,8 @@
 	    </div>
 	  </div>
 	  <br>
-	  <p class="btn-group">Utility</p>
 	  <div class="ubtns">
+      <p class="btn-group">Utility</p>
 	    <div class="ubtn-group">
 	      <button>Utility Button</button>
 	      <button>Utility Button</button>
@@ -405,7 +405,7 @@
       function closeNav() {
 	  document.getElementById("cashpaymentolay").style.height = "0%";
       }
-      
+
       function processPayment() {
 	  let saleObject = { custId: '', soldItems: {}, pointsUsed: 0, pointsEarned: 0, total: 0 };
 	  saleObject.custId = document.getElementById("custidval").innerHTML;

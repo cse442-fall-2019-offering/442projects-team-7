@@ -47,18 +47,19 @@ aside {
 div.qbtns {
     width:100%;
     height: 65%;
-
+    padding-left: 3%;
 }
 div.ubtns {
     width:100%;
     height:17%;
+    padding-left: 3%;
 }
 div.pbtns {
     width:100%;
     height:15%;
 }
 .qbtn-group button {
-    background-color:#76bd1d;
+    background-color:#77bd43;
     color:#fff;
     border-style: none;
     padding: 2%;
@@ -70,7 +71,7 @@ div.pbtns {
     background-color:#141414;
 }
 .ubtn-group button {
-    background-color:#76bd1d;
+    background-color:#77bd43;
     color:#fff;
     border-style: none;
     padding: 2%;
@@ -82,12 +83,12 @@ div.pbtns {
     background-color:#141414;
 }
 .pbtn-group button {
-    background-color:#76bd1d;
+    background-color:#77bd43;
     color:#fff;
     border-style: none;
     padding: 2%;
     width: 31%;
-    height: 100px;
+    height: 75px;
 }
 
 .pbtn-group button:hover{
@@ -131,10 +132,10 @@ div.customer-column {
 
 .fulloverlay-content {
   position: relative;
-  top: 25%; 
-  width: 100%; 
+  top: 25%;
+  width: 100%;
   text-align: center;
-  margin-top: 30px; 
+  margin-top: 30px;
   margin-right: -50%;
   left: 50%;
 }
@@ -368,10 +369,11 @@ div #Total-Column {
 }
 div #Sale-Overview {
   position: absolute;
-  width: 1265px;
-  height: 171px;
+  width: 1260px;
+  height: 163px;
   left: 0px;
-  top: 738px;
+  top: 736px;
+  padding: 5px;
 
   background: #3F3F3F;
 }
