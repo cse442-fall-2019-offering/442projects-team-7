@@ -177,13 +177,15 @@ div.customer-column {
 
 
 
-
+.tableText {
+  color: Black;
+}
 
 .tableEntryA {
-  background: #353535;
+  background: #eee;
 }
 .tableEntryB {
-  background: #292929;
+  background: #ccc;
 }
 .tableColumn1 {
   position: relative;
@@ -236,7 +238,7 @@ div.customer-column {
   font-size:18px;
   border: none;
   border-color: transparent;
-  color: white;
+  //color: Black;
   text-align: center;
   background: transparent;
   width: 100%;
