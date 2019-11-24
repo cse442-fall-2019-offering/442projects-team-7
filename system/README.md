@@ -123,6 +123,13 @@ npm install electron --save-dev
 
 You're all set. `npm start` in the /system directory will launch the login UI.
 
+To set up production environment:
+
+- Hide taskbar
+- Make desktop black
+- Remove or hide any icons on desktop
+- Auto start pos_boot.sh by adding it to /etc/xdg/lxsession/LXDE-pi/autostart
+
 # Deployment for Raspberry Pi
 
 Download our RPiPOS 64GB SD card image from https://buffalo.box.com/s/48lgw6pghu009hxyvn3icgu8yqp5gvoi and clone it to an SD card with Rufus.
