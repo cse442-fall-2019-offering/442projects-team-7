@@ -235,7 +235,7 @@ ipcMain.on('getAllCustomerRows', function(event) {
 			var rowsList = [];
 		    customers.forEach((customer) => {
 			    if (customer != undefined) {
-			    	let rowList = [customer.custId, customer.firstname, customer.lastname, customer.phone, customer.address, customer.city, customer.state, customer.zip]
+			    	let rowList = [customer.custId, customer.firstname, customer.lastname, customer.phone, customer.email, customer.address, customer.city, customer.state, customer.zip]
 			    	rowsList.push(rowList);
 				}
 		    });
@@ -322,7 +322,7 @@ ipcMain.on('loadCustLookup', function(event) {
 ipcMain.on('updateCurrCustInfo', function(event, data) {
 	console.log("Update Customer Info Called!");
 	//console.log(data);
-	mainWindow.webContents.send("forWin2", data)
+	mainWindow.webContents.send("changeCustomerData", data)
 });
 
 // Requests a product row in the products DB by sku
