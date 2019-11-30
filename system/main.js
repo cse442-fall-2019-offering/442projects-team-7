@@ -394,9 +394,13 @@ function refreshCustomerTable() {
 function selectCustomer() {
 	const { getCustomerData } = require("../datastore/tableManip.js");
 	var data = getCustomerData();
-	console.log(data);
-	let response = ipcRenderer.send('updateCurrCustInfo', data);
-	console.log(response);
+	if (data.length != 0) {
+		console.log(data);
+		let response = ipcRenderer.send('updateCurrCustInfo', data);
+		console.log(response);
+	} else {
+		console.log("PREVENTED!");
+	}
 }
 
 /**
