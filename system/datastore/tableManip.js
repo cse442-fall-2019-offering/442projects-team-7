@@ -64,9 +64,29 @@ function addRowCellNewItem(colClass, cell, entry) {
 }
 
 // Populates a newly created row cell for customers
-function addRowCellNewCustomer(colClass, cell, entry) {
-	let textNode = document.createTextNode(entry);
-	cell.appendChild(textNode);
+function addRowCellNewCustomer(colClass, cell, entry, rowNum) {
+
+	if (colClass != "tableColumn1") {
+		var input = document.createElement("input");
+		// SET THE INPUT ID's
+		if (colClass == "tableColumn2") {
+			input.classList.add("input1");
+			input.id = 'row_' + rowNum + '_name_input';
+		} else if (colClass == "tableColumn3") {
+			input.classList.add("input1");
+			input.id = 'row_' + rowNum + '_phone_input';
+		} else if (colClass == "tableColumn4") {
+			input.classList.add("input1");
+			input.id = 'row_' + rowNum + '_email_input';
+		} else {
+			input.classList.add("input2");
+			input.id = 'row_' + rowNum + '_address_input';
+		} 
+		cell.appendChild(input);
+	} else {
+		let textNode = document.createTextNode(entry);
+		cell.appendChild(textNode);
+	}
 	cell.classList.add(colClass);
 }
 
@@ -160,10 +180,10 @@ function insertTableRowDataNew(rowEntry, tableData, tableName) {
 			addRowCellNew(getColumnClass(4), row.insertCell(), rowEntry[2]);
 		}
 	} else {
-		addRowCellNewCustomer(getColumnClass(0), row.insertCell(), rowEntry[0]);
-		addRowCellNewCustomer(getColumnClass(1), row.insertCell(), rowEntry[1] + " " + rowEntry[2]);
-		addRowCellNewCustomer(getColumnClass(2), row.insertCell(), ('(' + rowEntry[3].slice(0, 3) + ') ' + rowEntry[3].slice(3, 6) + '-' + rowEntry[3].slice(6, 9)));
-		addRowCellNewCustomer(getColumnClass(3), row.insertCell(), rowEntry[4] + ", " + rowEntry[5] + ", " + rowEntry[6]);
+		addRowCellNewCustomer(getColumnClass(0), row.insertCell(), rowEntry[0], rowLen);
+		addRowCellNewCustomer(getColumnClass(1), row.insertCell(), rowEntry[1] + " " + rowEntry[2], rowLen);
+		addRowCellNewCustomer(getColumnClass(2), row.insertCell(), ('(' + rowEntry[3].slice(0, 3) + ') ' + rowEntry[3].slice(3, 6) + '-' + rowEntry[3].slice(6, 9)), rowLen);
+		addRowCellNewCustomer(getColumnClass(3), row.insertCell(), rowEntry[4] + ", " + rowEntry[5] + ", " + rowEntry[6], rowLen);
 	}
 }
 
@@ -303,10 +323,11 @@ function cleanupTable(tableData, tableName) {
 			addRowCellNewItem(getColumnClass(2), newRow.insertCell(), "");
 		} else {
 			newRow = tableData.insertRow();
-			addRowCellNewCustomer(getColumnClass(0), newRow.insertCell(), "");
-			addRowCellNewCustomer(getColumnClass(1), newRow.insertCell(), "");
-			addRowCellNewCustomer(getColumnClass(2), newRow.insertCell(), "");
-			addRowCellNewCustomer(getColumnClass(3), newRow.insertCell(), "");
+			addRowCellNewCustomer(getColumnClass(0), newRow.insertCell(), "", rowIndex+1);
+			addRowCellNewCustomer(getColumnClass(1), newRow.insertCell(), "", rowIndex+1);
+			addRowCellNewCustomer(getColumnClass(2), newRow.insertCell(), "", rowIndex+1);
+			addRowCellNewCustomer(getColumnClass(3), newRow.insertCell(), "", rowIndex+1);
+			addRowCellNewCustomer(getColumnClass(4), newRow.insertCell(), "", rowIndex+1);
 		}
 
 		row = tableData.rows[rowIndex];

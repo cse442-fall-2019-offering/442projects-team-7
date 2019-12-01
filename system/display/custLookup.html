@@ -140,19 +140,37 @@
                     console.log(row);
 
                     if (row.classList.contains('selectedRow')) {
-                        row.classList.remove('selectedRow');
+                        //row.classList.remove('selectedRow');
+                        if (row.cells[1].children[0] !== document.activeElement && row.cells[2].children[0] !== document.activeElement 
+                        		&& row.cells[3].children[0] !== document.activeElement && row.cells[4].children[0] !== document.activeElement) {
+                        	row.classList.remove('selectedRow');
+                        	row.cells[1].children[0].disabled = true;
+                        	row.cells[2].children[0].disabled = true;
+                        	row.cells[3].children[0].disabled = true;
+                        	row.cells[4].children[0].disabled = true;
+                        	console.log('already selected');
+                        }
                     } else {
                         // Check all row classes for selected
+                        console.log("does not contain selected!");
                         var prevSelected = false;
                         var tableData = document.getElementById("Table-Data");
                         for (var rowIndex = 0; rowIndex < tableData.rows.length; rowIndex++) {
                             if (tableData.rows[rowIndex].classList.contains('selectedRow')) {
                                 prevSelected = true;
+                                console.log("prevSelected = true");
                             }
                         }
 
                         if (!prevSelected) {
                             row.classList.add('selectedRow');
+                            // Enable customer inputs
+		                    if (row.cells[1].innerHTML != '') {
+		                        row.cells[1].children[0].disabled = false;
+		                        row.cells[2].children[0].disabled = false;
+		                        row.cells[3].children[0].disabled = false;
+		                        row.cells[4].children[0].disabled = false;
+		                    }
                         }
                     }
                 }); 
@@ -161,7 +179,7 @@
         <div id="Button-Array">
         	<input class="tableButton" type = "button" onclick="refreshCustomerTable();" value = "Refresh Table">
             <input class="tableButton" type = "button" onclick="selectCustomer();" value = "Select">
-            <input class="tableButton" type = "button" value = "Add">
+            <input class="tableButton" type = "button" onclick="editCustomer();" value = "Add">
             <input class="tableButton" type = "button" value = "Edit">
             <input class="tableButton" type = "button" value = "Delete">
             <script src="../main.js"></script>

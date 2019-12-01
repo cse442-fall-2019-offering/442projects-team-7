@@ -404,6 +404,22 @@ function selectCustomer() {
 }
 
 /**
+* Edit Customer in Lookup Table
+*/
+function editCustomer() {
+	const { getCustomerData } = require("../datastore/tableManip.js");
+	var data = getCustomerData();
+	if (data.length != 0) {
+		console.log(data);
+		//let response = ipcRenderer.send('updateCurrCustInfo', data);
+		let response = ipcRenderer.send('editCustInfo', data);
+		console.log(response);
+	} else {
+		console.log("PREVENTED!");
+	}
+}
+
+/**
  * Deletes a product from the DB and removes it from the Item Manipulation table
  */
 function deleteDbItem() {
