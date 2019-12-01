@@ -70,6 +70,39 @@ function addRowCellNewCustomer(colClass, cell, entry) {
 	cell.classList.add(colClass);
 }
 
+// populates each input element of the Customer Lookup table with its appropriate rowEntry
+function populateCustInput(rowEntry, rowNum) {
+	var cell;
+
+	for (var i = 1; i <= 4; i++) {
+		switch(i) {
+			case(1):
+			cell = document.getElementById('row_' + (rowNum) + '_name_input');
+			cell.disabled = false;
+			cell.value = rowEntry[1] + " " + rowEntry[2];
+			cell.disabled = true;
+
+			case(2):
+			cell = document.getElementById('row_' + (rowNum) + '_phone_input');
+			cell.disabled = false;
+			cell.value = '(' + rowEntry[3].slice(0, 3) + ') ' + rowEntry[3].slice(3, 6) + '-' + rowEntry[3].slice(6, 9);
+			cell.disabled = true;
+
+			case(3):
+			cell = document.getElementById('row_' + (rowNum) + '_email_input');
+			cell.disabled = false;
+			cell.value = rowEntry[4];
+			cell.disabled = true;
+
+			default:
+			cell = document.getElementById('row_' + (rowNum) + '_address_input');
+			cell.disabled = false;
+			cell.value = rowEntry[5] + ", " + rowEntry[6] + ", " + rowEntry[7] + ", " + rowEntry[8];
+			cell.disabled = true;
+		}
+	}
+}
+
 // Inserts a given rowEntry into an existing empty row
 function insertTableRowData(rowEntry, tableData, tableName) {
 	console.log(tableData.rows.length);
@@ -89,13 +122,9 @@ function insertTableRowData(rowEntry, tableData, tableName) {
 					tableData.rows[rowIndex].cells[4].innerHTML = rowEntry[2].toFixed(2);
 				} 
 			} else {
+				/// need row # to change inputs for cells 1-4
 				tableData.rows[rowIndex].cells[0].innerHTML = rowEntry[0];
-				tableData.rows[rowIndex].cells[1].innerHTML = rowEntry[1] + " " + rowEntry[2];
-				tableData.rows[rowIndex].cells[2].innerHTML = '(' + rowEntry[3].slice(0, 3) + ') ' + rowEntry[3].slice(3, 6) + '-' + rowEntry[3].slice(6, 9);
-				tableData.rows[rowIndex].cells[3].innerHTML = rowEntry[4];
-				let row = tableData.rows[rowIndex].cells[4];
-				row.innerHTML = rowEntry[5] + ", " + rowEntry[6];
-				row.innerHTML += ", " + rowEntry[7] + ", " + rowEntry[8];
+				populateCustInput(rowEntry, (rowIndex+1));
 			}
 			break;
 		}

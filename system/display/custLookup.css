@@ -93,9 +93,20 @@ tr:hover {
   text-align: center;
 }
 
-.input {
-  font-size:18px;
-  color: Black;
+.input1 {
+  font-size:14px;
+  border-color: grey;
+  color: white;
+  text-align: center;
+  background: transparent;
+  width: 100%;
+  box-sizing: border-box; width: 100%;
+}
+
+.input2 {
+  font-size:12px;
+  border-color: grey;
+  color: white;
   text-align: center;
   background: transparent;
   width: 100%;
