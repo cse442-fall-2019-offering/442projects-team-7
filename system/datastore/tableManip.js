@@ -105,7 +105,7 @@ function populateCustInput(rowEntry, rowNum) {
 			case(2):
 			cell = document.getElementById('row_' + (rowNum) + '_phone_input');
 			cell.disabled = false;
-			cell.value = '(' + rowEntry[3].slice(0, 3) + ') ' + rowEntry[3].slice(3, 6) + '-' + rowEntry[3].slice(6, 9);
+			cell.value = '(' + rowEntry[3].slice(0, 3) + ') ' + rowEntry[3].slice(3, 6) + '-' + rowEntry[3].slice(6, 10);
 			cell.disabled = true;
 
 			case(3):
@@ -180,6 +180,7 @@ function insertTableRowDataNew(rowEntry, tableData, tableName) {
 			addRowCellNew(getColumnClass(4), row.insertCell(), rowEntry[2]);
 		}
 	} else {
+		console.log('here???!?!?!??!');
 		addRowCellNewCustomer(getColumnClass(0), row.insertCell(), rowEntry[0], rowLen);
 		addRowCellNewCustomer(getColumnClass(1), row.insertCell(), rowEntry[1] + " " + rowEntry[2], rowLen);
 		addRowCellNewCustomer(getColumnClass(2), row.insertCell(), ('(' + rowEntry[3].slice(0, 3) + ') ' + rowEntry[3].slice(3, 6) + '-' + rowEntry[3].slice(6, 9)), rowLen);
@@ -393,7 +394,9 @@ function getCustomerData() {
 		if (row.classList.contains("selectedRow")) {
 			// check to see if the customer has a valid CID
 			if (row.cells[0].innerHTML !== '') {
-				var customerData = [row.cells[0].innerHTML, row.cells[1].innerHTML, row.cells[2].innerHTML, row.cells[3].innerHTML];
+				var customerData = [row.cells[0].innerHTML, document.getElementById('row_' + (rowIndex+1) + '_name_input').value, 
+					document.getElementById('row_' + (rowIndex+1) + '_phone_input').value, document.getElementById('row_' + (rowIndex+1) + '_email_input').value,
+						document.getElementById('row_' + (rowIndex+1) + '_address_input').value];
 				return customerData;
 			}
 		}
