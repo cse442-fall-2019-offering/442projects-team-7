@@ -64,10 +64,63 @@ function addRowCellNewItem(colClass, cell, entry) {
 }
 
 // Populates a newly created row cell for customers
-function addRowCellNewCustomer(colClass, cell, entry) {
-	let textNode = document.createTextNode(entry);
-	cell.appendChild(textNode);
+function addRowCellNewCustomer(colClass, cell, entry, rowNum) {
+
+	if (colClass != "tableColumn1") {
+		var input = document.createElement("input");
+		// SET THE INPUT ID's
+		if (colClass == "tableColumn2") {
+			input.classList.add("input1");
+			input.id = 'row_' + rowNum + '_name_input';
+		} else if (colClass == "tableColumn3") {
+			input.classList.add("input1");
+			input.id = 'row_' + rowNum + '_phone_input';
+		} else if (colClass == "tableColumn4") {
+			input.classList.add("input1");
+			input.id = 'row_' + rowNum + '_email_input';
+		} else {
+			input.classList.add("input2");
+			input.id = 'row_' + rowNum + '_address_input';
+		} 
+		cell.appendChild(input);
+	} else {
+		let textNode = document.createTextNode(entry);
+		cell.appendChild(textNode);
+	}
 	cell.classList.add(colClass);
+}
+
+// populates each input element of the Customer Lookup table with its appropriate rowEntry
+function populateCustInput(rowEntry, rowNum) {
+	var cell;
+
+	for (var i = 1; i <= 4; i++) {
+		switch(i) {
+			case(1):
+			cell = document.getElementById('row_' + (rowNum) + '_name_input');
+			cell.disabled = false;
+			cell.value = rowEntry[1] + " " + rowEntry[2];
+			cell.disabled = true;
+
+			case(2):
+			cell = document.getElementById('row_' + (rowNum) + '_phone_input');
+			cell.disabled = false;
+			cell.value = '(' + rowEntry[3].slice(0, 3) + ') ' + rowEntry[3].slice(3, 6) + '-' + rowEntry[3].slice(6, 10);
+			cell.disabled = true;
+
+			case(3):
+			cell = document.getElementById('row_' + (rowNum) + '_email_input');
+			cell.disabled = false;
+			cell.value = rowEntry[4];
+			cell.disabled = true;
+
+			default:
+			cell = document.getElementById('row_' + (rowNum) + '_address_input');
+			cell.disabled = false;
+			cell.value = rowEntry[5] + ", " + rowEntry[6] + ", " + rowEntry[7] + ", " + rowEntry[8];
+			cell.disabled = true;
+		}
+	}
 }
 
 // Inserts a given rowEntry into an existing empty row
@@ -89,13 +142,9 @@ function insertTableRowData(rowEntry, tableData, tableName) {
 					tableData.rows[rowIndex].cells[4].innerHTML = rowEntry[2].toFixed(2);
 				} 
 			} else {
+				/// need row # to change inputs for cells 1-4
 				tableData.rows[rowIndex].cells[0].innerHTML = rowEntry[0];
-				tableData.rows[rowIndex].cells[1].innerHTML = rowEntry[1] + " " + rowEntry[2];
-				tableData.rows[rowIndex].cells[2].innerHTML = '(' + rowEntry[3].slice(0, 3) + ') ' + rowEntry[3].slice(3, 6) + '-' + rowEntry[3].slice(6, 9);
-				tableData.rows[rowIndex].cells[3].innerHTML = rowEntry[4];
-				let row = tableData.rows[rowIndex].cells[4];
-				row.innerHTML = rowEntry[5] + ", " + rowEntry[6];
-				row.innerHTML += ", " + rowEntry[7] + ", " + rowEntry[8];
+				populateCustInput(rowEntry, (rowIndex+1));
 			}
 			break;
 		}
@@ -131,10 +180,11 @@ function insertTableRowDataNew(rowEntry, tableData, tableName) {
 			addRowCellNew(getColumnClass(4), row.insertCell(), rowEntry[2]);
 		}
 	} else {
-		addRowCellNewCustomer(getColumnClass(0), row.insertCell(), rowEntry[0]);
-		addRowCellNewCustomer(getColumnClass(1), row.insertCell(), rowEntry[1] + " " + rowEntry[2]);
-		addRowCellNewCustomer(getColumnClass(2), row.insertCell(), ('(' + rowEntry[3].slice(0, 3) + ') ' + rowEntry[3].slice(3, 6) + '-' + rowEntry[3].slice(6, 9)));
-		addRowCellNewCustomer(getColumnClass(3), row.insertCell(), rowEntry[4] + ", " + rowEntry[5] + ", " + rowEntry[6]);
+		console.log('here???!?!?!??!');
+		addRowCellNewCustomer(getColumnClass(0), row.insertCell(), rowEntry[0], rowLen);
+		addRowCellNewCustomer(getColumnClass(1), row.insertCell(), rowEntry[1] + " " + rowEntry[2], rowLen);
+		addRowCellNewCustomer(getColumnClass(2), row.insertCell(), ('(' + rowEntry[3].slice(0, 3) + ') ' + rowEntry[3].slice(3, 6) + '-' + rowEntry[3].slice(6, 9)), rowLen);
+		addRowCellNewCustomer(getColumnClass(3), row.insertCell(), rowEntry[4] + ", " + rowEntry[5] + ", " + rowEntry[6], rowLen);
 	}
 }
 
@@ -157,12 +207,21 @@ function deleteSelectedItems(src) {
 				row.classList.remove('selectedRow');
 				table.deleteRow(rowIndex);
 				let newRow = table.insertRow();
-				addRowCellNewItem(getColumnClass(0), newRow.insertCell(), "");
-				addRowCellNewItem(getColumnClass(1), newRow.insertCell(), "");
-				addRowCellNewItem(getColumnClass(2), newRow.insertCell(), "");
+				if (src === 'itemPopup' || src === 'main') {
+					addRowCellNewItem(getColumnClass(0), newRow.insertCell(), "");
+					addRowCellNewItem(getColumnClass(1), newRow.insertCell(), "");
+					addRowCellNewItem(getColumnClass(2), newRow.insertCell(), "");
+				} 
 				if (src === "main") {
 					addRowCellNewItem(getColumnClass(3), newRow.insertCell(), "");
 					addRowCellNewItem(getColumnClass(4), newRow.insertCell(), "");
+				}
+				if (src === 'custPopup') {
+					addRowCellNewCustomer(getColumnClass(0), newRow.insertCell(), "", rowIndex+1);
+					addRowCellNewCustomer(getColumnClass(1), newRow.insertCell(), "", rowIndex+1);
+					addRowCellNewCustomer(getColumnClass(2), newRow.insertCell(), "", rowIndex+1);
+					addRowCellNewCustomer(getColumnClass(3), newRow.insertCell(), "", rowIndex+1);
+					addRowCellNewCustomer(getColumnClass(4), newRow.insertCell(), "", rowIndex+1);
 				}
 			} else {
 				row.classList.remove('selectedRow');
@@ -178,6 +237,17 @@ function deleteSelectedItems(src) {
 		if (src === "main") {
 			row.cells[3].children[0].id = "row_" + (rowIndex+1) + "_qty_input";
 			if (!row.classList.contains('selectedRow')) {
+				row.cells[3].children[0].disabled = "true";
+			}
+		} else if (src === 'custPopup') {
+			row.cells[1].children[0].id = "row_" + (rowIndex+1) + "_name_input";
+			row.cells[2].children[0].id = "row_" + (rowIndex+1) + "_phone_input";
+			row.cells[3].children[0].id = "row_" + (rowIndex+1) + "_email_input";
+			row.cells[4].children[0].id = "row_" + (rowIndex+1) + "_address_input";
+			if (!row.classList.contains('selectedRow')) {
+				row.cells[1].children[0].disabled = "true";
+				row.cells[2].children[0].disabled = "true";
+				row.cells[3].children[0].disabled = "true";
 				row.cells[3].children[0].disabled = "true";
 			}
 		}
@@ -274,10 +344,11 @@ function cleanupTable(tableData, tableName) {
 			addRowCellNewItem(getColumnClass(2), newRow.insertCell(), "");
 		} else {
 			newRow = tableData.insertRow();
-			addRowCellNewCustomer(getColumnClass(0), newRow.insertCell(), "");
-			addRowCellNewCustomer(getColumnClass(1), newRow.insertCell(), "");
-			addRowCellNewCustomer(getColumnClass(2), newRow.insertCell(), "");
-			addRowCellNewCustomer(getColumnClass(3), newRow.insertCell(), "");
+			addRowCellNewCustomer(getColumnClass(0), newRow.insertCell(), "", rowIndex+1);
+			addRowCellNewCustomer(getColumnClass(1), newRow.insertCell(), "", rowIndex+1);
+			addRowCellNewCustomer(getColumnClass(2), newRow.insertCell(), "", rowIndex+1);
+			addRowCellNewCustomer(getColumnClass(3), newRow.insertCell(), "", rowIndex+1);
+			addRowCellNewCustomer(getColumnClass(4), newRow.insertCell(), "", rowIndex+1);
 		}
 
 		row = tableData.rows[rowIndex];
@@ -343,7 +414,9 @@ function getCustomerData() {
 		if (row.classList.contains("selectedRow")) {
 			// check to see if the customer has a valid CID
 			if (row.cells[0].innerHTML !== '') {
-				var customerData = [row.cells[0].innerHTML, row.cells[1].innerHTML, row.cells[2].innerHTML, row.cells[3].innerHTML];
+				var customerData = [row.cells[0].innerHTML, document.getElementById('row_' + (rowIndex+1) + '_name_input').value, 
+					document.getElementById('row_' + (rowIndex+1) + '_phone_input').value, document.getElementById('row_' + (rowIndex+1) + '_email_input').value,
+						document.getElementById('row_' + (rowIndex+1) + '_address_input').value];
 				return customerData;
 			}
 		}
