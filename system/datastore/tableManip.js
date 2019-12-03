@@ -207,12 +207,21 @@ function deleteSelectedItems(src) {
 				row.classList.remove('selectedRow');
 				table.deleteRow(rowIndex);
 				let newRow = table.insertRow();
-				addRowCellNewItem(getColumnClass(0), newRow.insertCell(), "");
-				addRowCellNewItem(getColumnClass(1), newRow.insertCell(), "");
-				addRowCellNewItem(getColumnClass(2), newRow.insertCell(), "");
+				if (src === 'itemPopup' || src === 'main') {
+					addRowCellNewItem(getColumnClass(0), newRow.insertCell(), "");
+					addRowCellNewItem(getColumnClass(1), newRow.insertCell(), "");
+					addRowCellNewItem(getColumnClass(2), newRow.insertCell(), "");
+				} 
 				if (src === "main") {
 					addRowCellNewItem(getColumnClass(3), newRow.insertCell(), "");
 					addRowCellNewItem(getColumnClass(4), newRow.insertCell(), "");
+				}
+				if (src === 'custPopup') {
+					addRowCellNewCustomer(getColumnClass(0), newRow.insertCell(), "", rowIndex+1);
+					addRowCellNewCustomer(getColumnClass(1), newRow.insertCell(), "", rowIndex+1);
+					addRowCellNewCustomer(getColumnClass(2), newRow.insertCell(), "", rowIndex+1);
+					addRowCellNewCustomer(getColumnClass(3), newRow.insertCell(), "", rowIndex+1);
+					addRowCellNewCustomer(getColumnClass(4), newRow.insertCell(), "", rowIndex+1);
 				}
 			} else {
 				row.classList.remove('selectedRow');
@@ -228,6 +237,17 @@ function deleteSelectedItems(src) {
 		if (src === "main") {
 			row.cells[3].children[0].id = "row_" + (rowIndex+1) + "_qty_input";
 			if (!row.classList.contains('selectedRow')) {
+				row.cells[3].children[0].disabled = "true";
+			}
+		} else if (src === 'custPopup') {
+			row.cells[1].children[0].id = "row_" + (rowIndex+1) + "_name_input";
+			row.cells[2].children[0].id = "row_" + (rowIndex+1) + "_phone_input";
+			row.cells[3].children[0].id = "row_" + (rowIndex+1) + "_email_input";
+			row.cells[4].children[0].id = "row_" + (rowIndex+1) + "_address_input";
+			if (!row.classList.contains('selectedRow')) {
+				row.cells[1].children[0].disabled = "true";
+				row.cells[2].children[0].disabled = "true";
+				row.cells[3].children[0].disabled = "true";
 				row.cells[3].children[0].disabled = "true";
 			}
 		}

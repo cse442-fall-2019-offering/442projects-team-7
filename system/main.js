@@ -156,7 +156,7 @@ ipcMain.on('editProduct', function(event, sku, newDescription, newPrice) {
 
 // On editCustInfo message, find a customer by their CID and update given fields
 ipcMain.on('editCustInfo', function(event, data) {
-	console.log("Edit Customer Info Called!");
+	//console.log("Edit Customer Info Called!");
 	//console.log(data);
 	const Promise = require('bluebird');
   	// Call function to generate productDB and return
@@ -200,6 +200,27 @@ ipcMain.on('deleteProduct', function(event, sku) {
 		return new Promise((resolve, reject) => {
 			if (product != undefined) {
 				productStore.deleteEntry(sku);
+			}
+		});
+		resolve("success");
+		})
+	    .catch((err) => {
+		console.log('Error: ');
+		console.log(err);
+		});
+});
+
+// On deleteCustInfo message, find a customer by their corresponding customer id and delete
+ipcMain.on('deleteCustInfo', function(event, cid) {
+	const Promise = require('bluebird');
+  	// Call function to generate productDB and return
+	customerStore.createTable()
+		.then(() => customerStore.getById(cid))
+		.then((customer) => {
+		//console.log('Retrieved product from DB', product);
+		return new Promise((resolve, reject) => {
+			if (customer != undefined) {
+				customerStore.deleteEntry(cid);
 			}
 		});
 		resolve("success");
@@ -447,9 +468,25 @@ function editCustomer() {
 	var data = getCustomerData();
 	if (data.length != 0) {
 		console.log(data);
-		//let response = ipcRenderer.send('updateCurrCustInfo', data);
 		let response = ipcRenderer.send('editCustInfo', data);
 		console.log(response);
+	} else {
+		console.log("PREVENTED!");
+	}
+}
+
+/**
+* Delete Customer from DB and entry in Lookup Table
+*/
+function deleteCustomer() {
+	console.log("deleteCustomer");
+	const { getCustomerData, deleteSelectedItems } = require("../datastore/tableManip.js");
+	var data = getCustomerData();
+	if (data.length != 0) {
+		console.log(data);
+		let response = ipcRenderer.send('deleteCustInfo', data[0]);
+		console.log(response);
+		deleteSelectedItems('custPopup');
 	} else {
 		console.log("PREVENTED!");
 	}
@@ -462,7 +499,7 @@ function deleteDbItem() {
 	const { getSkuFromSelected, deleteSelectedItems } = require("../datastore/tableManip.js");
 	var sku = getSkuFromSelected();
 	ipcRenderer.send('deleteProduct', sku);
-	deleteSelectedItems('popup');
+	deleteSelectedItems('itemPopup');
 }
 
 /**
