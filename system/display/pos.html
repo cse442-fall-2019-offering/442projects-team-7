@@ -389,7 +389,7 @@
 	  <label for="processsalechange">Change due: </label>
           <input class="paymentfield" id="processsalechange" type="number" value="0.00"><br>
           <input class="paymentfield" type="button" onClick="processPayment();" value="Complete transaction">
-
+	  <span id="errortext"></span>
 	</form>
       </div>
     </div>
@@ -400,14 +400,18 @@
       function openNav() {
 	  document.getElementById("cashpaymentolay").style.height = "100%";
 	  document.getElementById("processsaledue").value = document.getElementById("total").innerHTML.split("$")[1];
-	  document.getElementById("processsaledue").setAttributeNode(document.CreateAttribute("readonly"));
+	  document.getElementById("processsaledue").setAttributeNode(document.createAttribute("readonly"));
       }
       function closeNav() {
 	  document.getElementById("cashpaymentolay").style.height = "0%";
       }
 
       function processPayment() {
-	  let saleObject = { custId: '', soldItems: {}, pointsUsed: 0, pointsEarned: 0, total: 0 };
+	  if (document.getElementById("processsaledue").value > document.getElementById("processsalepaid").value) {
+	      document.getElementById("errortext").innerHTML = "Error: cannot complete transaction without being paid";
+	      return;
+	  }
+	  let saleObject = { custId: '', soldItems: [], pointsUsed: 0, pointsEarned: 0, total: 0 };
 	  saleObject.custId = document.getElementById("custidval").innerHTML;
 	  saleObject.pointsUsed = document.getElementById("custpointsapplyval").innerHTML;
 	  saleObject.pointsEarned = Math.floor(parseFloat(document.getElementById("total").innerHTML.split("$")[1]));
@@ -420,7 +424,12 @@
 	      let item = { sku: -1, qty: 0 };
 	      item.sku = row.cells[0].innerHTML;
 	      item.qty = row.cells[3].getElementsByTagName('input')[0].value;
-	      saleObject.soldItems = {...saleObject.soldItems, ...item};
+	      saleObject.soldItems.push(item);
+	      row.cells[0].innerHTML = '';
+	      row.cells[1].innerHTML = '';
+	      row.cells[2].innerHTML = '';
+	      row.cells[3].getElementsByTagName('input')[0].value = '';
+	      row.cells[4].innerHTML = '';
 	  }
 	  saleObject.soldItems = JSON.stringify(saleObject.soldItems);
 	  const {ipcRenderer} = require('electron');
