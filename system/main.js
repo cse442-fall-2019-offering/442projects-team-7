@@ -248,6 +248,24 @@ ipcMain.on('deleteCustInfo', function(event, cid) {
 		});
 });
 
+// On addCustomer message, create a new customer in Customer DB.
+ipcMain.on('addCustomer', function(event, firstAndLastName, phone, email, address){
+	const Promise = require('bluebird');
+	// Call function to generate productDB and return
+	customerStore.createTable()
+		.then(() => {
+			console.log("Add customer to DB")
+			return new Promise((resolve, reject) => {
+				// Creates an entry for new customer in Customer Datastore.
+				customerStore.createEntry(firstAndLastName, phone, email, address);
+			});
+			resolve("Success.");
+		})
+		.catch((err) => {
+			console.log("Error: ", err);
+		});
+});
+
 // On getProductRow message, open products DB and return a rowList by its corresponding sku 
 ipcMain.on('getProductRow', function(event, sku) {
 	const Promise = require('bluebird');
@@ -539,4 +557,10 @@ function createDbItem() {
 	var description = getInputDescription();
 	var price = getInputPrice();
 	ipcRenderer.send('createProduct', description, price);
+}
+
+function addCustomer(){
+	console.log("addCustomer")
+
+	ipcRenderer.send("addCustomer")
 }
