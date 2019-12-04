@@ -11,10 +11,6 @@ function getLoginTest() {
 		{
 			username: "edmund",
 			password: "qwerty"
-		},
-		{
-			username: "",
-			password: ""
 		}
 	];
 	return loginTest;
@@ -82,6 +78,7 @@ function uLogin(){
 	}
 	else{
 	    console.log("No such account");
+	    document.getElementById("errortext").innerHTML = "Error: invalid credentials.";
 	}
 }
 
