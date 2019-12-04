@@ -126,8 +126,54 @@ div.customer-column {
   align-items: center;
 }
 
-
-
+/*Sale Overlay*/
+.saleoverlay {
+    align-items: stretch;
+    align-content: stretch;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+.saleoverlay table, tr {
+    display: block;
+    width: 100%;
+}
+.saleoverlay td,th {
+    max-width: 100%;
+    white-space: pre-line;
+    border-bottom: 1px solid #333;
+    padding: 5px;
+}
+.saleoverlay th {
+    height: 40px;
+}
+#saleid {
+    width: 25px;
+}
+#saledate {
+    width: 75px;
+}
+#salecust {
+    width: 55px;
+}
+#saleitems {
+    width: 500px;
+}
+#salepoints {
+    width: 25px;
+}
+#saleredeemed {
+    width: 25px;
+}
+#saletotal {
+    width: 55px;
+}
+.saleoverlay td {
+    border-left: 1px solid #333;
+    border-right: 1px solid #333;
+}
+.saleoverlay tr:nth-child(even) {
+    background-color: rgb(20,20,20);
+}
 /* Position the content inside the overlay */
 
 .fulloverlay-content {
@@ -169,6 +215,14 @@ div.customer-column {
   right: 45px;
   font-size: 60px;
   color: #818181;
+}
+
+.fulloverlay .closebtnsale {
+    position: absolute;
+    bottom: 20px;
+    right: 45px;
+    font-size: 35px;
+    color: #616161;
 }
 
 .fulloverlay a:hover, .overlay a:focus {

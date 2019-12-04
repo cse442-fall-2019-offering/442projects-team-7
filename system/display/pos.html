@@ -21,6 +21,7 @@
         <div id="Sale-Page-Navbar">
 		  <button class="navButton" onclick="popUp('custLookup');" id="custLookup">Customer Lookup</button>
 		  <button class="navButton" onclick="popUp('itemManip');" value="Edit Items" id="itemManip">Edit Items</button>
+		  <button class="navButton" onclick="openSales();">Transaction History</button>
 	      <script src="../main.js"></script>
         </div>
 
@@ -402,8 +403,14 @@
 	  document.getElementById("processsaledue").value = document.getElementById("total").innerHTML.split("$")[1];
 	  document.getElementById("processsaledue").setAttributeNode(document.createAttribute("readonly"));
       }
+      function openSales(){
+	  const {ipcRenderer} = require('electron');
+	  ipcRenderer.send('getSales');
+	  document.getElementById("oldsaleoverlay").style.height = "100%";
+      }
       function closeNav() {
 	  document.getElementById("cashpaymentolay").style.height = "0%";
+	  document.getElementById("oldsaleoverlay").style.height = "0%";
       }
 
       function processPayment() {
@@ -437,5 +444,73 @@
 	  console.log('sent storeSale request');
 	  closeNav();
       }
+
+      ipcRenderer.on('retrievedSales', function(event, payload) {
+	  let tbl = document.getElementById('transactionsbody');
+	  console.log(payload);
+	  payload.forEach(function(sale) {
+	      let row = document.createElement('tr');
+	      let cell = document.createElement('td');
+	      cell.innerHTML = sale.saleId;
+	      row.appendChild(cell);
+	      cell = document.createElement('td');
+	      cell.innerHTML = sale.date;
+	      row.appendChild(cell);
+	      cell = document.createElement('td');
+	      cell.innerHTML = sale.matchCust;
+	      row.appendChild(cell);
+	      cell = document.createElement('td');
+	      cell.innerHTML = sale.soldItems;
+	      row.appendChild(cell);
+	      cell = document.createElement('td');
+	      cell.innerHTML = sale.pointsEarned;
+	      row.appendChild(cell);
+	      cell = document.createElement('td');
+	      cell.innerHTML = sale.pointsUsed;
+	      row.appendChild(cell);
+	      cell = document.createElement('td');
+	      cell.innerHTML = '$' + sale.total;
+	      row.appendChild(cell);
+	      cell = document.createElement('td');
+	      
+	      tbl.appendChild(row);
+	  });
+
+      });
     </script>
+
+    <div id="oldsaleoverlay" class="fulloverlay saleoverlay">
+      <a href="javascript:void(0)" class="closebtnsale" onclick="closeNav()">Close</a>
+
+      <div class="overlaycontent saleolaycontent">
+
+	<table id="salelist">
+	  <tr>
+	    <th class="saleid">ID</th>
+	    <th class="saledate">Date</th>
+	    <th class="salecust">Customer ID</th>
+	    <th class="saleitems">Sale Items</th>
+	    <th class="salepoints">Points Earned</th>
+	    <th class="saleredeemed">Points Spent</th>
+	    <th class="saletotal">Total</th>
+	  </tr>
+	  <tbody id="transactionsbody">
+	  <tr>
+	    <td>0</td>
+	    <td>2019-12-04 08:11</td>
+	    <td>1</td>
+	    <td>Taco (1) - $2.99</td>
+	    <td>3</td>
+	    <td>0</td>
+	    <td>$2.99</td>
+	  </tr>
+	  </tbody>
+	  
+	</table>
+	
+
+      </div>
+      
+    </div>
+    
   </body>

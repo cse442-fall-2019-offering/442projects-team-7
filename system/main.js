@@ -94,8 +94,8 @@ const productStore = new Products.Products(DAOtest);
 const salesStore = new Sales.Sales(DAOtest);
 
 ipcMain.on('storeSale', (event, payload) => {
-    console.log('received sale storage in main');
-    console.log(payload);
+    //console.log('received sale storage in main');
+    //console.log(payload);
     const Promise = require('bluebird');
     salesStore.createTable()
 	.then(() => {
@@ -113,6 +113,23 @@ ipcMain.on('storeSale', (event, payload) => {
 
     
 
+});
+
+ipcMain.on('getSales', (event) => {
+    const Promise = require('bluebird');
+    salesStore.createTable()
+	.then(() => salesStore.getAll())
+	.then((sales) => {
+	    return new Promise((resolve, reject) => {
+		//console.log(sales);
+		event.sender.send("retrievedSales", sales);
+	    });
+	    resolve("success");
+	})
+	.catch((err) => {
+	    console.log('Error: ');
+	    console.log(err);
+	});
 });
 
 // On createProduct message, create a new product in products DB
