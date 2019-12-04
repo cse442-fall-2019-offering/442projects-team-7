@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="pos.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="title">RPi Point of Sale - Cashier Default Window</title>
+    <script>
+
+    </script>
+
+  </head>
+  <body>
+    <div id="Nav-wrapper">
+      <div id="navbar">
+      </div>
+    </div>
+    <div id="CSI-wrapper">
+      <div id="Create Sale Interface">
+
+        <div id="Sale-Page-Navbar">
+		  <button class="navButton" onclick="popUp('custLookup');" id="custLookup">Customer Lookup</button>
+		  <button class="navButton" onclick="popUp('itemManip');" value="Edit Items" id="itemManip">Edit Items</button>
+		  <button class="navButton" onclick="openSales();">Transaction History</button>
+	      <script src="../main.js"></script>
+        </div>
+
+        <section>
+          <div id="Transaction-Info-Panel">
+            <div id="Inner-Transaction-Panel">
+                <input id="Item-Search-Field" type="text" name="search_text" placeholder="Enter a SKU, scan barcode, or search for item...">
+                <button class="tableButton" type="button" onclick="requestProductRow(document.getElementById('Item-Search-Field').value); updateTotals();" id ="searchItem">Search Item</button>
+                <button class="tableButton" type="button" onclick="deleteProductRow(); updateTotals();">Delete Item</button>
+            </div>
+          </div>
+
+          <table id="Item-List-Panel">
+            <thead id="Column-Headers">
+              <tr>
+                <th id="SKU-Column">SKU</th>
+                <th id="Description-Column">Description</th>
+                <th id="Unit-Price-Column">Unit Price</th>
+                <th id="Quantity-Column">Qty</th>
+                <th id="Total-Column">Total</th>
+              </tr>
+            </thead>
+            <tbody id="Table-Data" class="tableText">
+            	<tr id="row_1" class="tableEntryA">
+            		<td class="tableColumn1"></td>
+            		<td class="tableColumn2"></td>
+            		<td class="tableColumn3"></td>
+            		<td class="tableColumn4"><input type="number" id="row_1_qty_input" class="qty_input" disabled="true" min="0" onChange="updateProductTotal(this.value, this.id); updateTotals();"></td>
+            		<td class="tableColumn5"></td>
+            	</tr>
+            	<tr id="row_2" class="tableEntryB">
+            		<td class="tableColumn1"></td>
+            		<td class="tableColumn2"></td>
+            		<td class="tableColumn3"></td>
+            		<td class="tableColumn4"><input type="number" id="row_2_qty_input" class="qty_input" disabled="true" min="0" onChange="updateProductTotal(this.value, this.id); updateTotals();"></td>
+            		<td class="tableColumn5"></td>
+            	</tr>
+            	<tr id="row_3" class="tableEntryA">
+            		<td class="tableColumn1"></td>
+            		<td class="tableColumn2"></td>
+            		<td class="tableColumn3"></td>
+            		<td class="tableColumn4"><input type="number" id="row_3_qty_input" class="qty_input" disabled="true" min="0" onChange="updateProductTotal(this.value, this.id); updateTotals();"></td>
+            		<td class="tableColumn5"></td>
+            	</tr>
+            	<tr id="row_4" class="tableEntryB">
+            		<td class="tableColumn1"></td>
+            		<td class="tableColumn2"></td>
+            		<td class="tableColumn3"></td>
+            		<td class="tableColumn4"><input type="number" id="row_4_qty_input" class="qty_input" disabled="true" min="0" onChange="updateProductTotal(this.value, this.id); updateTotals();"></td>
+            		<td class="tableColumn5"></td>
+            	</tr>
+            	<tr id="row_5" class="tableEntryA">
+            		<td class="tableColumn1"></td>
+            		<td class="tableColumn2"></td>
+            		<td class="tableColumn3"></td>
+            		<td class="tableColumn4"><input type="number" id="row_5_qty_input" class="qty_input" disabled="true" min="0" onChange="updateProductTotal(this.value, this.id); updateTotals();"></td>
+            		<td class="tableColumn5"></td>
+            	</tr>
+            	<tr id="row_6" class="tableEntryB">
+            		<td class="tableColumn1"></td>
+            		<td class="tableColumn2"></td>
+            		<td class="tableColumn3"></td>
+            		<td class="tableColumn4"><input type="number" id="row_6_qty_input" class="qty_input" disabled="true" min="0" onChange="updateProductTotal(this.value, this.id); updateTotals();"></td>
+            		<td class="tableColumn5"></td>
+            	</tr>
+            	<tr id="row_7" class="tableEntryA">
+            		<td class="tableColumn1"></td>
+            		<td class="tableColumn2"></td>
+            		<td class="tableColumn3"></td>
+            		<td class="tableColumn4"><input type="number" id="row_7_qty_input" class="qty_input" disabled="true" min="0" onChange="updateProductTotal(this.value, this.id); updateTotals();"></td>
+            		<td class="tableColumn5"></td>
+            	</tr>
+            	<tr id="row_8" class="tableEntryB">
+            		<td class="tableColumn1"></td>
+            		<td class="tableColumn2"></td>
+            		<td class="tableColumn3"></td>
+            		<td class="tableColumn4"><input type="number" id="row_8_qty_input" class="qty_input" disabled="true" min="0" onChange="updateProductTotal(this.value, this.id); updateTotals();"></td>
+            		<td class="tableColumn5"></td>
+            	</tr>
+            	<tr id="row_9" class="tableEntryA">
+            		<td class="tableColumn1"></td>
+            		<td class="tableColumn2"></td>
+            		<td class="tableColumn3"></td>
+            		<td class="tableColumn4"><input type="number" id="row_9_qty_input" class="qty_input" disabled="true" min="0" onChange="updateProductTotal(this.value, this.id); updateTotals();"></td>
+            		<td class="tableColumn5"></td>
+            	</tr>
+            	<tr id="row_10" class="tableEntryB">
+            		<td class="tableColumn1"></td>
+            		<td class="tableColumn2"></td>
+            		<td class="tableColumn3"></td>
+            		<td class="tableColumn4"><input type="number" id="row_10_qty_input" class="qty_input" disabled="true" min="0" onChange="updateProductTotal(this.value, this.id); updateTotals();"></td>
+            		<td class="tableColumn5"></td>
+            	</tr>
+            	<tr id="row_11" class="tableEntryA">
+            		<td class="tableColumn1"></td>
+            		<td class="tableColumn2"></td>
+            		<td class="tableColumn3"></td>
+            		<td class="tableColumn4"><input type="number" id="row_11_qty_input" class="qty_input" disabled="true" min="0" onChange="updateProductTotal(this.value, this.id); updateTotals();"></td>
+            		<td class="tableColumn5"></td>
+            	</tr>
+            	<tr id="row_12" class="tableEntryB">
+            		<td class="tableColumn1"></td>
+            		<td class="tableColumn2"></td>
+            		<td class="tableColumn3"></td>
+            		<td class="tableColumn4"><input type="number" id="row_12_qty_input" class="qty_input" disabled="true" min="0" onChange="updateProductTotal(this.value, this.id); updateTotals();"></td>
+            		<td class="tableColumn5"></td>
+            	</tr>
+            	<tr id="row_13" class="tableEntryA">
+            		<td class="tableColumn1"></td>
+            		<td class="tableColumn2"></td>
+            		<td class="tableColumn3"></td>
+            		<td class="tableColumn4"><input type="number" id="row_13_qty_input" class="qty_input" disabled="true" min="0" onChange="updateProductTotal(this.value, this.id); updateTotals();"></td>
+            		<td class="tableColumn5"></td>
+            	</tr>
+            	<tr id="row_14" class="tableEntryB">
+            		<td class="tableColumn1"></td>
+            		<td class="tableColumn2"></td>
+            		<td class="tableColumn3"></td>
+            		<td class="tableColumn4"><input type="number" id="row_14_qty_input" class="qty_input" disabled="true" min="0" onChange="updateProductTotal(this.value, this.id); updateTotals();"></td>
+            		<td class="tableColumn5"></td>
+            	</tr>
+            	<tr id="row_15" class="tableEntryA">
+            		<td class="tableColumn1"></td>
+            		<td class="tableColumn2"></td>
+            		<td class="tableColumn3"></td>
+            		<td class="tableColumn4"><input type="number" id="row_15_qty_input" class="qty_input" disabled="true" min="0" onChange="updateProductTotal(this.value, this.id); updateTotals();"></td>
+            		<td class="tableColumn5"></td>
+            	</tr>
+            	<tr id="row_16" class="tableEntryB">
+            		<td class="tableColumn1"></td>
+            		<td class="tableColumn2"></td>
+            		<td class="tableColumn3"></td>
+            		<td class="tableColumn4"><input type="number" id="row_16_qty_input" class="qty_input" disabled="true" min="0" onChange="updateProductTotal(this.value, this.id); updateTotals();"></td>
+            		<td class="tableColumn5"></td>
+            	</tr>
+            	<tr id="row_17" class="tableEntryA">
+            		<td class="tableColumn1"></td>
+            		<td class="tableColumn2"></td>
+            		<td class="tableColumn3"></td>
+            		<td class="tableColumn4"><input type="number" id="row_17_qty_input" class="qty_input" disabled="true" min="0" onChange="updateProductTotal(this.value, this.id); updateTotals();"></td>
+            		<td class="tableColumn5"></td>
+            	</tr>
+            	<tr id="row_18" class="tableEntryB">
+            		<td class="tableColumn1"></td>
+            		<td class="tableColumn2"></td>
+            		<td class="tableColumn3"></td>
+            		<td class="tableColumn4"><input type="number" id="row_18_qty_input" class="qty_input" disabled="true" min="0" onChange="updateProductTotal(this.value, this.id); updateTotals();"></td>
+            		<td class="tableColumn5"></td>
+            	</tr>
+            	<tr id="row_19" class="tableEntryA">
+            		<td class="tableColumn1"></td>
+            		<td class="tableColumn2"></td>
+            		<td class="tableColumn3"></td>
+            		<td class="tableColumn4"><input type="number" id="row_19_qty_input" class="qty_input" disabled="true" min="0" onChange="updateProductTotal(this.value, this.id); updateTotals();"></td>
+            		<td class="tableColumn5"></td>
+            	</tr>
+            	<tr id="row_20" class="tableEntryB">
+            		<td class="tableColumn1"></td>
+            		<td class="tableColumn2"></td>
+            		<td class="tableColumn3"></td>
+            		<td class="tableColumn4"><input type="number" id="row_20_qty_input" class="qty_input" disabled="true" min="0" onChange="updateProductTotal(this.value, this.id); updateTotals();"></td>
+            		<td class="tableColumn5"></td>
+            	</tr>
+            	<tr id="row_21" class="tableEntryA">
+            		<td class="tableColumn1"></td>
+            		<td class="tableColumn2"></td>
+            		<td class="tableColumn3"></td>
+            		<td class="tableColumn4"><input type="number" id="row_21_qty_input" class="qty_input" disabled="true" min="0" onChange="updateProductTotal(this.value, this.id); updateTotals();"></td>
+            		<td class="tableColumn5"></td>
+            	</tr>
+
+            </tbody>
+          </table>
+        <script type="text/javascript">
+            ipcRenderer.on('changeCustomerData', function (event, custData){
+              console.log(custData);
+              document.getElementById('custidval').innerHTML = custData[0];
+              document.getElementById('custnameval').innerHTML = custData[1];
+              document.getElementById('custphoneval').innerHTML = custData[2];
+              document.getElementById('custemailval').innerHTML = custData[3];
+            });
+        </script>
+        <script type="text/javascript">
+            document.getElementById("Table-Data").addEventListener('click', (e) => {
+                var rowID = e.target.closest('tr').id;
+                var row = document.getElementById(rowID);
+                console.log(e.target.closest('tr').id);
+                console.log(row);
+
+                if (row.classList.contains('selectedRow')) {
+                    // Check to see if the input was selected
+                    if (row.cells[3].children[0] !== document.activeElement) {
+                        row.classList.remove('selectedRow');
+                        // Disable QTY input
+                        row.cells[3].children[0].disabled = true;
+                        console.log('already selected');
+                    }
+                } else {
+                    row.classList.add('selectedRow');
+                    // Enable QTY input
+                    if (row.cells[0].innerHTML != '') {
+                        row.cells[3].children[0].disabled = false;
+                    }
+                    console.log('newly selected');
+                }
+            });
+        </script>
+
+          <div id="Sale-Overview">
+            <div id="Customer-Info">
+
+	      <div class="flex-row">
+		<div class="customer-column">
+		  <strong><em>Customer Info</em></strong>
+		  <div class="flex-row">
+		    <div class="customer-column">
+		      <p id="custidval">654321</p>
+		    </div>
+		  </div>
+		  <div class="flex-row">
+		    <div class="customer-column">
+		      <p id="custnameval">John Doe</p> <!--Concatenate first+last name in script that sets this via customer selection-->
+		    </div>
+		  </div>
+		  <div class="flex-row">
+		    <div class="customer-column">
+		      <p id="custphoneval">(555) 555-5555</p>
+		    </div>
+		  </div>
+		  <div class="flex-row">
+		    <div class="customer-column">
+		      <p id="custemailval">john.doe@example.com</p>
+		    </div>
+		  </div>
+		</div>
+		<div class="customer-column">
+		  <strong><em>Rewards Points</em></strong>
+		  <div class="flex-row">
+		    <div class="customer-column">
+		      <p id="custpointsavaillabel">Available:</p>
+		    </div>
+		    <div class="customer-column">
+		      <p id="custpointsavailval">3</p>
+		    </div>
+		  </div>
+		  <div class="flex-row">
+		    <div class="customer-column">
+		      <p id="custpointsapplylabel">To apply:</p>
+		    </div>
+		    <div class="customer-column">
+		      <p id="custpointsapplyval">0</p>
+		    </div>
+		  </div>
+		  <div class="flex-row">
+		    <div class="customer-column">
+		      <p id="custpointsremaininglabel">Remaining:</p>
+		    </div>
+		    <div class="customer-column">
+		      <p id="custpointsremainingval">3</p>
+		    </div>
+		  </div>
+		</div>
+	      </div>
+            </div>
+            <div id="Totals">
+
+				<p>Subtotal: <span id="subtotal">$0.00</span></p>
+				<p>Discounts: <span id="discounts">$0.00</span></p>
+				<p>Tax: <span id="tax">$0.00</span></p>
+				<br>
+				<p>Total: <span id="total">$0.00</span></p>
+			</div>
+			<script>
+				function updateTotals(){
+					//whenever somthing gets added to the table, add it to the total sum.
+				    console.log("updateTotals()");
+				    var table = document.getElementById("Table-Data"), sumVal = 0;
+				    for(var i = 0; i < table.rows.length; i++){
+					if (table.rows[i].cells[4].innerHTML == '') { console.log("empty row"); }
+					else {
+					    sumVal += parseFloat(table.rows[i].cells[4].innerHTML);
+					    console.log("attempted to parse " + table.rows[i].cells[4].innerHTML);
+					}
+				    }
+
+				    let subtotal = sumVal.toFixed(2);
+				    subtotal = "$".concat(subtotal.toString());
+				    let tax = (sumVal * 0.08).toFixed(2);
+				    tax =  "$".concat(tax.toString());
+				    let total = (sumVal * 1.08).toFixed(2);
+				    total =  "$".concat(total.toString());
+				    document.getElementById("subtotal").innerHTML = subtotal;
+				    document.getElementById("tax").innerHTML = tax;
+				    document.getElementById("total").innerHTML = total;
+				}
+			</script>
+          </div>
+        </section>
+
+        <aside id="Quick-Buttons">
+	  <div class="qbtns">
+	    <p class="btn-group">Base</p>
+	    <div class="qbtn-group">
+	      <button onClick="requestProductRow(1); updateTotals();">Taco</button>
+	      <button onClick="requestProductRow(2); updateTotals();">Burrito</button>
+	      <button onClick="requestProductRow(3); updateTotals();">Bowl</button>
+	    </div>
+	    <p class="btn-group">Protein</p>
+	    <div class="qbtn-group">
+	      <button onClick="requestProductRow(15); updateTotals();">Braised Beef</button>
+	      <button onClick="requestProductRow(16); updateTotals();">Grilled Chicken</button>
+	      <button onClick="requestProductRow(17); updateTotals();">Slow Roasted Pork</button>
+	    </div>
+	    <p class="btn-group">Sides</p>
+	    <div class="qbtn-group">
+	      <button onClick="requestProductRow(5); updateTotals();">Poppin' Spring Rolls</button>
+	      <button onClick="requestProductRow(6); updateTotals();">Chorizo Mackin' Cheese</button>
+	      <button onClick="requestProductRow(7); updateTotals();">Reg Nach</button>
+	    </div>
+	    <p class="btn-group">Drinks</p>
+	    <div class="qbtn-group">
+
+	      <button onClick="requestProductRow(9); updateTotals();">Mexican Coca-Cola</button>
+	      <button onClick="requestProductRow(10); updateTotals();">Jarritos</button>
+	      <button onClick="requestProductRow(12); updateTotals();">Spring Water</button>
+	    </div>
+	  </div>
+	  <br>
+	  <div class="ubtns">
+      <p class="btn-group">Utility</p>
+	    <div class="ubtn-group">
+	      <button>Utility Button</button>
+	      <button>Utility Button</button>
+	      <button>Utility Button</button>
+	    </div>
+	   <!-- <br>
+	    <div class="ubtn-group">
+	      <button>Utility Button</button>
+	      <button>Utility Button</button>
+	      <button>Utility Button</button>
+	    </div>
+	    <br>
+	  </div>
+	  -->
+	  <p class="btn-group">Payment</p>
+	  <div class="pbtns">
+	    <div class="pbtn-group">
+	      <button onclick="openNav();">Accept Cash Payment</button>
+	      <button>Payment Button</button>
+	      <button>Payment Button</button>
+	    </div>
+	  </div>
+        </aside>
+      </div>
+    </div>
+
+    <div id="cashpaymentolay" class="fulloverlay">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+      <div class="overlay-content">
+	<form class="cashpaymentform">
+	  <label for="processsaledue">Amount due: </label>
+	  <input class="paymentfield" id="processsaledue" type="number"  value="0.00"><br>
+	  <label for="processsalepaid">Amount paid: </label>
+          <input class="paymentfield" id="processsalepaid" type="number" value="0.00" onchange="updateAmountDue();"><br>
+	  <label for="processsalechange">Change due: </label>
+          <input class="paymentfield" id="processsalechange" type="number" value="0.00"><br>
+          <input class="paymentfield" type="button" onClick="processPayment();" value="Complete transaction">
+	  <span id="errortext"></span>
+	</form>
+      </div>
+    </div>
+    <script>
+      function updateAmountDue() {
+	  document.getElementById("processsalechange").value = (parseFloat(document.getElementById("processsalepaid").value) - parseFloat(document.getElementById("total").innerHTML.split("$")[1])).toFixed(2);
+      }
+      function openNav() {
+	  document.getElementById("cashpaymentolay").style.height = "100%";
+	  document.getElementById("processsaledue").value = document.getElementById("total").innerHTML.split("$")[1];
+	  document.getElementById("processsaledue").setAttributeNode(document.createAttribute("readonly"));
+      }
+      function openSales(){
+	  const {ipcRenderer} = require('electron');
+	  ipcRenderer.send('getSales');
+	  document.getElementById("oldsaleoverlay").style.height = "100%";
+      }
+      function closeNav() {
+	  document.getElementById("cashpaymentolay").style.height = "0%";
+	  document.getElementById("oldsaleoverlay").style.height = "0%";
+      }
+
+      function processPayment() {
+	  if (document.getElementById("processsaledue").value > document.getElementById("processsalepaid").value) {
+	      document.getElementById("errortext").innerHTML = "Error: cannot complete transaction without being paid";
+	      return;
+	  }
+	  let saleObject = { custId: '', soldItems: [], pointsUsed: 0, pointsEarned: 0, total: 0 };
+	  saleObject.custId = document.getElementById("custidval").innerHTML;
+	  saleObject.pointsUsed = document.getElementById("custpointsapplyval").innerHTML;
+	  saleObject.pointsEarned = Math.floor(parseFloat(document.getElementById("total").innerHTML.split("$")[1]));
+	  saleObject.total = document.getElementById("total").innerHTML.split("$")[1];
+
+	  let table = document.getElementById("Table-Data");
+
+	  for (var i=0, row; row = table.rows[i]; i++) {
+	      if (row.cells[0].innerHTML == '') { break; }
+	      let item = { sku: -1, qty: 0 };
+	      item.sku = row.cells[0].innerHTML;
+	      item.qty = row.cells[3].getElementsByTagName('input')[0].value;
+	      saleObject.soldItems.push(item);
+	      row.cells[0].innerHTML = '';
+	      row.cells[1].innerHTML = '';
+	      row.cells[2].innerHTML = '';
+	      row.cells[3].getElementsByTagName('input')[0].value = '';
+	      row.cells[4].innerHTML = '';
+	  }
+	  saleObject.soldItems = JSON.stringify(saleObject.soldItems);
+	  const {ipcRenderer} = require('electron');
+	  ipcRenderer.send('storeSale', saleObject);
+	  console.log('sent storeSale request');
+	  closeNav();
+      }
+
+      ipcRenderer.on('retrievedSales', function(event, payload) {
+	  let tbl = document.getElementById('transactionsbody');
+	  console.log(payload);
+	  payload.forEach(function(sale) {
+	      let row = document.createElement('tr');
+	      let cell = document.createElement('td');
+	      cell.innerHTML = sale.saleId;
+	      row.appendChild(cell);
+	      cell = document.createElement('td');
+	      cell.innerHTML = sale.date;
+	      row.appendChild(cell);
+	      cell = document.createElement('td');
+	      cell.innerHTML = sale.matchCust;
+	      row.appendChild(cell);
+	      cell = document.createElement('td');
+	      cell.innerHTML = sale.soldItems;
+	      row.appendChild(cell);
+	      cell = document.createElement('td');
+	      cell.innerHTML = sale.pointsEarned;
+	      row.appendChild(cell);
+	      cell = document.createElement('td');
+	      cell.innerHTML = sale.pointsUsed;
+	      row.appendChild(cell);
+	      cell = document.createElement('td');
+	      cell.innerHTML = '$' + sale.total;
+	      row.appendChild(cell);
+	      cell = document.createElement('td');
+	      
+	      tbl.appendChild(row);
+	  });
+
+      });
+    </script>
+
+    <div id="oldsaleoverlay" class="fulloverlay saleoverlay">
+      <a href="javascript:void(0)" class="closebtnsale" onclick="closeNav()">Close</a>
+
+      <div class="overlaycontent saleolaycontent">
+
+	<table id="salelist">
+	  <tr>
+	    <th class="saleid">ID</th>
+	    <th class="saledate">Date</th>
+	    <th class="salecust">Customer ID</th>
+	    <th class="saleitems">Sale Items</th>
+	    <th class="salepoints">Points Earned</th>
+	    <th class="saleredeemed">Points Spent</th>
+	    <th class="saletotal">Total</th>
+	  </tr>
+	  <tbody id="transactionsbody">
+	  <tr>
+	    <td>0</td>
+	    <td>2019-12-04 08:11</td>
+	    <td>1</td>
+	    <td>Taco (1) - $2.99</td>
+	    <td>3</td>
+	    <td>0</td>
+	    <td>$2.99</td>
+	  </tr>
+	  </tbody>
+	  
+	</table>
+	
+
+      </div>
+      
+    </div>
+    
+  </body>

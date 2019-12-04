@@ -25,10 +25,10 @@ class Products {
 
     }
 
-    updateEntry(product){
-	const { sku, description, unit_price } = product;
+    updateEntry(sku, newDescription, newPrice){
+	//const { sku, description, unit_price } = product;
 	const sql = `UPDATE Products SET description = ?, unit_price = ? WHERE sku = ?`;
-	return this.dao.run(sql, [description, unit_price, sku]);
+	return this.dao.run(sql, [newDescription, newPrice, sku]);
 	
     }
 

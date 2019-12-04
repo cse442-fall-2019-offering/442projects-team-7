@@ -1,5 +1,5 @@
 html, body {
-    background-color: #1B1B1B;
+    background-color: #77bd43;
     color: #CECECE;
     font-family: Arial, Verdana, sans-serif;
 }
@@ -28,13 +28,13 @@ div #loginframe {
     padding: 20px;
 }
 label {
-    
+
 }
 input {
-    
+
 }
 div.row {
-    
+
 }
 form .login {
     text-align: center;
@@ -44,11 +44,11 @@ h1 .login {
 
 }
 label .login {
-    display: inline-block;    
+    display: inline-block;
     text-align: right;
     font-size: 120%;
     font-weight: bold;
-    
+
 }
 input[type=password],input[type=text] {
     background-color: #4B4B4B;
