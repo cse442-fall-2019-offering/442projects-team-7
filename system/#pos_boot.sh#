@@ -1,0 +1,4 @@
+#!/bin/bash
+sleep 10
+cd /.RPiPOS/442projects-team-7/system
+npm start

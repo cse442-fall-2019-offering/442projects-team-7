@@ -40,6 +40,9 @@ tr:hover {
     transform: translate(-50%, -50%);
     text-align: center;
 }
+button {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 /*Quick Button Panel*/
 aside {
     width:30%;
@@ -65,6 +68,7 @@ div.pbtns {
     padding: 2%;
     width: 31%;
     height: 100px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .qbtn-group button:hover{
@@ -77,6 +81,7 @@ div.pbtns {
     padding: 2%;
     width: 31%;
     height: 100px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .ubtn-group button:hover{
@@ -89,6 +94,7 @@ div.pbtns {
     padding: 2%;
     width: 31%;
     height: 75px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .pbtn-group button:hover{
@@ -101,6 +107,7 @@ div.flex-row {
 }
 div.customer-column {
     flex: 50%;
+    height: 2em;
 }
 #Customer-Info {
     padding-left: 1%;
@@ -195,6 +202,7 @@ div.customer-column {
   font-size: 36px;
   color: #818181;
   background-color: #1b1b1b;
+  border:none;
   transition: 0.3s;
 
 }
@@ -202,6 +210,9 @@ div.customer-column {
     padding: 8px;
     text-decoration: none;
     font-size: 36px;
+    float: left;
+    clear: left;
+    width: 220px;
 }
 
 .fulloverlay input[type=number] {
@@ -319,6 +330,7 @@ div #Quick-Buttons {
   top: 59px;
 
   background: #2F2F2F;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 section {
   position: absolute;
@@ -328,6 +340,7 @@ section {
   top: 59px;
 
   background: #2F2F2F;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 div #Transaction-Info-Panel {
   position: relative;
@@ -380,7 +393,7 @@ div #Column-Headers {
 }
 div #SKU-Column {
   position: relative;
-  width: 10%;
+  width: 114px;
   height: 30px;
   left: 0px;
   top: 0px;
@@ -534,6 +547,7 @@ label .login {
   width: 150px;
   height: 30px;
   margin: 4px 2px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 input[type=text]:focus, input[type=password]:focus {
