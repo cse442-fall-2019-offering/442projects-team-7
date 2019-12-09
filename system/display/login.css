@@ -43,11 +43,12 @@ form .login {
 h1 .login {
 
 }
-label .login {
+label.login.centered {
     display: inline-block;
     text-align: right;
     font-size: 120%;
     font-weight: bold;
+    width: 150px;
 
 }
 input[type=password],input[type=text] {

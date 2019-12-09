@@ -25,7 +25,8 @@ function createWindow(){
 	    nodeIntegration: true
 	}
     })
-   
+    win.removeMenu();
+    //win.setFullScreen(true);
     win.loadFile('./display/index.html')
     win.on('closed',() => {
 		win=null;
@@ -333,8 +334,10 @@ ipcMain.on('loadPosDisplay', function(event) {
 	    nodeIntegration: true
 	}
     })
-	 mainWindow.loadFile('./display/pos.html');
-	 mainWindow.once('ready-to-show', () => {
+	mainWindow.loadFile('./display/pos.html');
+        mainWindow.removeMenu();
+        //mainWindow.setFullScreen(true);
+	mainWindow.once('ready-to-show', () => {
   		 mainWindow.show();
 	});
 	 mainWindow.on('closed',() => {
@@ -349,7 +352,7 @@ ipcMain.on('loadItemManip', function(event) {
 	let win = new BrowserWindow({
 	show: false,
 	width: 1025,
-	height: 560,
+	height: 940,
 	resizable: false,
 	alwaysOnTop: true,
 	webPreferences: {
@@ -372,7 +375,7 @@ ipcMain.on('loadCustLookup', function(event) {
 	let win = new BrowserWindow({
 	show: false,
 	width: 1025,
-	height: 560,
+	height: 740,
 	resizable: false,
 	alwaysOnTop: true,
 	webPreferences: {
