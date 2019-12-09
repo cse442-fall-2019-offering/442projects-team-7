@@ -238,22 +238,22 @@
 		  <strong><em>Customer Info</em></strong>
 		  <div class="flex-row">
 		    <div class="customer-column">
-		      <p id="custidval">654321</p>
+		      <p id="custidval"></p>
 		    </div>
 		  </div>
 		  <div class="flex-row">
 		    <div class="customer-column">
-		      <p id="custnameval">John Doe</p> <!--Concatenate first+last name in script that sets this via customer selection-->
+		      <p id="custnameval">Guest</p> <!--Concatenate first+last name in script that sets this via customer selection-->
 		    </div>
 		  </div>
 		  <div class="flex-row">
 		    <div class="customer-column">
-		      <p id="custphoneval">(555) 555-5555</p>
+		      <p id="custphoneval"></p>
 		    </div>
 		  </div>
 		  <div class="flex-row">
 		    <div class="customer-column">
-		      <p id="custemailval">john.doe@example.com</p>
+		      <p id="custemailval"></p>
 		    </div>
 		  </div>
 		</div>
@@ -264,7 +264,7 @@
 		      <p id="custpointsavaillabel">Available:</p>
 		    </div>
 		    <div class="customer-column">
-		      <p id="custpointsavailval">3</p>
+		      <p id="custpointsavailval">0</p>
 		    </div>
 		  </div>
 		  <div class="flex-row">
@@ -280,7 +280,7 @@
 		      <p id="custpointsremaininglabel">Remaining:</p>
 		    </div>
 		    <div class="customer-column">
-		      <p id="custpointsremainingval">3</p>
+		      <p id="custpointsremainingval">0</p>
 		    </div>
 		  </div>
 		</div>
@@ -327,7 +327,7 @@
 	    <div class="qbtn-group">
 	      <button onClick="requestProductRow(1); updateTotals();">Taco</button>
 	      <button onClick="requestProductRow(2); updateTotals();">Burrito</button>
-	      <button onClick="requestProductRow(3); updateTotals();">Bowl</button>
+	      <button onClick="requestProductRow(4); updateTotals();">Bowl</button>
 	    </div>
 	    <p class="btn-group">Protein</p>
 	    <div class="qbtn-group">
@@ -353,9 +353,9 @@
 	  <div class="ubtns">
       <p class="btn-group">Utility</p>
 	    <div class="ubtn-group">
-	      <button>Utility Button</button>
-	      <button>Utility Button</button>
-	      <button>Utility Button</button>
+	      <button>Clear Sale</button>
+	      <button>Process Refund</button>
+	      <button>Clock In/Out</button>
 	    </div>
 	   <!-- <br>
 	    <div class="ubtn-group">
@@ -370,8 +370,8 @@
 	  <div class="pbtns">
 	    <div class="pbtn-group">
 	      <button onclick="openNav();">Accept Cash Payment</button>
-	      <button>Payment Button</button>
-	      <button>Payment Button</button>
+	      <button>Accept Credit Payment</button>
+	      <button>Accept Check Payment</button>
 	    </div>
 	  </div>
         </aside>
@@ -411,6 +411,7 @@
       function closeNav() {
 	  document.getElementById("cashpaymentolay").style.height = "0%";
 	  document.getElementById("oldsaleoverlay").style.height = "0%";
+	  updateTotals();
       }
 
       function processPayment() {
